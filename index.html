@@ -1060,9 +1060,11 @@
 
     <!-- Stage C: Video Sequence -->
     <div class="reveal-video-container" id="video-container">
-        <video id="reveal-video" preload="auto">
+        <!-- [REEMPLAZAR EL SRC DE ABAJO CON TU LINK DE CLOUDINARY/MUX/DRIVE] -->
+        <video id="reveal-video" preload="auto" poster="assets/images/brownie.png">
+            <source src="TU_LINK_EXTERNO_AQUI" type="video/mp4">
             <source src="assets/videos/reveal.mp4" type="video/mp4">
-            <!-- Fallback if reveal.mp4 is missing during test -->
+            <!-- Fallback if reveal.mp4 is missing -->
             <source
                 src="https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-chocolate-syrup-pouring-on-a-brownie-41134-large.mp4"
                 type="video/mp4">
