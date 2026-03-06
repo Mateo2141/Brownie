@@ -1100,11 +1100,9 @@
         </div>
     </section>
 
-    <!-- Stage C: Video Sequence -->
     <div class="reveal-video-container" id="video-container">
         <!-- [REEMPLAZAR EL SRC DE ABAJO CON TU LINK DE CLOUDINARY/MUX/DRIVE] -->
         <video id="reveal-video" preload="auto" poster="assets/images/brownie.png" playsinline>
-            <source src="TU_LINK_EXTERNO_AQUI" type="video/mp4">
             <source src="assets/videos/reveal.mp4" type="video/mp4">
             <source
                 src="https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-chocolate-syrup-pouring-on-a-brownie-41134-large.mp4"
@@ -1364,9 +1362,10 @@
         function playRevealSequence() {
             const videoLoader = document.getElementById('video-loader');
             quantumEntry.style.display = 'none';
-            videoLoader.style.display = 'flex'; // Show custom loader while buffering
+            videoLoader.style.display = 'flex';
 
             let isRevealing = false;
+            let hasStartedPlaying = false;
 
             const triggerReveal = () => {
                 if (isRevealing) return;
@@ -1399,28 +1398,32 @@
 
             // ONLY show video container when it's actually playing
             revealVideo.addEventListener('playing', () => {
+                hasStartedPlaying = true;
                 videoLoader.style.display = 'none';
                 videoContainer.style.display = 'block';
             });
 
-            // FINAL FALLBACK: 20 seconds as absolute last resort
+            // ABSOLUTE LAST RESORT: 30 seconds for dead connections only
             globalThis.revealTimeout = setTimeout(() => {
-                console.warn("Critical timeout. Forcing reveal.");
+                console.warn("30s Emergency timeout reached.");
                 triggerReveal();
-            }, 20000);
+            }, 30000);
 
+            // Attempt playback - DON'T catch to skip, just report error
             revealVideo.play().catch(err => {
-                console.error("Playback failed:", err);
-                triggerReveal();
+                console.error("Playback failed but waiting for signal...", err);
             });
 
             revealVideo.addEventListener('timeupdate', () => {
-                if (revealVideo.currentTime > revealVideo.duration - 0.4) {
+                // Only allow snappy transition if the video has actually been playing
+                if (hasStartedPlaying && revealVideo.currentTime > revealVideo.duration - 0.4) {
                     triggerReveal();
                 }
             });
 
-            revealVideo.onended = triggerReveal;
+            revealVideo.onended = () => {
+                if (hasStartedPlaying) triggerReveal();
+            };
         }
 
         // --- CHECKOUT LOGIC ---
