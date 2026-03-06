@@ -1269,6 +1269,12 @@
         welcomeBtn.addEventListener('click', () => {
             stageWelcome.classList.remove('active');
             stageScan.classList.add('active');
+            // Optimization: Start buffering the reveal video as soon as they activate the camera
+            // This buys us 5-15 seconds of background loading time during the scanning phase
+            if (revealVideo) {
+                revealVideo.load();
+                console.log("Preloading reveal video...");
+            }
             startScanner();
         });
 
@@ -1310,7 +1316,6 @@
         function playRevealSequence() {
             quantumEntry.style.display = 'none';
             videoContainer.style.display = 'block';
-            revealVideo.play();
 
             let isRevealing = false;
 
@@ -1318,19 +1323,20 @@
                 if (isRevealing) return;
                 isRevealing = true;
 
+                // Clear any safety timeout
+                if (globalThis.revealTimeout) clearTimeout(globalThis.revealTimeout);
+
                 const tl = gsap.timeline();
-                // 1. Instantly fade video & start hero reveal
                 tl.to(videoContainer, { opacity: 0, duration: 0.5, ease: "power2.inOut" })
                     .add(() => {
                         lenis.start();
                         lenis.scrollTo(0, { immediate: true });
                         contentWrapper.style.visibility = 'visible';
                         contentWrapper.style.opacity = '1';
-                    }, 0.2) // Start appearing even before video is fully gone
+                    }, 0.2)
                     .from(".purchase-container > *", { y: 50, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out" }, 0.3)
                     .set(videoContainer, { display: 'none' });
 
-                // Text overlay logic is separate to not block the hero
                 gsap.to(revealText, {
                     opacity: 1, y: 0, duration: 0.4,
                     onComplete: () => {
@@ -1339,7 +1345,18 @@
                 });
             };
 
-            // Snappy detection: Trigger 0.4s before video ends
+            // FAIL-SAFE: If video doesn't trigger the reveal within 4 seconds (slow data), force reveal anyway.
+            globalThis.revealTimeout = setTimeout(() => {
+                console.warn("Reveal timeout reached (slow connection). Forcing reveal.");
+                triggerReveal();
+            }, 4000);
+
+            revealVideo.play().catch(err => {
+                console.error("Video play blocked/failed:", err);
+                triggerReveal(); // Force reveal if playback fails
+            });
+
+            // Snappy detection
             revealVideo.addEventListener('timeupdate', () => {
                 if (revealVideo.currentTime > revealVideo.duration - 0.4) {
                     triggerReveal();
