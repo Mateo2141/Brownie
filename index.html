@@ -1310,20 +1310,41 @@
             videoContainer.style.display = 'block';
             revealVideo.play();
 
-            revealVideo.onended = () => {
+            let isRevealing = false;
+
+            const triggerReveal = () => {
+                if (isRevealing) return;
+                isRevealing = true;
+
                 const tl = gsap.timeline();
-                tl.to(revealText, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "power4.out" })
-                    .to(videoContainer, { opacity: 0, y: -50, duration: 0.8, ease: "expo.inOut" }, "+=0.1")
+                // 1. Instantly fade video & start hero reveal
+                tl.to(videoContainer, { opacity: 0, duration: 0.5, ease: "power2.inOut" })
                     .add(() => {
                         lenis.start();
                         lenis.scrollTo(0, { immediate: true });
                         contentWrapper.style.visibility = 'visible';
                         contentWrapper.style.opacity = '1';
-                    }, "<")
-                    .to(revealText, { opacity: 0, y: -20, duration: 0.3 }, "-=0.2")
-                    .from(".purchase-container > *", { y: 50, opacity: 0, stagger: 0.1, duration: 1, ease: "power3.out" }, "-=0.2")
+                    }, 0.2) // Start appearing even before video is fully gone
+                    .from(".purchase-container > *", { y: 50, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out" }, 0.3)
                     .set(videoContainer, { display: 'none' });
+
+                // Text overlay logic is separate to not block the hero
+                gsap.to(revealText, {
+                    opacity: 1, y: 0, duration: 0.4,
+                    onComplete: () => {
+                        gsap.to(revealText, { opacity: 0, y: -20, delay: 0.8, duration: 0.4 });
+                    }
+                });
             };
+
+            // Snappy detection: Trigger 0.4s before video ends
+            revealVideo.addEventListener('timeupdate', () => {
+                if (revealVideo.currentTime > revealVideo.duration - 0.4) {
+                    triggerReveal();
+                }
+            });
+
+            revealVideo.onended = triggerReveal;
         }
 
         // --- CHECKOUT LOGIC ---
