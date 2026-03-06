@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KACAO | Guilty? Never.</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"
+        crossorigin="anonymous"></script>
+    <!-- QR QR Engine -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            --bg-black: #0D0D0D;
+            --accent-orange: #FF4D00;
+            --accent-yellow: #FFD600;
+            --neon-green: #39FF14;
+            --deep-cacao: #3B1A0A;
+            --warm-cream: #FFF4E0;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: none;
+            /* Custom cursor */
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: white;
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            line-height: 0.9;
+        }
+
+        /* --- UI OVERLAY --- */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .cacao-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 26, 10, 0.4) 0%, transparent 70%);
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        #cursor,
+        #cursor-follower {
+            display: none;
+        }
+
+        /* --- SECTION 0: QUANTUM ENTRY --- */
+        #quantum-entry {
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: var(--bg-black);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .entry-stage {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Ensure vertical centering */
+            width: 100%;
+            height: 100%;
+            /* Take full height for better centering */
+            padding: 40px;
+        }
+
+        .entry-stage.active {
+            display: flex;
+        }
+
+        .welcome-title {
+            font-size: clamp(3rem, 12vw, 8rem);
+            /* More balanced size */
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            color: white;
+            letter-spacing: -1px;
+            line-height: 0.9;
+            text-transform: uppercase;
+        }
+
+        #qr-reader {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 1 / 1;
+            border: 2px solid var(--accent-orange) !important;
+            /* Solid and thicker for better contrast */
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        #qr-reader::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-orange);
+            box-shadow: 0 0 15px var(--accent-orange);
+            animation: scan-line 3s infinite linear;
+            z-index: 10;
+        }
+
+        @keyframes scan-line {
+            0% {
+                top: 0;
+            }
+
+            50% {
+                top: 100%;
+            }
+
+            100% {
+                top: 0;
+            }
+        }
+
+        #qr-reader video {
+            object-fit: cover !important;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* --- PREMIUM BUTTON CLASS --- */
+        .premium-btn {
+            background: rgba(255, 77, 0, 0.1);
+            border: 1px solid var(--accent-orange);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 1.2rem 3.5rem;
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            letter-spacing: 2px;
+            animation: subtle-pulse 2s infinite;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        .premium-btn:hover {
+            background: var(--accent-orange);
+            box-shadow: 0 0 30px rgba(255, 77, 0, 0.6);
+        }
+
+        .premium-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Subtle breathing shadow instead of monstrous scaling */
+        @keyframes subtle-pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 77, 0, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 0 20px 10px rgba(255, 77, 0, 0);
+            }
+        }
+
+        .fire-icon {
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .reveal-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 2100;
+            display: none;
+        }
+
+        #reveal-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .reveal-overlay-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            /* Better scaling */
+            color: white;
+            z-index: 2200;
+            text-align: center;
+            width: 90%;
+            /* Better width for mobile */
+            max-width: 600px;
+            opacity: 0;
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        /* --- CHECKOUT --- */
+        #checkout-view {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 3000;
+            padding: 40px 5vw;
+            transition: right 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+            overflow-y: auto;
+            /* ENABLLE SCROLL */
+            -webkit-overflow-scrolling: touch;
+            border-left: 1px solid var(--accent-orange);
+        }
+
+        #checkout-view.open {
+            right: 0;
+        }
+
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .close-checkout {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            font-family: var(--font-mono);
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .order-summary {
+            background: #111;
+            padding: 40px;
+            border: 1px solid #222;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .qty-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--accent-orange);
+            background: transparent;
+            color: white;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            margin-top: 50px;
+            font-size: 1.8rem;
+            /* Refined size */
+            background: var(--accent-orange);
+            border: none;
+            padding: 20px;
+            color: white;
+            font-family: var(--font-display);
+            cursor: pointer;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(255, 77, 0, 0.3);
+            border-radius: 4px;
+        }
+
+        .checkout-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* --- SECTION 0: QR HACK --- */
+        #qr-screen {
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: var(--bg-black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 900;
+            overflow: hidden;
+        }
+
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, transparent, var(--neon-green), transparent);
+            opacity: 0.5;
+            top: -20%;
+        }
+
+        .qr-frame {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(5px);
+        }
+
+        .corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid var(--neon-green);
+        }
+
+        .tl {
+            top: -5px;
+            left: -5px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .tr {
+            top: -5px;
+            right: -5px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .bl {
+            bottom: -5px;
+            left: -5px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .br {
+            bottom: -5px;
+            right: -5px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .glitch-text {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--neon-green);
+            margin-top: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 1;
+            /* Better contrast */
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+
+        #discover-btn {
+            margin-top: 3rem;
+            background: transparent;
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            padding: 1rem 3rem;
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        #discover-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-orange);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        #discover-btn:hover {
+            color: white;
+        }
+
+        #discover-btn:hover::before {
+            left: 0;
+        }
+
+        /* --- SECTION 1: HERO EPIC --- */
+        #content-wrapper {
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        .hero {
+            height: 120vh;
+            /* Reduced from 150vh to minimize initial "black/empty" gap on mobile */
+            width: 100%;
+            position: relative;
+            background: #000;
+        }
+
+        .hero-video-container {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .hero-content .big-text {
+            font-size: clamp(6rem, 25vw, 15rem);
+            line-height: 0.8;
+            margin: 0;
+            letter-spacing: -5px;
+        }
+
+        /* --- SECTION 2: STORY CARDS --- */
+        .story-section {
+            background: #000;
+            padding: 0;
+        }
+
+        .story-card {
+            height: 100vh;
+            width: 100%;
+            padding: 10vw 8vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            border-bottom: 1px solid #1a1a1a;
+            overflow: hidden;
+        }
+
+        .story-card .num {
+            font-family: var(--font-mono);
+            color: var(--accent-orange);
+            font-size: 14px;
+            margin-bottom: 2rem;
+            display: block;
+            letter-spacing: 3px;
+        }
+
+        .story-card h3 {
+            font-size: clamp(3.5rem, 12vw, 6rem);
+            margin-bottom: 2rem;
+            line-height: 0.9;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .story-card p {
+            font-size: 1.4rem;
+            line-height: 1.4;
+            opacity: 1;
+            /* Maximum readability */
+            max-width: 90%;
+            margin-bottom: 3rem;
+            color: #ffffff;
+            /* Pure white for contrast */
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- IMPACT --- */
+        .impact-section {
+            background: var(--neon-green);
+            color: #000;
+            padding: 100px 0;
+            transform: skewY(-2deg);
+            margin: 100px 0;
+        }
+
+        .marquee-wrapper {
+            background: #000;
+            color: var(--neon-green);
+            padding: 20px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-text {
+            font-family: var(--font-display);
+            font-size: 8rem;
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee-scroll 30s linear infinite;
+        }
+
+        @keyframes marquee-scroll {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-100%, 0);
+            }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 100px 5vw;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
+
+        footer h1 {
+            font-size: 15vw;
+            opacity: 0.1;
+            margin: 0;
+        }
+
+        /* --- MASCOT & PRODUCT --- */
+        /* --- CINEMATIC THEATER HERO --- */
+        .purchase-container {
+            background: #000;
+            padding: 0;
+            text-align: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        /* Layer 1: Background Brand Theater */
+        .theater-bg-text {
+            position: absolute;
+            font-size: 35vw;
+            font-family: var(--font-display);
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 0.8;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+            animation: theater-bg-float 20s linear infinite alternate;
+        }
+
+        .volumetric-light {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 40%, rgba(255, 77, 0, 0.1) 0%, transparent 50%);
+            z-index: 1;
+            animation: light-sweep 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes light-sweep {
+            0% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 0.7;
+                transform: scale(1.2);
+            }
+        }
+
+        /* Layer 2: Iconic Midground */
+        .theater-midground {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .product-visual {
+            margin: 0;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .product-img {
+            width: 85vw;
+            max-width: 420px;
+            filter: drop-shadow(0 40px 100px rgba(0, 0, 0, 0.9));
+            animation: theater-float 6s ease-in-out infinite;
+        }
+
+        @keyframes theater-float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-1deg) scale(1);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(1deg) scale(1.02);
+            }
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: var(--accent-yellow);
+            color: #000;
+            padding: 12px 18px;
+            border-radius: 50px;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            top: 10%;
+            right: 5%;
+            transform: rotate(5deg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 15;
+            animation: badge-wobble 4s ease-in-out infinite;
+        }
+
+        @keyframes badge-wobble {
+
+            0%,
+            100% {
+                transform: rotate(5deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(-5deg) scale(1.1);
+            }
+        }
+
+        /* Layer 3: Foreground UI */
+        .theater-foreground {
+            position: absolute;
+            bottom: 12%;
+            left: 0;
+            width: 100%;
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* THE PORTAL BUTTON */
+        .cta-portal {
+            position: relative;
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: #fff;
+            text-decoration: none;
+            background: var(--accent-orange);
+            padding: 18px 45px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            box-shadow: 0 0 40px rgba(255, 77, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            pointer-events: auto;
+        }
+
+        .cta-portal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .cta-portal:hover::before {
+            left: 100%;
+        }
+
+        .cta-portal:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 60px rgba(255, 77, 0, 0.7);
+            letter-spacing: 6px;
+        }
+
+        /* COMPRESSED SOCIAL PROOF */
+        .sales-indicator {
+            font-family: var(--font-mono);
+            color: var(--accent-yellow);
+            font-size: 11px;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.8;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 6px 15px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* MASCOT INTEGRATION */
+        .theater-kao {
+            position: absolute;
+            top: 15%;
+            left: 8%;
+            width: 80px;
+            height: 80px;
+            z-index: 12;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 20px rgba(255, 77, 0, 0.3));
+        }
+
+        @keyframes theater-bg-float {
+            0% {
+                transform: translate(-50%, -50%) skewX(0deg);
+            }
+
+            100% {
+                transform: translate(-52%, -48%) skewX(2deg);
+            }
+        }
+
+
+        /* THE PORTAL BUTTON SHIMMER */
+        .cta-portal::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer-portal 4s infinite;
+        }
+
+        @keyframes shimmer-portal {
+            0% {
+                left: -100%;
+            }
+
+            20% {
+                left: 100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* --- SCROLL INDICATOR --- */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            opacity: 0.8;
+            z-index: 100;
+        }
+
+        .scroll-indicator span {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--accent-orange);
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator .arrow-down {
+            width: 20px;
+            height: 20px;
+            border-right: 2px solid white;
+            border-bottom: 2px solid white;
+            transform: rotate(45deg);
+            animation: bounce-arrow 2s infinite;
+        }
+
+        @keyframes bounce-arrow {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: rotate(45deg) translate(0, 0);
+                opacity: 1;
+            }
+
+            40% {
+                transform: rotate(45deg) translate(10px, 10px);
+                opacity: 0.5;
+            }
+        }
+
+        /* --- MASCARA --- */
+        .shutter {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 1000;
+            transform: scaleX(0);
+            transform-origin: left;
+        }
+
+        /* --- DESKTOP BARRIER --- */
+        #desktop-barrier {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 99999;
+            display: none;
+            /* Controlled by Media Query */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        #desktop-barrier h1 {
+            font-size: 8vw;
+            color: var(--accent-orange);
+            margin-bottom: 2rem;
+        }
+
+        #desktop-barrier p {
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            max-width: 600px;
+        }
+
+        /* --- PRESENCE PULSE --- */
+        .presence-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #ff0000;
+            border-radius: 50%;
+            margin-right: 10px;
+            box-shadow: 0 0 10px #ff0000;
+        }
+
+        /* --- SUCCESS STATE --- */
+        #checkout-success {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+        }
+
+        #checkout-success h2 {
+            font-size: 6rem;
+            color: var(--neon-green);
+            margin-bottom: 2rem;
+        }
+
+        #checkout-success p {
+            font-size: 1.5rem;
+            opacity: 0.8;
+            margin-bottom: 3rem;
+        }
+
+        /* --- FLOATING CTA --- */
+        #floating-buy {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent-orange);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            text-decoration: none;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(255, 77, 0, 0.5);
+            transform: scale(0);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #floating-buy.visible {
+            transform: scale(1);
+        }
+
+        @media (min-width: 1025px) {
+            #desktop-barrier {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .big-text {
+                font-size: 6rem;
+            }
+
+            .brutalist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .marquee-text {
+                font-size: 4rem;
+            }
+
+            .cacao-blob {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="desktop-barrier">
+        <h1>MÓVIL EXCLUSIVO</h1>
+        <p>ACCEDE DESDE TU CELULAR <br>PARA VIVIR LA EXPERIENCIA KACAO.</p>
+        <div style="margin-top: 50px; font-size: 3rem;">📱</div>
+    </div>
+
+    <div class="noise-overlay"></div>
+    <div class="cacao-blob" id="blob"></div>
+    <div class="shutter"></div>
+    <a href="#" id="floating-buy">PEDIR</a>
+
+    <!-- QUANTUM ENTRY FLOW -->
+    <section id="quantum-entry">
+        <!-- Stage A: Welcome -->
+        <div class="entry-stage active" id="stage-welcome">
+            <h1 class="welcome-title">ESCANEA PARA DESCUBRIR <br><span style="color:var(--accent-orange)">EL
+                    PLACER</span></h1>
+            <div class="magnetic-wrap">
+                <button id="activate-camera-btn" class="premium-btn">
+                    ACTIVAR CÁMARA <span class="fire-icon">🔥</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Stage B: QR Scanner -->
+        <div class="entry-stage" id="stage-scan">
+            <h2 style="font-family:var(--font-display); font-size:2.5rem; margin-bottom:3rem; letter-spacing:1px;">
+                ENFOCA EL CÓDIGO <br><span style="color:var(--accent-orange)">KACAO</span></h2>
+            <div id="qr-reader"></div>
+            <p class="glitch-text" style="margin-top:3rem; font-family:var(--font-mono); font-size:14px; opacity:0.7;">[
+                ESCANEADO ACTIVO ]</p>
+        </div>
+    </section>
+
+    <!-- Stage C: Video Sequence -->
+    <div class="reveal-video-container" id="video-container">
+        <video id="reveal-video" preload="auto">
+            <source src="assets/videos/reveal.mp4" type="video/mp4">
+            <!-- Fallback if reveal.mp4 is missing during test -->
+            <source
+                src="https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-chocolate-syrup-pouring-on-a-brownie-41134-large.mp4"
+                type="video/mp4">
+        </video>
+    </div>
+
+    <div class="reveal-overlay-text" id="reveal-text">DESCUBRE NUESTROS<br>BENEFICIOS DELICIOSOS</div>
+
+    <!-- CHECKOUT VIEW -->
+    <div id="checkout-view">
+        <div id="checkout-main">
+            <div class="checkout-header">
+                <h2 style="font-size:4rem;">ORDENA TU KACAO</h2>
+                <button class="close-checkout" id="close-checkout">VOLVER</button>
+            </div>
+            <div class="order-summary">
+                <div class="order-item">
+                    <div>
+                        <h3>Brownie Artesanal KACAO</h3>
+                        <p style="color:var(--accent-yellow)">$12.500 COP p/u</p>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" id="minus">-</button>
+                        <span id="qty-val" style="font-family:var(--font-display); font-size:2rem;">1</span>
+                        <button class="qty-btn" id="plus">+</button>
+                    </div>
+                </div>
+                <div style="font-family:var(--font-mono); margin-top:30px; font-size:14px; color:var(--neon-green)">
+                    MODO: PAGO CONTRA-ENTREGA ✅
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:2rem;">
+                    <span>TOTAL:</span>
+                    <span id="total-price" style="color:var(--accent-orange)">$12.500 COP</span>
+                </div>
+                <button class="checkout-btn" id="confirm-order-btn">CONFIRMAR PEDIDO</button>
+            </div>
+        </div>
+
+        <div id="checkout-success">
+            <h2>¡LISTO!</h2>
+            <p>PEDIDO ENVIADO CON ÉXITO.<br>PREPÁRATE PARA EL PLACER REAL.</p>
+            <div style="font-size: 5rem;">✨🍫✨</div>
+            <button class="close-checkout" style="margin-top:50px;" onclick="location.reload()">VOLVER AL
+                INICIO</button>
+        </div>
+    </div>
+
+    <!-- CONTENT WRAPPER -->
+    <div id="content-wrapper">
+
+        <!-- SECTION 1: CINEMATIC THEATER HERO -->
+        <section class="purchase-container">
+            <!-- Layer 1: Background -->
+            <div class="theater-bg-text">KACAO</div>
+            <div class="volumetric-light"></div>
+
+            <!-- Layer 2: Midground -->
+            <div class="theater-kao" id="kao-mascot">
+                <svg viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="80" fill="var(--accent-orange)" />
+                    <circle cx="70" cy="80" r="12" fill="black" />
+                    <circle cx="130" cy="80" r="12" fill="black" />
+                    <path d="M80,130 Q100,150 120,130" stroke="black" stroke-width="5" fill="none" />
+                    <text x="50" y="160" font-size="20">🐾</text>
+                </svg>
+            </div>
+
+            <div class="theater-midground">
+                <div class="product-visual">
+                    <div class="floating-badge">¡SÍ VALE!</div>
+                    <img src="assets/images/brownie.png" alt="Brownie Artesanal" class="product-img">
+                </div>
+            </div>
+
+            <!-- Layer 3: Foreground UI -->
+            <div class="theater-foreground">
+                <div class="sales-indicator">
+                    <span class="presence-dot"></span>
+                    <span id="sales">32</span> PERSONAS ESTÁN DISFRUTANDO KACAO
+                </div>
+
+                <a href="#" class="cta-portal buy-cta">QUIERO MI KACAO</a>
+            </div>
+
+            <div class="scroll-indicator">
+                <span>SCROLL DOWN</span>
+                <div class="arrow-down"></div>
+            </div>
+        </section>
+
+
+        <!-- SECTION 2: STORY-BASED INSIGHTS -->
+        <section class="story-section" id="insights">
+            <div class="story-card card-reveal">
+                <span class="num">01. INGREDIENTES</span>
+                <h3>TIERRA <br><span style="color:var(--accent-yellow)">ADENTRO.</span></h3>
+                <p>Harina de plátano, almendra y avena. Sin experimentos. Solo lo que la selva nos dio para tu placer.
+                </p>
+                <button class="buy-cta premium-btn">PROBAR ESTO 🔥</button>
+            </div>
+
+            <div class="story-card card-reveal">
+                <span class="num">02. PERFORMANCE</span>
+                <h3>172 KCAL <br><span style="color:var(--neon-green)">HONESTAS.</span></h3>
+                <p>Proteína real y carbohidratos que no te traicionan. Energía plana para mentes que no se detienen.</p>
+                <button class="buy-cta premium-btn">ME INTERESA 🔥</button>
+            </div>
+
+            <div class="story-card card-reveal">
+                <span class="num">03. IMPACTO</span>
+                <h3>CAMBIO <br><span style="color:var(--accent-orange)">REAL.</span></h3>
+                <p>1 Bite = 1 Aporte. Movemos recursos a familias colombianas que necesitan un impulso hoy mismo.</p>
+                <button class="buy-cta premium-btn">APOYAR AHORA 🔥</button>
+            </div>
+
+            <div class="story-card card-reveal">
+                <span class="num">04. ORIGEN</span>
+                <h3>COLOMBIA <br><span style="color:var(--warm-cream)">MAXIMAL.</span></h3>
+                <p>Cacao puro de nuestras selvas. Sostenibilidad radical en cada fibra de este brownie artesanal.</p>
+                <button class="buy-cta premium-btn">PEDIR KACAO 🔥</button>
+            </div>
+        </section>
+
+        <!-- SECTION 3: IMPACT MARQUEE -->
+        <section class="impact-section">
+            <div class="marquee-wrapper">
+                <span class="marquee-text">GUILTY? NEVER. · COMIDO CON CONSCIENCIA · IMPACTO REAL · KACAO · COLOMBIA ·
+                </span>
+                <span class="marquee-text">GUILTY? NEVER. · COMIDO CON CONSCIENCIA · IMPACTO REAL · KACAO · COLOMBIA ·
+                </span>
+            </div>
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer style="padding: 100px 5vw; border-top: 1px solid #222; text-align: center;">
+            <h1 style="font-size: 15vw; opacity: 0.1;">KACAO</h1>
+            <div
+                style="display: flex; gap: 40px; justify-content: center; margin-top: -5vw; font-family: var(--font-mono); font-size: 12px;">
+                <a href="#" style="color: white; text-decoration: none;">INSTAGRAM</a>
+                <a href="#" style="color: white; text-decoration: none;">TIKTOK</a>
+                <a href="#" style="color: white; text-decoration: none;">WHATSAPP</a>
+            </div>
+            <p style="margin-top: 50px; opacity: 0.5;">Hecho con chocolate de verdad en Colombia.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Smooth Scroll (Lenis)
+        const lenis = new Lenis();
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // --- CUSTOM CURSOR REMOVED FOR MOBILE ELEGANCE ---
+        const blob = document.getElementById('blob');
+        gsap.to(blob, {
+            scale: 1.2,
+            opacity: 0.3,
+            repeat: -1,
+            yoyo: true,
+            duration: 10,
+            ease: "sine.inOut"
+        });
+
+        // Magnetic Effect
+        const magnets = document.querySelectorAll('.magnetic-wrap');
+        magnets.forEach((m) => {
+            m.addEventListener('mousemove', (e) => {
+                const rect = m.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                gsap.to(m, { x: x * 0.5, y: y * 0.5, duration: 0.4, ease: "power2.out" });
+
+                // Extra wow: Shift blob color on hover
+                gsap.to(blob, { background: "radial-gradient(circle, rgba(255, 77, 0, 0.4) 0%, transparent 70%)", duration: 0.5 });
+            });
+            m.addEventListener('mouseleave', () => {
+                gsap.to(m, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
+                gsap.to(blob, { background: "radial-gradient(circle, rgba(59, 26, 10, 0.4) 0%, transparent 70%)", duration: 0.5 });
+            });
+        });
+
+        // Floating Mascot Logic
+        gsap.to("#kao-mascot", {
+            y: 30, x: 20, rotate: 10, repeat: -1, yoyo: true, duration: 2, ease: "sine.inOut"
+        });
+
+        // --- QUANTUM FLOW LOGIC ---
+        const welcomeBtn = document.getElementById('activate-camera-btn');
+        const stageWelcome = document.getElementById('stage-welcome');
+        const stageScan = document.getElementById('stage-scan');
+        const videoContainer = document.getElementById('video-container');
+        const revealVideo = document.getElementById('reveal-video');
+        const revealText = document.getElementById('reveal-text');
+        const contentWrapper = document.getElementById('content-wrapper');
+        const quantumEntry = document.getElementById('quantum-entry');
+
+        welcomeBtn.addEventListener('click', () => {
+            stageWelcome.classList.remove('active');
+            stageScan.classList.add('active');
+            startScanner();
+        });
+
+        function startScanner() {
+            const html5QrCode = new Html5Qrcode("qr-reader");
+
+            // High-performance configuration
+            const config = {
+                fps: 30, // Much smoother for fast motion
+                qrbox: { width: 250, height: 250 },
+                aspectRatio: 1,
+                experimentalFeatures: {
+                    useBarCodeDetectorIfSupported: true // Native OS decoding is much faster
+                },
+                videoConstraints: {
+                    facingMode: "environment",
+                    focusMode: "continuous",
+                    whiteBalanceMode: "continuous"
+                }
+            };
+
+            html5QrCode.start({ facingMode: "environment" }, config, (decodedText) => {
+                // Audio feedback if possible? html5-qrcode doesn't have it built-in, but we can add haptic
+                if (globalThis.navigator.vibrate) globalThis.navigator.vibrate(100);
+
+                html5QrCode.stop().then(() => {
+                    playRevealSequence();
+                }).catch(err => {
+                    // Even if stop fails, we proceed
+                    playRevealSequence();
+                });
+            }).catch(err => {
+                console.error("Camera fail:", err);
+                // Fallback for desktop/testing
+                setTimeout(playRevealSequence, 1500);
+            });
+        }
+
+        function playRevealSequence() {
+            quantumEntry.style.display = 'none';
+            videoContainer.style.display = 'block';
+            revealVideo.play();
+
+            revealVideo.onended = () => {
+                const tl = gsap.timeline();
+                tl.to(revealText, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "power4.out" })
+                    .to(videoContainer, { opacity: 0, y: -50, duration: 0.8, ease: "expo.inOut" }, "+=0.1")
+                    .add(() => {
+                        lenis.start();
+                        lenis.scrollTo(0, { immediate: true });
+                        contentWrapper.style.visibility = 'visible';
+                        contentWrapper.style.opacity = '1';
+                    }, "<")
+                    .to(revealText, { opacity: 0, y: -20, duration: 0.3 }, "-=0.2")
+                    .from(".purchase-container > *", { y: 50, opacity: 0, stagger: 0.1, duration: 1, ease: "power3.out" }, "-=0.2")
+                    .set(videoContainer, { display: 'none' });
+            };
+        }
+
+        // --- CHECKOUT LOGIC ---
+        const buyCtas = document.querySelectorAll('.buy-cta, #floating-buy');
+        const floatingBuy = document.getElementById('floating-buy');
+        const checkoutView = document.getElementById('checkout-view');
+        const checkoutMain = document.getElementById('checkout-main');
+        const checkoutSuccess = document.getElementById('checkout-success');
+        const confirmOrderBtn = document.getElementById('confirm-order-btn');
+        const closeCheckout = document.getElementById('close-checkout');
+        const qtyVal = document.getElementById('qty-val');
+        const totalPrice = document.getElementById('total-price');
+
+        let quantity = 1;
+        const pricePerUnit = 12500;
+
+        buyCtas.forEach(cta => {
+            cta.addEventListener('click', (e) => {
+                e.preventDefault();
+                checkoutView.classList.add('open');
+                lenis.stop();
+            });
+        });
+
+        closeCheckout.addEventListener('click', () => {
+            checkoutView.classList.remove('open');
+            lenis.start();
+        });
+
+        confirmOrderBtn.addEventListener('click', () => {
+            gsap.to(checkoutMain, {
+                opacity: 0, y: -20, duration: 0.5, onComplete: () => {
+                    checkoutMain.style.display = 'none';
+                    checkoutSuccess.style.display = 'flex';
+                    gsap.from(checkoutSuccess, { opacity: 0, y: 20, duration: 0.5 });
+                }
+            });
+        });
+
+        document.getElementById('plus').addEventListener('click', () => {
+            quantity++;
+            updateCheckout();
+        });
+
+        document.getElementById('minus').addEventListener('click', () => {
+            if (quantity > 1) quantity--;
+            updateCheckout();
+        });
+
+        function updateCheckout() {
+            qtyVal.innerText = quantity;
+            const total = quantity * pricePerUnit;
+            totalPrice.innerText = `$${total.toLocaleString()} COP`;
+            gsap.from(totalPrice, { scale: 1.2, duration: 0.3, ease: "back.out" });
+        }
+
+        // Presence Pulse Animation
+        gsap.to(".presence-dot", { scale: 1.5, opacity: 0.5, repeat: -1, yoyo: true, duration: 0.8 });
+
+        // Floating Buy Visibility
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Lowered threshold because hero is gone
+                floatingBuy.classList.add('visible');
+            } else {
+                floatingBuy.classList.remove('visible');
+            }
+        });
+
+        // Scroll Animations (GSAP ScrollTrigger)
+        gsap.registerPlugin(ScrollTrigger);
+
+
+        // Stagger Reveal Cards
+        gsap.utils.toArray(".story-card").forEach((card, i) => {
+            gsap.from(card.children, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 70%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                stagger: 0.1,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // Marquee Logic (Manual Sync for extreme smoothness)
+        gsap.to(".marquee-text", {
+            xPercent: -100,
+            repeat: -1,
+            duration: 20,
+            ease: "none"
+        });
+
+        // Social Proof Counter
+        setInterval(() => {
+            const sales = document.getElementById('sales');
+            if (!sales) return;
+            const currentText = sales.innerText.trim();
+            const val = Number.parseInt(currentText);
+
+            if (Number.isNaN(val)) {
+                sales.innerText = "32";
+            } else {
+                let newVal = val;
+                if (Math.random() > 0.4) newVal++;
+                sales.innerText = newVal.toString();
+            }
+        }, 4000);
+
+    </script>
+</body>
+
+</html>
