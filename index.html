@@ -234,6 +234,9 @@
             background: black;
             z-index: 2100;
             display: none;
+            opacity: 0;
+            /* Start hidden */
+            transition: opacity 0.5s ease;
         }
 
         #reveal-video {
@@ -1365,7 +1368,7 @@
             videoLoader.style.display = 'flex';
 
             let isRevealing = false;
-            let hasStartedPlaying = false;
+            let hasSignal = false;
 
             const triggerReveal = () => {
                 if (isRevealing) return;
@@ -1374,8 +1377,13 @@
                 if (globalThis.revealTimeout) clearTimeout(globalThis.revealTimeout);
                 if (videoLoader) videoLoader.style.display = 'none';
 
+                // ABSOLUTE SYNC: Kill video audio immediately
+                if (revealVideo) {
+                    revealVideo.pause();
+                    revealVideo.currentTime = 0;
+                }
+
                 const tl = gsap.timeline();
-                // Ensure video container is at least block so it can fade out if it was visible
                 videoContainer.style.display = 'block';
 
                 tl.to(videoContainer, { opacity: 0, duration: 0.5, ease: "power2.inOut" })
@@ -1396,33 +1404,33 @@
                 });
             };
 
-            // ONLY show video container when it's actually playing
-            revealVideo.addEventListener('playing', () => {
-                hasStartedPlaying = true;
-                videoLoader.style.display = 'none';
-                videoContainer.style.display = 'block';
-            });
-
-            // ABSOLUTE LAST RESORT: 30 seconds for dead connections only
+            // ABSOLUTE LAST RESORT: 30 seconds
             globalThis.revealTimeout = setTimeout(() => {
-                console.warn("30s Emergency timeout reached.");
+                console.warn("30s Sync timeout reached.");
                 triggerReveal();
             }, 30000);
 
-            // Attempt playback - DON'T catch to skip, just report error
             revealVideo.play().catch(err => {
-                console.error("Playback failed but waiting for signal...", err);
+                console.error("Playback start blocked:", err);
             });
 
             revealVideo.addEventListener('timeupdate', () => {
-                // Only allow snappy transition if the video has actually been playing
-                if (hasStartedPlaying && revealVideo.currentTime > revealVideo.duration - 0.4) {
+                // 1. SIGNAL CHECK: Only show video when it has actually moved (prevent poster flash)
+                if (!hasSignal && revealVideo.currentTime > 0.1) {
+                    hasSignal = true;
+                    videoLoader.style.display = 'none';
+                    videoContainer.style.display = 'block';
+                    gsap.to(videoContainer, { opacity: 1, duration: 0.5 });
+                }
+
+                // 2. REVEAL CHECK: Snappy transition at the end
+                if (hasSignal && revealVideo.currentTime > revealVideo.duration - 0.4) {
                     triggerReveal();
                 }
             });
 
             revealVideo.onended = () => {
-                if (hasStartedPlaying) triggerReveal();
+                if (hasSignal) triggerReveal();
             };
         }
 
