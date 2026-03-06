@@ -1415,16 +1415,22 @@
             });
 
             revealVideo.addEventListener('timeupdate', () => {
-                // 1. SIGNAL CHECK: Only show video when it has actually moved (prevent poster flash)
+                // 1. SIGNAL CHECK: Only show video when it has actually moved
                 if (!hasSignal && revealVideo.currentTime > 0.1) {
                     hasSignal = true;
+                    // DYNAMIC PROTECTION: Once video starts, cancel the emergency timeout
+                    // This prevents the site from jumping to home while the video is playing slowly
+                    if (globalThis.revealTimeout) {
+                        clearTimeout(globalThis.revealTimeout);
+                        console.log("Video started. Emergency timeout cancelled.");
+                    }
                     videoLoader.style.display = 'none';
                     videoContainer.style.display = 'block';
                     gsap.to(videoContainer, { opacity: 1, duration: 0.5 });
                 }
 
-                // 2. REVEAL CHECK: Snappy transition at the end
-                if (hasSignal && revealVideo.currentTime > revealVideo.duration - 0.4) {
+                // 2. REVEAL CHECK: Snappy transition at the very end (0.1s before end)
+                if (hasSignal && revealVideo.duration > 0 && revealVideo.currentTime > revealVideo.duration - 0.1) {
                     triggerReveal();
                 }
             });
