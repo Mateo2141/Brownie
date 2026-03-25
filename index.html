@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KACAO | Guilty? Never.</title>
+    <title>Antojo Criollo | Alfajor de Guatila</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
 
     <!-- GSAP & Lenis -->
@@ -24,15 +24,30 @@
 
     <style>
         :root {
-            --bg-black: #0D0D0D;
-            --accent-orange: #FF4D00;
-            --accent-yellow: #FFD600;
-            --neon-green: #39FF14;
-            --deep-cacao: #3B1A0A;
-            --warm-cream: #FFF4E0;
+            /* Alfajor Guatila — paleta referencia: verde arequipe, galleta dorada, coco, madera */
+            --bg-black: #1a1510;
+            --bg-wood: #2d2419;
+            --accent-orange: #D4A373;
+            --accent-gold-deep: #C68E4B;
+            --accent-yellow: #E8C547;
+            --neon-green: #4F772D;
+            --guatila-mint: #A3B18A;
+            --guatila-fill: #B2C28E;
+            --deep-cacao: #4A3728;
+            --warm-cream: #F8F9FA;
+            --glow-gold: rgba(212, 163, 115, 0.45);
             --font-display: 'Bebas Neue', sans-serif;
             --font-body: 'DM Sans', sans-serif;
             --font-mono: 'Space Mono', monospace;
+            --font-brand: 'Caveat', cursive;
+        }
+
+        .brand-script {
+            font-family: var(--font-brand);
+            text-transform: none;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            color: var(--warm-cream);
         }
 
         * {
@@ -44,8 +59,8 @@
         }
 
         body {
-            background-color: var(--bg-black);
-            color: white;
+            background: linear-gradient(165deg, var(--bg-black) 0%, var(--bg-wood) 45%, #1f1812 100%);
+            color: var(--warm-cream);
             font-family: var(--font-body);
             overflow-x: hidden;
             line-height: 1.4;
@@ -76,7 +91,7 @@
             position: fixed;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(59, 26, 10, 0.4) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(79, 119, 45, 0.35) 0%, rgba(212, 163, 115, 0.12) 45%, transparent 70%);
             filter: blur(80px);
             pointer-events: none;
             z-index: -1;
@@ -136,10 +151,9 @@
             max-width: 320px;
             aspect-ratio: 1 / 1;
             border: 2px solid var(--accent-orange) !important;
-            /* Solid and thicker for better contrast */
             border-radius: 20px;
             overflow: hidden;
-            background: #000;
+            background: var(--bg-black);
             margin: 0 auto;
             position: relative;
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
@@ -180,8 +194,8 @@
 
         /* --- PREMIUM BUTTON CLASS --- */
         .premium-btn {
-            background: rgba(255, 77, 0, 0.1);
-            border: 1px solid var(--accent-orange);
+            background: rgba(163, 177, 138, 0.12);
+            border: 1px solid var(--guatila-mint);
             backdrop-filter: blur(10px);
             color: white;
             padding: 1.2rem 3.5rem;
@@ -202,7 +216,8 @@
 
         .premium-btn:hover {
             background: var(--accent-orange);
-            box-shadow: 0 0 30px rgba(255, 77, 0, 0.6);
+            color: #1a1510;
+            box-shadow: 0 0 30px var(--glow-gold);
         }
 
         .premium-btn:active {
@@ -212,11 +227,11 @@
         /* Subtle breathing shadow instead of monstrous scaling */
         @keyframes subtle-pulse {
             0% {
-                box-shadow: 0 0 0 0 rgba(255, 77, 0, 0.4);
+                box-shadow: 0 0 0 0 rgba(79, 119, 45, 0.35);
             }
 
             100% {
-                box-shadow: 0 0 20px 10px rgba(255, 77, 0, 0);
+                box-shadow: 0 0 20px 10px rgba(79, 119, 45, 0);
             }
         }
 
@@ -231,7 +246,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: black;
+            background: var(--bg-black);
             z-index: 2100;
             display: none;
             opacity: 0;
@@ -269,7 +284,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: black;
+            background: var(--bg-black);
             z-index: 2500;
             display: none;
             flex-direction: column;
@@ -313,7 +328,7 @@
             right: -100%;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: var(--bg-wood);
             z-index: 3000;
             padding: 40px 5vw;
             transition: right 0.8s cubic-bezier(0.8, 0, 0.2, 1);
@@ -344,16 +359,16 @@
         }
 
         .order-summary {
-            background: #111;
+            background: rgba(26, 21, 16, 0.85);
             padding: 40px;
-            border: 1px solid #222;
+            border: 1px solid rgba(212, 163, 115, 0.25);
         }
 
         .order-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid rgba(212, 163, 115, 0.12);
             padding: 20px 0;
         }
 
@@ -387,7 +402,7 @@
             cursor: pointer;
             letter-spacing: 2px;
             text-transform: uppercase;
-            box-shadow: 0 10px 30px rgba(255, 77, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(212, 163, 115, 0.3);
             border-radius: 4px;
         }
 
@@ -415,8 +430,8 @@
             position: absolute;
             width: 100%;
             height: 20px;
-            background: linear-gradient(to bottom, transparent, var(--neon-green), transparent);
-            opacity: 0.5;
+            background: linear-gradient(to bottom, transparent, var(--guatila-mint), transparent);
+            opacity: 0.55;
             top: -20%;
         }
 
@@ -434,7 +449,7 @@
             position: absolute;
             width: 30px;
             height: 30px;
-            border: 3px solid var(--neon-green);
+            border: 3px solid var(--guatila-mint);
         }
 
         .tl {
@@ -468,13 +483,12 @@
         .glitch-text {
             font-family: var(--font-mono);
             font-size: 14px;
-            color: var(--neon-green);
+            color: var(--guatila-mint);
             margin-top: 2rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             opacity: 1;
-            /* Better contrast */
-            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            text-shadow: 0 0 12px rgba(163, 177, 138, 0.45);
         }
 
         #discover-btn {
@@ -520,10 +534,9 @@
 
         .hero {
             height: 120vh;
-            /* Reduced from 150vh to minimize initial "black/empty" gap on mobile */
             width: 100%;
             position: relative;
-            background: #000;
+            background: var(--bg-black);
         }
 
         .hero-video-container {
@@ -558,7 +571,7 @@
 
         /* --- SECTION 2: STORY CARDS --- */
         .story-section {
-            background: #000;
+            background: transparent;
             padding: 0;
         }
 
@@ -570,13 +583,13 @@
             flex-direction: column;
             justify-content: center;
             position: relative;
-            border-bottom: 1px solid #1a1a1a;
+            border-bottom: 1px solid rgba(212, 163, 115, 0.15);
             overflow: hidden;
         }
 
         .story-card .num {
             font-family: var(--font-mono);
-            color: var(--accent-orange);
+            color: var(--guatila-mint);
             font-size: 14px;
             margin-bottom: 2rem;
             display: block;
@@ -592,29 +605,32 @@
         }
 
         .story-card p {
-            font-size: 1.4rem;
-            line-height: 1.4;
+            font-size: clamp(1.05rem, 3.8vw, 1.25rem);
+            line-height: 1.55;
             opacity: 1;
-            /* Maximum readability */
-            max-width: 90%;
+            max-width: 95%;
             margin-bottom: 3rem;
-            color: #ffffff;
-            /* Pure white for contrast */
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            color: var(--warm-cream);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+        }
+
+        .story-card p strong {
+            color: var(--guatila-mint);
+            font-weight: 700;
         }
 
         /* --- IMPACT --- */
         .impact-section {
-            background: var(--neon-green);
-            color: #000;
+            background: var(--guatila-fill);
+            color: #1a1510;
             padding: 100px 0;
             transform: skewY(-2deg);
             margin: 100px 0;
         }
 
         .marquee-wrapper {
-            background: #000;
-            color: var(--neon-green);
+            background: var(--deep-cacao);
+            color: var(--guatila-mint);
             padding: 20px 0;
             overflow: hidden;
             white-space: nowrap;
@@ -654,7 +670,7 @@
         /* --- MASCOT & PRODUCT --- */
         /* --- CINEMATIC THEATER HERO --- */
         .purchase-container {
-            background: #000;
+            background: radial-gradient(ellipse 120% 80% at 50% 20%, rgba(79, 119, 45, 0.12) 0%, transparent 55%), var(--bg-black);
             padding: 0;
             text-align: center;
             position: relative;
@@ -690,7 +706,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 50% 40%, rgba(255, 77, 0, 0.1) 0%, transparent 50%);
+            background: radial-gradient(circle at 50% 40%, rgba(178, 194, 142, 0.18) 0%, rgba(212, 163, 115, 0.08) 40%, transparent 55%);
             z-index: 1;
             animation: light-sweep 8s ease-in-out infinite alternate;
         }
@@ -723,6 +739,14 @@
             margin: 0;
             position: relative;
             transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .product-visual .img-wrap {
+            position: relative;
+            display: inline-block;
         }
 
         .product-img {
@@ -746,8 +770,8 @@
 
         .floating-badge {
             position: absolute;
-            background: var(--accent-yellow);
-            color: #000;
+            background: var(--guatila-fill);
+            color: #1a1510;
             padding: 12px 18px;
             border-radius: 50px;
             font-family: var(--font-display);
@@ -799,7 +823,7 @@
             display: inline-block;
             text-transform: uppercase;
             letter-spacing: 4px;
-            box-shadow: 0 0 40px rgba(255, 77, 0, 0.4);
+            box-shadow: 0 0 40px rgba(212, 163, 115, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s ease;
             pointer-events: auto;
@@ -822,7 +846,7 @@
 
         .cta-portal:hover {
             transform: translateY(-5px);
-            box-shadow: 0 0 60px rgba(255, 77, 0, 0.7);
+            box-shadow: 0 0 60px rgba(212, 163, 115, 0.7);
             letter-spacing: 6px;
         }
 
@@ -851,7 +875,7 @@
             height: 80px;
             z-index: 12;
             opacity: 0.9;
-            filter: drop-shadow(0 0 20px rgba(255, 77, 0, 0.3));
+            filter: drop-shadow(0 0 20px rgba(212, 163, 115, 0.3));
         }
 
         @keyframes theater-bg-float {
@@ -959,7 +983,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: #000;
+            background: var(--bg-black);
             z-index: 99999;
             display: none;
             /* Controlled by Media Query */
@@ -987,10 +1011,10 @@
             display: inline-block;
             width: 10px;
             height: 10px;
-            background: #ff0000;
+            background: var(--neon-green);
             border-radius: 50%;
             margin-right: 10px;
-            box-shadow: 0 0 10px #ff0000;
+            box-shadow: 0 0 12px rgba(79, 119, 45, 0.85);
         }
 
         /* --- SUCCESS STATE --- */
@@ -1005,7 +1029,7 @@
 
         #checkout-success h2 {
             font-size: 6rem;
-            color: var(--neon-green);
+            color: var(--guatila-mint);
             margin-bottom: 2rem;
         }
 
@@ -1032,7 +1056,7 @@
             font-size: 1.2rem;
             text-decoration: none;
             z-index: 1000;
-            box-shadow: 0 10px 30px rgba(255, 77, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(212, 163, 115, 0.5);
             transform: scale(0);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -1071,21 +1095,22 @@
 
     <div id="desktop-barrier">
         <h1>MÓVIL EXCLUSIVO</h1>
-        <p>ACCEDE DESDE TU CELULAR <br>PARA VIVIR LA EXPERIENCIA KACAO.</p>
+        <p>ACCEDE DESDE TU CELULAR <br>PARA VIVIR LA EXPERIENCIA <span class="brand-script" style="font-size:1.4em;">Antojo Criollo</span>.</p>
         <div style="margin-top: 50px; font-size: 3rem;">📱</div>
     </div>
 
     <div class="noise-overlay"></div>
     <div class="cacao-blob" id="blob"></div>
     <div class="shutter"></div>
-    <a href="#" id="floating-buy">PEDIR</a>
+    <a href="#" id="floating-buy" title="Pedir alfajor">PEDIR</a>
 
     <!-- QUANTUM ENTRY FLOW -->
     <section id="quantum-entry">
         <!-- Stage A: Welcome -->
         <div class="entry-stage active" id="stage-welcome">
-            <h1 class="welcome-title">ESCANEA PARA DESCUBRIR <br><span style="color:var(--accent-orange)">EL
-                    PLACER</span></h1>
+            <h1 class="welcome-title">ESCANEA PARA DESCUBRIR <br><span style="color:var(--accent-orange)">EL ALFAJOR DE
+                    GUATILA</span></h1>
+            <p class="brand-script" style="font-size:clamp(1.8rem, 6vw, 2.8rem); margin-top:-1.5rem; opacity:0.95;">Antojo Criollo</p>
             <div class="magnetic-wrap">
                 <button id="activate-camera-btn" class="premium-btn">
                     ACTIVAR CÁMARA <span class="fire-icon">🔥</span>
@@ -1096,7 +1121,7 @@
         <!-- Stage B: QR Scanner -->
         <div class="entry-stage" id="stage-scan">
             <h2 style="font-family:var(--font-display); font-size:2.5rem; margin-bottom:3rem; letter-spacing:1px;">
-                ENFOCA EL CÓDIGO <br><span style="color:var(--accent-orange)">KACAO</span></h2>
+                ENFOCA EL CÓDIGO <br><span style="color:var(--accent-orange)">ANTOJO CRIOLLO</span></h2>
             <div id="qr-reader"></div>
             <p class="glitch-text" style="margin-top:3rem; font-family:var(--font-mono); font-size:14px; opacity:0.7;">[
                 ESCANEADO ACTIVO ]</p>
@@ -1105,11 +1130,8 @@
 
     <div class="reveal-video-container" id="video-container">
         <!-- [REEMPLAZAR EL SRC DE ABAJO CON TU LINK DE CLOUDINARY/MUX/DRIVE] -->
-        <video id="reveal-video" preload="auto" poster="assets/images/brownie.png" playsinline>
+        <video id="reveal-video" preload="auto" poster="assets/images/alfajor-guatila.png" playsinline>
             <source src="assets/videos/reveal.mp4" type="video/mp4">
-            <source
-                src="https://assets.mixkit.co/videos/preview/mixkit-slow-motion-of-chocolate-syrup-pouring-on-a-brownie-41134-large.mp4"
-                type="video/mp4">
         </video>
     </div>
 
@@ -1120,20 +1142,20 @@
         </div>
     </div>
 
-    <div class="reveal-overlay-text" id="reveal-text">DESCUBRE NUESTROS<br>BENEFICIOS DELICIOSOS</div>
+    <div class="reveal-overlay-text" id="reveal-text">UNA EXPERIENCIA SUAVE<br>Y DELICIOSA</div>
 
     <!-- CHECKOUT VIEW -->
     <div id="checkout-view">
         <div id="checkout-main">
             <div class="checkout-header">
-                <h2 style="font-size:4rem;">ORDENA TU KACAO</h2>
+                <h2 style="font-size:4rem;">ORDENA TU ALFAJOR</h2>
                 <button class="close-checkout" id="close-checkout">VOLVER</button>
             </div>
             <div class="order-summary">
                 <div class="order-item">
                     <div>
-                        <h3>Brownie Artesanal KACAO</h3>
-                        <p style="color:var(--accent-yellow)">$12.500 COP p/u</p>
+                        <h3>Alfajor de Guatila — Antojo Criollo</h3>
+                        <p style="color:var(--accent-yellow)">$5.000 COP p/u · también $3.500 según escenario</p>
                     </div>
                     <div class="qty-controls">
                         <button class="qty-btn" id="minus">-</button>
@@ -1141,12 +1163,12 @@
                         <button class="qty-btn" id="plus">+</button>
                     </div>
                 </div>
-                <div style="font-family:var(--font-mono); margin-top:30px; font-size:14px; color:var(--neon-green)">
+                <div style="font-family:var(--font-mono); margin-top:30px; font-size:14px; color:var(--guatila-mint)">
                     MODO: PAGO CONTRA-ENTREGA ✅
                 </div>
                 <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:2rem;">
                     <span>TOTAL:</span>
-                    <span id="total-price" style="color:var(--accent-orange)">$12.500 COP</span>
+                    <span id="total-price" style="color:var(--accent-orange)">$5.000 COP</span>
                 </div>
                 <button class="checkout-btn" id="confirm-order-btn">CONFIRMAR PEDIDO</button>
             </div>
@@ -1154,8 +1176,8 @@
 
         <div id="checkout-success">
             <h2>¡LISTO!</h2>
-            <p>PEDIDO ENVIADO CON ÉXITO.<br>PREPÁRATE PARA EL PLACER REAL.</p>
-            <div style="font-size: 5rem;">✨🍫✨</div>
+            <p>PEDIDO ENVIADO CON ÉXITO.<br>PREPÁRATE PARA EL AREQUIPE DE GUATILA.</p>
+            <div style="font-size: 5rem;">✨🥥✨</div>
             <button class="close-checkout" style="margin-top:50px;" onclick="location.reload()">VOLVER AL
                 INICIO</button>
         </div>
@@ -1167,24 +1189,31 @@
         <!-- SECTION 1: CINEMATIC THEATER HERO -->
         <section class="purchase-container">
             <!-- Layer 1: Background -->
-            <div class="theater-bg-text">KACAO</div>
+            <div class="theater-bg-text">GUATILA</div>
             <div class="volumetric-light"></div>
 
             <!-- Layer 2: Midground -->
             <div class="theater-kao" id="kao-mascot">
-                <svg viewBox="0 0 200 200">
-                    <circle cx="100" cy="100" r="80" fill="var(--accent-orange)" />
-                    <circle cx="70" cy="80" r="12" fill="black" />
-                    <circle cx="130" cy="80" r="12" fill="black" />
-                    <path d="M80,130 Q100,150 120,130" stroke="black" stroke-width="5" fill="none" />
-                    <text x="50" y="160" font-size="20">🐾</text>
+                <svg viewBox="0 0 200 200" aria-hidden="true">
+                    <ellipse cx="100" cy="100" rx="88" ry="72" fill="#C68E4B" opacity="0.95" />
+                    <ellipse cx="100" cy="100" rx="72" ry="22" fill="#B2C28E" />
+                    <ellipse cx="100" cy="100" rx="88" ry="72" fill="none" stroke="#4A3728" stroke-width="3" opacity="0.35" />
+                    <circle cx="78" cy="88" r="10" fill="#1a1510" />
+                    <circle cx="122" cy="88" r="10" fill="#1a1510" />
+                    <ellipse cx="78" cy="86" rx="3" ry="4" fill="#F8F9FA" opacity="0.7" />
+                    <ellipse cx="122" cy="86" rx="3" ry="4" fill="#F8F9FA" opacity="0.7" />
+                    <path d="M82,118 Q100,132 118,118" stroke="#1a1510" stroke-width="4" fill="none" stroke-linecap="round" />
                 </svg>
             </div>
 
             <div class="theater-midground">
                 <div class="product-visual">
-                    <div class="floating-badge">¡SÍ VALE!</div>
-                    <img src="assets/images/brownie.png" alt="Brownie Artesanal" class="product-img">
+                    <p class="brand-script" style="font-size:clamp(2rem, 6vw, 3rem); margin-bottom:0.5rem;">Antojo Criollo</p>
+                    <p style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.25em; opacity:0.75; margin-bottom:1rem;">ALFAJOR DE GUATILA · AREQUIPE ARTESANAL</p>
+                    <div class="img-wrap">
+                        <div class="floating-badge">Relleno cremoso</div>
+                        <img src="assets/images/alfajor-guatila.png" alt="Alfajor de Guatila Antojo Criollo" class="product-img">
+                    </div>
                 </div>
             </div>
 
@@ -1192,10 +1221,10 @@
             <div class="theater-foreground">
                 <div class="sales-indicator">
                     <span class="presence-dot"></span>
-                    <span id="sales">32</span> PERSONAS ESTÁN DISFRUTANDO KACAO
+                    <span id="sales">32</span> PERSONAS ESTÁN DISFRUTANDO ESTE ALFAJOR
                 </div>
 
-                <a href="#" class="cta-portal buy-cta">QUIERO MI KACAO</a>
+                <a href="#" class="cta-portal buy-cta">QUIERO MI ALFAJOR</a>
             </div>
 
             <div class="scroll-indicator">
@@ -1205,44 +1234,43 @@
         </section>
 
 
-        <!-- SECTION 2: STORY-BASED INSIGHTS -->
+        <!-- SECTION 2: ANÁLISIS DE COSTOS (MATRIZ) -->
         <section class="story-section" id="insights">
             <div class="story-card card-reveal">
-                <span class="num">01. INGREDIENTES</span>
-                <h3>TIERRA <br><span style="color:var(--accent-yellow)">ADENTRO.</span></h3>
-                <p>Harina de plátano, almendra y avena. Sin experimentos. Solo lo que la selva nos dio para tu placer.
-                </p>
-                <button class="buy-cta premium-btn">PROBAR ESTO 🔥</button>
+                <span class="num">01. MATRIZ DE COSTOS</span>
+                <h3>135 UNIDADES <br><span style="color:var(--accent-yellow)">POR SEMANA.</span></h3>
+                <p>Hoy el foco está en la matriz de costos de nuestro alfajor, un producto altamente eficiente en lo financiero y lo operativo. La estructura se determinó en <strong>135 unidades semanales</strong> con capacidad instalada casera. El precio de venta puede ser <strong>$5.000</strong> o <strong>$3.500</strong>, con rentabilidades entre <strong>50%</strong> y <strong>30%</strong>, y puntos de equilibrio que implican vender el <strong>50%</strong> o el <strong>70%</strong> de la producción, según el escenario.</p>
+                <button class="buy-cta premium-btn">QUIERO PROBARLO</button>
             </div>
 
             <div class="story-card card-reveal">
-                <span class="num">02. PERFORMANCE</span>
-                <h3>172 KCAL <br><span style="color:var(--neon-green)">HONESTAS.</span></h3>
-                <p>Proteína real y carbohidratos que no te traicionan. Energía plana para mentes que no se detienen.</p>
-                <button class="buy-cta premium-btn">ME INTERESA 🔥</button>
+                <span class="num">02. COSTOS VARIABLES</span>
+                <h3>$1.170 <br><span style="color:var(--guatila-mint)">/ UNIDAD · 60%</span></h3>
+                <p>Al descomponer la estructura aparecen costos variables y fijos prorrateados. Los variables son favorables: <strong>$1.170 por unidad</strong>, alrededor del <strong>60%</strong> del costo total: harina o galleta base, arequipe de guatila como relleno, empaque individual y, en algunos casos, mano de obra directa. Son bajos, <strong>controlables y estandarizables</strong>, lo que mantiene consistencia y eficiencia en el tiempo.</p>
+                <button class="buy-cta premium-btn">VER DETALLE</button>
             </div>
 
             <div class="story-card card-reveal">
-                <span class="num">03. IMPACTO</span>
-                <h3>CAMBIO <br><span style="color:var(--accent-orange)">REAL.</span></h3>
-                <p>1 Bite = 1 Aporte. Movemos recursos a familias colombianas que necesitan un impulso hoy mismo.</p>
-                <button class="buy-cta premium-btn">APOYAR AHORA 🔥</button>
+                <span class="num">03. COSTOS FIJOS</span>
+                <h3>$1.296 <br><span style="color:var(--accent-orange)">/ UNIDAD · 40%</span></h3>
+                <p>Los costos fijos suman <strong>$1.296 por unidad</strong> (~<strong>40%</strong>): horno, equipos y espacio de producción. Al prorratearse en volumen, <strong>baja el impacto por unidad</strong>: a mayor escala, mayor eficiencia del costo unitario.</p>
+                <button class="buy-cta premium-btn">ENTENDIDO</button>
             </div>
 
             <div class="story-card card-reveal">
-                <span class="num">04. ORIGEN</span>
-                <h3>COLOMBIA <br><span style="color:var(--warm-cream)">MAXIMAL.</span></h3>
-                <p>Cacao puro de nuestras selvas. Sostenibilidad radical en cada fibra de este brownie artesanal.</p>
-                <button class="buy-cta premium-btn">PEDIR KACAO 🔥</button>
+                <span class="num">04. VENTAJAS Y CIERRE</span>
+                <h3>ESTABILIDAD <br><span style="color:var(--warm-cream)">Y ESCALA.</span></h3>
+                <p>La <strong>vida útil</strong> del alfajor reduce pérdidas por vencimiento o merma; eso impacta directamente la rentabilidad. El proceso es <strong>simple y replicable</strong>, apto para estandarizar y escalar sin subir costos a la misma proporción. En estrategia: <strong>1)</strong> bajo costo unitario; <strong>2)</strong> alta capacidad de producción; <strong>3)</strong> margen potencial superior. En conclusión: un producto <strong>sólido, controlable y altamente rentable</strong>, listo para sostener el crecimiento. Muchas gracias.</p>
+                <button class="buy-cta premium-btn">PEDIR ALFAJOR</button>
             </div>
         </section>
 
         <!-- SECTION 3: IMPACT MARQUEE -->
         <section class="impact-section">
             <div class="marquee-wrapper">
-                <span class="marquee-text">GUILTY? NEVER. · COMIDO CON CONSCIENCIA · IMPACTO REAL · KACAO · COLOMBIA ·
+                <span class="marquee-text">UNA EXPERIENCIA SUAVE Y DELICIOSA · ALFAJOR DE GUATILA · ANTOJO CRIOLLO · AREQUIPE ARTESANAL ·
                 </span>
-                <span class="marquee-text">GUILTY? NEVER. · COMIDO CON CONSCIENCIA · IMPACTO REAL · KACAO · COLOMBIA ·
+                <span class="marquee-text">UNA EXPERIENCIA SUAVE Y DELICIOSA · ALFAJOR DE GUATILA · ANTOJO CRIOLLO · AREQUIPE ARTESANAL ·
                 </span>
             </div>
         </section>
@@ -1250,14 +1278,14 @@
 
         <!-- FOOTER -->
         <footer style="padding: 100px 5vw; border-top: 1px solid #222; text-align: center;">
-            <h1 style="font-size: 15vw; opacity: 0.1;">KACAO</h1>
+            <h1 style="font-size: 15vw; opacity: 0.1;">GUATILA</h1>
             <div
                 style="display: flex; gap: 40px; justify-content: center; margin-top: -5vw; font-family: var(--font-mono); font-size: 12px;">
                 <a href="#" style="color: white; text-decoration: none;">INSTAGRAM</a>
                 <a href="#" style="color: white; text-decoration: none;">TIKTOK</a>
                 <a href="#" style="color: white; text-decoration: none;">WHATSAPP</a>
             </div>
-            <p style="margin-top: 50px; opacity: 0.5;">Hecho con chocolate de verdad en Colombia.</p>
+            <p style="margin-top: 50px; opacity: 0.5;">Alfajor de guatila — hecho con sabor criollo en Colombia.</p>
         </footer>
 
     </div>
@@ -1292,11 +1320,11 @@
                 gsap.to(m, { x: x * 0.5, y: y * 0.5, duration: 0.4, ease: "power2.out" });
 
                 // Extra wow: Shift blob color on hover
-                gsap.to(blob, { background: "radial-gradient(circle, rgba(255, 77, 0, 0.4) 0%, transparent 70%)", duration: 0.5 });
+                gsap.to(blob, { background: "radial-gradient(circle, rgba(212, 163, 115, 0.35) 0%, rgba(79, 119, 45, 0.2) 50%, transparent 70%)", duration: 0.5 });
             });
             m.addEventListener('mouseleave', () => {
                 gsap.to(m, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
-                gsap.to(blob, { background: "radial-gradient(circle, rgba(59, 26, 10, 0.4) 0%, transparent 70%)", duration: 0.5 });
+                gsap.to(blob, { background: "radial-gradient(circle, rgba(79, 119, 45, 0.35) 0%, rgba(212, 163, 115, 0.12) 45%, transparent 70%)", duration: 0.5 });
             });
         });
 
@@ -1452,7 +1480,7 @@
         const totalPrice = document.getElementById('total-price');
 
         let quantity = 1;
-        const pricePerUnit = 12500;
+        const pricePerUnit = 5000;
 
         buyCtas.forEach(cta => {
             cta.addEventListener('click', (e) => {
