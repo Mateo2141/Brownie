@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Antojo Criollo | Alfajor de Guatila</title>
 
     <!-- Fonts -->
@@ -1087,6 +1087,130 @@
             .cacao-blob {
                 display: none;
             }
+
+            /*
+             * Hero móvil: equilibrio entre “no tan arriba” y que quepa
+             * título + imagen + CTA + scroll (sin amontonar).
+             */
+            .purchase-container {
+                align-items: center;
+                justify-content: flex-start;
+                height: auto;
+                min-height: 100vh;
+                min-height: 100dvh;
+                /* Un poco más abajo que el borde, sin volver al hueco enorme de antes */
+                padding-top: calc(env(safe-area-inset-top, 0px) + clamp(1.25rem, 4.5vh, 2.5rem));
+                padding-left: 4vw;
+                padding-right: 4vw;
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+                box-sizing: border-box;
+            }
+
+            .theater-midground {
+                justify-content: flex-start;
+                align-items: center;
+                width: 100%;
+                max-width: 420px;
+                margin-left: auto;
+                margin-right: auto;
+                padding-top: 0;
+            }
+
+            .theater-bg-text {
+                top: 42%;
+            }
+
+            .theater-kao {
+                top: calc(env(safe-area-inset-top, 0px) + clamp(6.5rem, 18vw, 7.5rem));
+                left: 3%;
+                width: 52px;
+                height: 52px;
+            }
+
+            .theater-foreground {
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 0.85rem);
+                left: 0;
+                width: 100%;
+                gap: 8px;
+                padding-left: 4vw;
+                padding-right: 4vw;
+                box-sizing: border-box;
+            }
+
+            .cta-portal {
+                font-size: clamp(1.1rem, 3.8vw, 1.35rem);
+                padding: 12px 24px;
+                letter-spacing: 1.5px;
+            }
+
+            .sales-indicator {
+                font-size: 9px;
+                letter-spacing: 0.12em;
+                padding: 5px 10px;
+                max-width: 94vw;
+                text-align: center;
+                justify-content: center;
+                line-height: 1.25;
+            }
+
+            /* Sobre el bloque CTA + ventas (que va abajo), sin taparlo */
+            .scroll-indicator {
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 8.35rem);
+                gap: 8px;
+            }
+
+            .scroll-indicator span {
+                font-size: 10px;
+                letter-spacing: 0.2em;
+            }
+
+            .product-visual .brand-script {
+                margin-bottom: 0.35rem !important;
+                font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
+            }
+
+            .product-visual .hero-tagline {
+                margin-bottom: 0.65rem !important;
+                font-size: 10px !important;
+                letter-spacing: 0.18em !important;
+            }
+
+            @keyframes theater-float-mobile {
+
+                0%,
+                100% {
+                    transform: translateY(0) rotate(-1deg) scale(1);
+                }
+
+                50% {
+                    transform: translateY(-8px) rotate(1deg) scale(1.01);
+                }
+            }
+
+            .product-img {
+                width: min(68vw, 300px);
+                max-width: 300px;
+                animation: theater-float-mobile 6s ease-in-out infinite;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .purchase-container {
+                padding-top: calc(env(safe-area-inset-top, 0px) + clamp(1rem, 3.8vh, 2rem));
+            }
+
+            .theater-foreground {
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 0.65rem);
+            }
+
+            .scroll-indicator {
+                bottom: calc(env(safe-area-inset-bottom, 0px) + 8rem);
+            }
+
+            .product-img {
+                width: min(70vw, 280px);
+                max-width: 280px;
+            }
         }
     </style>
 </head>
@@ -1209,7 +1333,7 @@
             <div class="theater-midground">
                 <div class="product-visual">
                     <p class="brand-script" style="font-size:clamp(2rem, 6vw, 3rem); margin-bottom:0.5rem;">Antojo Criollo</p>
-                    <p style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.25em; opacity:0.75; margin-bottom:1rem;">ALFAJOR DE GUATILA · AREQUIPE ARTESANAL</p>
+                    <p class="hero-tagline" style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.25em; opacity:0.75; margin-bottom:1rem;">ALFAJOR DE GUATILA · AREQUIPE ARTESANAL</p>
                     <div class="img-wrap">
                         <div class="floating-badge">Relleno cremoso</div>
                         <img src="assets/images/alfajor-guatila.png" alt="Alfajor de Guatila Antojo Criollo" class="product-img">
