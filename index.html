@@ -1950,12 +1950,22 @@
       border-radius: 50px;
       transform-origin: left;
       transform: scaleX(0);
-      transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    @keyframes macro-grow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
     }
 
     .fp__macros.is-animated .fp__macro-fill {
-      transform: scaleX(1);
+      animation: macro-grow 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     }
+    .fp__macros.is-animated .fp__macro:nth-child(1) .fp__macro-fill { animation-delay: 0.00s; }
+    .fp__macros.is-animated .fp__macro:nth-child(2) .fp__macro-fill { animation-delay: 0.10s; }
+    .fp__macros.is-animated .fp__macro:nth-child(3) .fp__macro-fill { animation-delay: 0.20s; }
+    .fp__macros.is-animated .fp__macro:nth-child(4) .fp__macro-fill { animation-delay: 0.30s; }
+    .fp__macros.is-animated .fp__macro:nth-child(5) .fp__macro-fill { animation-delay: 0.40s; }
+    .fp__macros.is-animated .fp__macro:nth-child(6) .fp__macro-fill { animation-delay: 0.50s; }
 
     .fp__sin-sello {
       display: flex;
@@ -3246,6 +3256,7 @@
       transition: opacity 0.5s ease, visibility 0.5s ease;
       overflow-y: auto;
     }
+
     #qr-gate::after {
       content: '';
       position: absolute;
@@ -3255,10 +3266,29 @@
       opacity: 0.025;
       pointer-events: none;
     }
-    #qr-gate.is-visible  { opacity: 1; visibility: visible; pointer-events: auto; }
 
-    .qrg__logo  { height: clamp(36px, 8vw, 48px); filter: brightness(0) invert(1); opacity: 0.95; position: relative; z-index: 2; }
-    .qrg__title { font-family: var(--font-script); font-size: clamp(1.7rem, 6vw, 2.4rem); color: var(--blanco); line-height: 1.1; position: relative; z-index: 2; }
+    #qr-gate.is-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .qrg__logo {
+      height: clamp(36px, 8vw, 48px);
+      filter: brightness(0) invert(1);
+      opacity: 0.95;
+      position: relative;
+      z-index: 2;
+    }
+
+    .qrg__title {
+      font-family: var(--font-script);
+      font-size: clamp(1.7rem, 6vw, 2.4rem);
+      color: var(--blanco);
+      line-height: 1.1;
+      position: relative;
+      z-index: 2;
+    }
 
     .qrg__viewfinder {
       position: relative;
@@ -3267,45 +3297,132 @@
       border-radius: 20px;
       overflow: hidden;
       background: #000;
-      box-shadow: 0 0 0 1px rgba(237,217,176,0.2), 0 24px 64px rgba(0,0,0,0.5);
+      box-shadow: 0 0 0 1px rgba(237, 217, 176, 0.2), 0 24px 64px rgba(0, 0, 0, 0.5);
       z-index: 2;
     }
-    .qrg__viewfinder::before, .qrg__viewfinder::after {
-      content: ''; position: absolute; z-index: 10; width: 28px; height: 28px; pointer-events: none;
+
+    .qrg__viewfinder::before,
+    .qrg__viewfinder::after {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      width: 28px;
+      height: 28px;
+      pointer-events: none;
     }
-    .qrg__viewfinder::before { top: 10px; left: 10px; border-top: 3px solid var(--dorado); border-left: 3px solid var(--dorado); border-radius: 6px 0 0 0; }
-    .qrg__viewfinder::after  { bottom: 10px; right: 10px; border-bottom: 3px solid var(--dorado); border-right: 3px solid var(--dorado); border-radius: 0 0 6px 0; }
-    .qrg__corner-tr, .qrg__corner-bl { position: absolute; z-index: 10; width: 28px; height: 28px; pointer-events: none; }
-    .qrg__corner-tr { top: 10px; right: 10px; border-top: 3px solid var(--dorado); border-right: 3px solid var(--dorado); border-radius: 0 6px 0 0; }
-    .qrg__corner-bl { bottom: 10px; left: 10px; border-bottom: 3px solid var(--dorado); border-left: 3px solid var(--dorado); border-radius: 0 0 0 6px; }
+
+    .qrg__viewfinder::before {
+      top: 10px;
+      left: 10px;
+      border-top: 3px solid var(--dorado);
+      border-left: 3px solid var(--dorado);
+      border-radius: 6px 0 0 0;
+    }
+
+    .qrg__viewfinder::after {
+      bottom: 10px;
+      right: 10px;
+      border-bottom: 3px solid var(--dorado);
+      border-right: 3px solid var(--dorado);
+      border-radius: 0 0 6px 0;
+    }
+
+    .qrg__corner-tr,
+    .qrg__corner-bl {
+      position: absolute;
+      z-index: 10;
+      width: 28px;
+      height: 28px;
+      pointer-events: none;
+    }
+
+    .qrg__corner-tr {
+      top: 10px;
+      right: 10px;
+      border-top: 3px solid var(--dorado);
+      border-right: 3px solid var(--dorado);
+      border-radius: 0 6px 0 0;
+    }
+
+    .qrg__corner-bl {
+      bottom: 10px;
+      left: 10px;
+      border-bottom: 3px solid var(--dorado);
+      border-left: 3px solid var(--dorado);
+      border-radius: 0 0 0 6px;
+    }
 
     .qrg__scan-line {
-      position: absolute; left: 10px; right: 10px; height: 2px;
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      height: 2px;
       background: linear-gradient(90deg, transparent, var(--dorado), transparent);
-      z-index: 9; animation: qrg-sweep 2s ease-in-out infinite;
+      z-index: 9;
+      animation: qrg-sweep 2s ease-in-out infinite;
       box-shadow: 0 0 8px var(--dorado);
     }
+
     @keyframes qrg-sweep {
-      0%   { top: 14px; opacity: 0; }
-      10%  { opacity: 1; }
-      90%  { opacity: 1; }
-      100% { top: calc(100% - 16px); opacity: 0; }
+      0% {
+        top: 14px;
+        opacity: 0;
+      }
+
+      10% {
+        opacity: 1;
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        top: calc(100% - 16px);
+        opacity: 0;
+      }
     }
-    #qrg-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    #qrg-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     .qrg__hint {
-      font-family: var(--font-display); font-size: clamp(0.85rem, 2.5vw, 1rem);
-      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-      color: rgba(255,255,255,0.45); position: relative; z-index: 2;
+      font-family: var(--font-display);
+      font-size: clamp(0.85rem, 2.5vw, 1rem);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+      position: relative;
+      z-index: 2;
     }
+
     .qrg__skip {
-      font-family: var(--font-display); font-size: 0.85rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase; background: transparent;
-      color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 50px; padding: 0.6rem 1.75rem; cursor: pointer;
-      transition: color 0.2s, border-color 0.2s; position: relative; z-index: 2; min-height: 44px;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50px;
+      padding: 0.6rem 1.75rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      position: relative;
+      z-index: 2;
+      min-height: 44px;
     }
-    .qrg__skip:hover { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.4); }
+
+    .qrg__skip:hover {
+      color: rgba(255, 255, 255, 0.65);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
 
     .qrg__cam-denied {
       display: none;
@@ -3313,48 +3430,127 @@
       align-items: center;
       gap: 0.75rem;
       width: min(82vw, 300px);
-      background: rgba(201,148,58,0.12);
-      border: 1px solid rgba(201,148,58,0.3);
+      background: rgba(201, 148, 58, 0.12);
+      border: 1px solid rgba(201, 148, 58, 0.3);
       border-radius: 14px;
       padding: 1.1rem 1.25rem;
       position: relative;
       z-index: 2;
     }
-    .qrg__cam-denied.is-visible { display: flex; }
-    .qrg__cam-denied-icon { font-size: 1.6rem; line-height: 1; }
+
+    .qrg__cam-denied.is-visible {
+      display: flex;
+    }
+
+    .qrg__cam-denied-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
     .qrg__cam-denied-title {
-      font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase; color: var(--dorado);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dorado);
     }
+
     .qrg__cam-denied-text {
-      font-family: var(--font-body); font-size: 0.8rem;
-      color: rgba(255,255,255,0.65); line-height: 1.5; text-align: center;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.5;
+      text-align: center;
     }
+
     .qrg__cam-denied-reload {
-      font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      background: var(--dorado); color: var(--verde-profundo);
-      border: none; border-radius: 50px; padding: 0.55rem 1.5rem;
-      cursor: pointer; min-height: 44px; transition: background 0.2s;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      border: none;
+      border-radius: 50px;
+      padding: 0.55rem 1.5rem;
+      cursor: pointer;
+      min-height: 44px;
+      transition: background 0.2s;
     }
-    .qrg__cam-denied-reload:hover { background: var(--dorado-claro); }
+
+    .qrg__cam-denied-reload:hover {
+      background: var(--dorado-claro);
+    }
 
     .qrg__success {
-      display: none; position: absolute; inset: 0; z-index: 20;
-      background: rgba(21,46,11,0.92); flex-direction: column;
-      align-items: center; justify-content: center; gap: 1.25rem;
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      background: rgba(21, 46, 11, 0.92);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
     }
-    .qrg__success.is-active { display: flex; animation: qrg-fade-in 0.3s ease; }
-    @keyframes qrg-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+    .qrg__success.is-active {
+      display: flex;
+      animation: qrg-fade-in 0.3s ease;
+    }
+
+    @keyframes qrg-fade-in {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
     .qrg__check {
-      width: 72px; height: 72px; background: var(--verde-claro); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      animation: qrg-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+      width: 72px;
+      height: 72px;
+      background: var(--verde-claro);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: qrg-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
-    @keyframes qrg-pop { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .qrg__check svg { stroke-dasharray: 40; stroke-dashoffset: 40; animation: qrg-draw 0.4s ease forwards 0.2s; }
-    @keyframes qrg-draw { to { stroke-dashoffset: 0; } }
-    .qrg__success-label { font-family: var(--font-script); font-size: 2rem; color: var(--beige-suave); }
+
+    @keyframes qrg-pop {
+      from {
+        transform: scale(0.5);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .qrg__check svg {
+      stroke-dasharray: 40;
+      stroke-dashoffset: 40;
+      animation: qrg-draw 0.4s ease forwards 0.2s;
+    }
+
+    @keyframes qrg-draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    .qrg__success-label {
+      font-family: var(--font-script);
+      font-size: 2rem;
+      color: var(--beige-suave);
+    }
   </style>
 </head>
 
@@ -3373,8 +3569,9 @@
       <video id="qrg-video" autoplay playsinline muted></video>
       <div class="qrg__success" id="qrg-success" aria-live="polite">
         <div class="qrg__check">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="7,18 15,26 29,10"/>
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="7,18 15,26 29,10" />
           </svg>
         </div>
         <p class="qrg__success-label">¡Listo!</p>
@@ -3963,7 +4160,7 @@
         <!-- Panels -->
         <div class="fp__panels">
 
-          <!-- (Ingredientes removido — contenido ya está en sección #porque) -->
+          <!-- (Ingredientes removido - contenido ya está en sección #porque) -->
           <div class="fp__panel" id="fp-panel-ing">
             <div class="fp__ing-cards">
 
@@ -4037,7 +4234,8 @@
                   <div class="fp__kcal-divider"></div>
                   <div class="fp__invima-mini">
                     <p class="fp__invima-mini-label">🍯 Endulzado naturalmente</p>
-                    <p class="fp__invima-mini-text">La energía proviene de panela artesanal y arequipe de guatila — azúcares de origen 100% natural y vegetal.</p>
+                    <p class="fp__invima-mini-text">La energía proviene de panela artesanal y arequipe de guatila -
+                      azúcares de origen 100% natural y vegetal.</p>
                   </div>
                 </div>
               </div>
@@ -4500,10 +4698,12 @@
         moveIndicator(btn);
 
         if (target === 'nut') {
-          setTimeout(() => {
-            const m = document.getElementById('macrosBlock');
-            if (m) m.classList.add('is-animated');
-          }, 120);
+          const m = document.getElementById('macrosBlock');
+          if (m) {
+            m.classList.remove('is-animated');
+            void m.offsetWidth; // forzar reflow para reiniciar animación
+            setTimeout(() => m.classList.add('is-animated'), 60);
+          }
         }
         if (target === 'imp') {
           if (!countersAnimated) { countersAnimated = true; animateAllCounters(); }
@@ -4512,6 +4712,22 @@
       }
 
       tabBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn)));
+
+      // Animar barras al entrar en viewport (tab Nutrición es el default activo)
+      const macrosEl = document.getElementById('macrosBlock');
+      if (macrosEl) {
+        const macroObs = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              macrosEl.classList.remove('is-animated');
+              void macrosEl.offsetWidth;
+              macrosEl.classList.add('is-animated');
+              macroObs.disconnect();
+            }
+          });
+        }, { threshold: 0.15 });
+        macroObs.observe(macrosEl);
+      }
 
       // Position indicator after layout settles
       requestAnimationFrame(() => {
@@ -4820,13 +5036,13 @@
   <!-- QR GATE script -->
   <script>
     (function () {
-      var gate       = document.getElementById('qr-gate');
-      var skipBtn    = document.getElementById('qrg-skip');
+      var gate = document.getElementById('qr-gate');
+      var skipBtn = document.getElementById('qrg-skip');
       var viewfinder = document.getElementById('qrg-viewfinder');
-      var successEl  = document.getElementById('qrg-success');
-      var video      = document.getElementById('qrg-video');
-      var deniedBox  = document.getElementById('qrg-denied');
-      var hintEl     = document.getElementById('qrg-hint');
+      var successEl = document.getElementById('qrg-success');
+      var video = document.getElementById('qrg-video');
+      var deniedBox = document.getElementById('qrg-denied');
+      var hintEl = document.getElementById('qrg-hint');
       if (!gate || !skipBtn) return;
 
       var dismissed = false;
@@ -4851,7 +5067,7 @@
         }
       }
 
-      // Skip button — siempre funciona
+      // Skip button - siempre funciona
       skipBtn.addEventListener('click', function () { dismiss(false); });
 
       // Mostrar gate de inmediato
@@ -4868,17 +5084,17 @@
             .then(function (stream) {
               mediaStream = stream;
               video.srcObject = stream;
-              video.play().catch(function () {});
+              video.play().catch(function () { });
 
               if (!('BarcodeDetector' in window)) return;
               var detector = new BarcodeDetector({ formats: ['qr_code'] });
-              var readyAt  = Date.now() + 1500;
+              var readyAt = Date.now() + 1500;
               function tick() {
                 if (dismissed) return;
                 if (video.readyState >= 2 && Date.now() >= readyAt) {
                   detector.detect(video).then(function (codes) {
                     if (!dismissed && codes.length && codes[0].rawValue) dismiss(true);
-                  }).catch(function () {});
+                  }).catch(function () { });
                 }
                 rafId = requestAnimationFrame(tick);
               }
