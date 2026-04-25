@@ -4822,31 +4822,34 @@
           viewfinder.style.display = 'none';
           return;
         }
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } })
-          .then(function (stream) {
-            mediaStream = stream;
-            video.srcObject = stream;
+        function startCamera(constraints) {
+          return navigator.mediaDevices.getUserMedia(constraints)
+            .then(function (stream) {
+              mediaStream = stream;
+              video.srcObject = stream;
+              video.play().catch(function () {});
 
-            // Usar BarcodeDetector si está disponible (Chrome Android/Desktop)
-            if (!('BarcodeDetector' in window)) return;
-            var detector = new BarcodeDetector({ formats: ['qr_code'] });
-            var readyAt  = Date.now() + 1500;
-
-            function tick() {
-              if (dismissed) return;
-              if (video.readyState >= 2 && Date.now() >= readyAt) {
-                detector.detect(video).then(function (codes) {
-                  if (!dismissed && codes.length && codes[0].rawValue) {
-                    dismiss(true);
-                  }
-                }).catch(function () {});
+              if (!('BarcodeDetector' in window)) return;
+              var detector = new BarcodeDetector({ formats: ['qr_code'] });
+              var readyAt  = Date.now() + 1500;
+              function tick() {
+                if (dismissed) return;
+                if (video.readyState >= 2 && Date.now() >= readyAt) {
+                  detector.detect(video).then(function (codes) {
+                    if (!dismissed && codes.length && codes[0].rawValue) dismiss(true);
+                  }).catch(function () {});
+                }
+                rafId = requestAnimationFrame(tick);
               }
               rafId = requestAnimationFrame(tick);
-            }
-            rafId = requestAnimationFrame(tick);
-          })
+            });
+        }
+
+        // Intenta cámara trasera primero; si falla, cualquier cámara
+        startCamera({ video: { facingMode: { ideal: 'environment' } } })
+          .catch(function () { return startCamera({ video: true }); })
           .catch(function () {
-            // Cámara denegada — ocultar visor, dejar Skip visible
+            // Sin cámara disponible — dejar solo el botón Saltar
             viewfinder.style.display = 'none';
           });
       }, 400);
