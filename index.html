@@ -3224,10 +3224,136 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ================================
+       QR GATE (pantalla de entrada)
+    ================================ */
+    #qr-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: var(--verde-profundo);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1.25rem, 4vw, 2rem);
+      padding: clamp(1.5rem, 5vw, 2.5rem) 1.5rem;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #qr-gate::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      opacity: 0.025;
+      pointer-events: none;
+    }
+    #qr-gate.is-visible  { opacity: 1; visibility: visible; pointer-events: auto; }
+    #qr-gate.is-closing  { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .qrg__logo  { height: clamp(36px, 8vw, 48px); filter: brightness(0) invert(1); opacity: 0.95; position: relative; z-index: 2; }
+    .qrg__title { font-family: var(--font-script); font-size: clamp(1.7rem, 6vw, 2.4rem); color: var(--blanco); line-height: 1.1; position: relative; z-index: 2; }
+
+    .qrg__viewfinder {
+      position: relative;
+      width: min(82vw, 300px);
+      height: min(82vw, 300px);
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      box-shadow: 0 0 0 1px rgba(237,217,176,0.2), 0 24px 64px rgba(0,0,0,0.5);
+      z-index: 2;
+    }
+    .qrg__viewfinder::before, .qrg__viewfinder::after {
+      content: ''; position: absolute; z-index: 10; width: 28px; height: 28px; pointer-events: none;
+    }
+    .qrg__viewfinder::before { top: 10px; left: 10px; border-top: 3px solid var(--dorado); border-left: 3px solid var(--dorado); border-radius: 6px 0 0 0; }
+    .qrg__viewfinder::after  { bottom: 10px; right: 10px; border-bottom: 3px solid var(--dorado); border-right: 3px solid var(--dorado); border-radius: 0 0 6px 0; }
+    .qrg__corner-tr, .qrg__corner-bl { position: absolute; z-index: 10; width: 28px; height: 28px; pointer-events: none; }
+    .qrg__corner-tr { top: 10px; right: 10px; border-top: 3px solid var(--dorado); border-right: 3px solid var(--dorado); border-radius: 0 6px 0 0; }
+    .qrg__corner-bl { bottom: 10px; left: 10px; border-bottom: 3px solid var(--dorado); border-left: 3px solid var(--dorado); border-radius: 0 0 0 6px; }
+
+    .qrg__scan-line {
+      position: absolute; left: 10px; right: 10px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+      z-index: 9; animation: qrg-sweep 2s ease-in-out infinite;
+      box-shadow: 0 0 8px var(--dorado);
+    }
+    @keyframes qrg-sweep {
+      0%   { top: 14px; opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { top: calc(100% - 16px); opacity: 0; }
+    }
+    #qrg-reader { width: 100% !important; height: 100% !important; border: none !important; }
+    #qrg-reader video { width: 100% !important; height: 100% !important; object-fit: cover !important; border-radius: 0 !important; }
+    #qrg-reader img, #qrg-reader__dashboard, #qrg-reader__status_span,
+    #qrg-reader__header_message, #qrg-reader__filescan_input { display: none !important; }
+
+    .qrg__hint {
+      font-family: var(--font-display); font-size: clamp(0.85rem, 2.5vw, 1rem);
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); position: relative; z-index: 2;
+    }
+    .qrg__skip {
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; background: transparent;
+      color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 50px; padding: 0.6rem 1.75rem; cursor: pointer;
+      transition: color 0.2s, border-color 0.2s; position: relative; z-index: 2; min-height: 44px;
+    }
+    .qrg__skip:hover { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.4); }
+
+    .qrg__success {
+      display: none; position: absolute; inset: 0; z-index: 20;
+      background: rgba(21,46,11,0.92); flex-direction: column;
+      align-items: center; justify-content: center; gap: 1.25rem;
+    }
+    .qrg__success.is-active { display: flex; animation: qrg-fade-in 0.3s ease; }
+    @keyframes qrg-fade-in { from { opacity: 0; } to { opacity: 1; } }
+    .qrg__check {
+      width: 72px; height: 72px; background: var(--verde-claro); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      animation: qrg-pop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+    }
+    @keyframes qrg-pop { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .qrg__check svg { stroke-dasharray: 40; stroke-dashoffset: 40; animation: qrg-draw 0.4s ease forwards 0.2s; }
+    @keyframes qrg-draw { to { stroke-dashoffset: 0; } }
+    .qrg__success-label { font-family: var(--font-script); font-size: 2rem; color: var(--beige-suave); }
   </style>
 </head>
 
 <body>
+
+  <!-- ============================
+     QR GATE
+============================ -->
+  <div id="qr-gate" role="dialog" aria-label="Escáner de entrada Guati" aria-modal="true">
+    <img src="assets/images/logo guati.png" alt="Guati" class="qrg__logo">
+    <h2 class="qrg__title">Escanea para entrar</h2>
+    <div class="qrg__viewfinder" id="qrg-viewfinder">
+      <span class="qrg__corner-tr" aria-hidden="true"></span>
+      <span class="qrg__corner-bl" aria-hidden="true"></span>
+      <div class="qrg__scan-line" aria-hidden="true"></div>
+      <div id="qrg-reader"></div>
+      <div class="qrg__success" id="qrg-success" aria-live="polite">
+        <div class="qrg__check">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="7,18 15,26 29,10"/>
+          </svg>
+        </div>
+        <p class="qrg__success-label">¡Listo!</p>
+      </div>
+    </div>
+    <p class="qrg__hint">Apunta la cámara al código QR</p>
+    <button id="qrg-skip" class="qrg__skip">Saltar →</button>
+  </div>
 
   <!-- ============================
      LOADING SCREEN
@@ -4654,6 +4780,70 @@
         }
       }, { passive: true });
     }
+  </script>
+
+  <!-- QR GATE script -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <script>
+    /* QR GATE — muestra escáner antes de revelar el sitio */
+    (function () {
+      const gate      = document.getElementById('qr-gate');
+      const success   = document.getElementById('qrg-success');
+      const skipBtn   = document.getElementById('qrg-skip');
+      const viewfinder = document.getElementById('qrg-viewfinder');
+      if (!gate) return;
+
+      let handled = false;
+      let readyAt = 0;
+      let scanner = null;
+
+      function dismissGate() {
+        if (handled) return;
+        handled = true;
+        if (scanner) scanner.stop().catch(() => {});
+        gate.classList.add('is-closing');
+        setTimeout(() => { gate.remove(); }, 500);
+      }
+
+      function onScanSuccess(decodedText) {
+        if (handled) return;
+        if (!decodedText || !decodedText.trim()) return;
+        if (Date.now() < readyAt) return;
+        handled = true;
+        if (scanner) scanner.stop().catch(() => {});
+        success.classList.add('is-active');
+        setTimeout(() => {
+          gate.classList.add('is-closing');
+          setTimeout(() => { gate.remove(); }, 500);
+        }, 950);
+      }
+
+      // Mostrar gate después de que termina el loader (~1.95s)
+      setTimeout(function () {
+        gate.classList.add('is-visible');
+
+        if (typeof Html5Qrcode === 'undefined') return; // CDN falló
+
+        try {
+          scanner = new Html5Qrcode('qrg-reader');
+          scanner
+            .start(
+              { facingMode: 'environment' },
+              { fps: 15, qrbox: { width: 220, height: 220 }, aspectRatio: 1.0 },
+              onScanSuccess
+            )
+            .then(function () { readyAt = Date.now() + 1500; })
+            .catch(function () {
+              // Cámara no disponible: ocultar visor pero dejar el skip
+              viewfinder.style.display = 'none';
+            });
+        } catch (e) {
+          viewfinder.style.display = 'none';
+        }
+      }, 1950);
+
+      skipBtn.addEventListener('click', dismissGate);
+    })();
   </script>
 
 </body>
