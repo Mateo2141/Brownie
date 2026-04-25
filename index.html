@@ -3290,10 +3290,7 @@
       90%  { opacity: 1; }
       100% { top: calc(100% - 16px); opacity: 0; }
     }
-    #qrg-reader { width: 100% !important; height: 100% !important; border: none !important; }
-    #qrg-reader video { width: 100% !important; height: 100% !important; object-fit: cover !important; border-radius: 0 !important; }
-    #qrg-reader img, #qrg-reader__dashboard, #qrg-reader__status_span,
-    #qrg-reader__header_message, #qrg-reader__filescan_input { display: none !important; }
+    #qrg-video { width: 100%; height: 100%; object-fit: cover; display: block; }
 
     .qrg__hint {
       font-family: var(--font-display); font-size: clamp(0.85rem, 2.5vw, 1rem);
@@ -3340,7 +3337,7 @@
       <span class="qrg__corner-tr" aria-hidden="true"></span>
       <span class="qrg__corner-bl" aria-hidden="true"></span>
       <div class="qrg__scan-line" aria-hidden="true"></div>
-      <div id="qrg-reader"></div>
+      <video id="qrg-video" autoplay playsinline muted></video>
       <div class="qrg__success" id="qrg-success" aria-live="polite">
         <div class="qrg__check">
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -4782,67 +4779,77 @@
   </script>
 
   <!-- QR GATE script -->
-  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
   <script>
-    /* QR GATE — muestra escáner antes de revelar el sitio */
     (function () {
-      const gate      = document.getElementById('qr-gate');
-      const success   = document.getElementById('qrg-success');
-      const skipBtn   = document.getElementById('qrg-skip');
-      const viewfinder = document.getElementById('qrg-viewfinder');
-      if (!gate) return;
+      var gate       = document.getElementById('qr-gate');
+      var skipBtn    = document.getElementById('qrg-skip');
+      var viewfinder = document.getElementById('qrg-viewfinder');
+      var successEl  = document.getElementById('qrg-success');
+      var video      = document.getElementById('qrg-video');
+      if (!gate || !skipBtn) return;
 
-      let handled = false;
-      let readyAt = 0;
-      let scanner = null;
+      var dismissed = false;
+      var mediaStream = null;
+      var rafId = null;
 
-      function dismissGate() {
-        if (handled) return;
-        handled = true;
-        if (scanner) scanner.stop().catch(() => {});
-        gate.classList.remove('is-visible');   // dispara fade-out por transition
-        setTimeout(() => { gate.remove(); }, 520);
+      function fadeOut() {
+        gate.classList.remove('is-visible');
+        setTimeout(function () { if (gate.parentNode) gate.remove(); }, 520);
       }
 
-      function onScanSuccess(decodedText) {
-        if (handled) return;
-        if (!decodedText || !decodedText.trim()) return;
-        if (Date.now() < readyAt) return;
-        handled = true;
-        if (scanner) scanner.stop().catch(() => {});
-        success.classList.add('is-active');
-        setTimeout(() => {
-          gate.classList.remove('is-visible');
-          setTimeout(() => { gate.remove(); }, 520);
-        }, 950);
-      }
-
-      // Mostrar la gate de inmediato (el loader la cubre mientras carga)
-      requestAnimationFrame(function () {
-        gate.classList.add('is-visible');
-      });
-
-      // Iniciar cámara tras 400ms (tiempo para que el DOM se estabilice)
-      setTimeout(function () {
-        if (typeof Html5Qrcode === 'undefined') return;
-        try {
-          scanner = new Html5Qrcode('qrg-reader');
-          scanner
-            .start(
-              { facingMode: 'environment' },
-              { fps: 15, qrbox: { width: 220, height: 220 }, aspectRatio: 1.0 },
-              onScanSuccess
-            )
-            .then(function () { readyAt = Date.now() + 1500; })
-            .catch(function () {
-              viewfinder.style.display = 'none';
-            });
-        } catch (e) {
-          viewfinder.style.display = 'none';
+      function dismiss(withSuccess) {
+        if (dismissed) return;
+        dismissed = true;
+        if (mediaStream) mediaStream.getTracks().forEach(function (t) { t.stop(); });
+        if (rafId) cancelAnimationFrame(rafId);
+        if (withSuccess && successEl) {
+          successEl.classList.add('is-active');
+          setTimeout(fadeOut, 950);
+        } else {
+          fadeOut();
         }
-      }, 400);
+      }
 
-      skipBtn.addEventListener('click', dismissGate);
+      // Skip button — siempre funciona
+      skipBtn.addEventListener('click', function () { dismiss(false); });
+
+      // Mostrar gate de inmediato
+      requestAnimationFrame(function () { gate.classList.add('is-visible'); });
+
+      // Iniciar cámara
+      setTimeout(function () {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+          viewfinder.style.display = 'none';
+          return;
+        }
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } } })
+          .then(function (stream) {
+            mediaStream = stream;
+            video.srcObject = stream;
+
+            // Usar BarcodeDetector si está disponible (Chrome Android/Desktop)
+            if (!('BarcodeDetector' in window)) return;
+            var detector = new BarcodeDetector({ formats: ['qr_code'] });
+            var readyAt  = Date.now() + 1500;
+
+            function tick() {
+              if (dismissed) return;
+              if (video.readyState >= 2 && Date.now() >= readyAt) {
+                detector.detect(video).then(function (codes) {
+                  if (!dismissed && codes.length && codes[0].rawValue) {
+                    dismiss(true);
+                  }
+                }).catch(function () {});
+              }
+              rafId = requestAnimationFrame(tick);
+            }
+            rafId = requestAnimationFrame(tick);
+          })
+          .catch(function () {
+            // Cámara denegada — ocultar visor, dejar Skip visible
+            viewfinder.style.display = 'none';
+          });
+      }, 400);
     })();
   </script>
 
