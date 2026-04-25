@@ -3244,6 +3244,7 @@
       visibility: hidden;
       pointer-events: none;
       transition: opacity 0.5s ease, visibility 0.5s ease;
+      overflow-y: auto;
     }
     #qr-gate::after {
       content: '';
@@ -3306,6 +3307,38 @@
     }
     .qrg__skip:hover { color: rgba(255,255,255,0.65); border-color: rgba(255,255,255,0.4); }
 
+    .qrg__cam-denied {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      width: min(82vw, 300px);
+      background: rgba(201,148,58,0.12);
+      border: 1px solid rgba(201,148,58,0.3);
+      border-radius: 14px;
+      padding: 1.1rem 1.25rem;
+      position: relative;
+      z-index: 2;
+    }
+    .qrg__cam-denied.is-visible { display: flex; }
+    .qrg__cam-denied-icon { font-size: 1.6rem; line-height: 1; }
+    .qrg__cam-denied-title {
+      font-family: var(--font-display); font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--dorado);
+    }
+    .qrg__cam-denied-text {
+      font-family: var(--font-body); font-size: 0.8rem;
+      color: rgba(255,255,255,0.65); line-height: 1.5; text-align: center;
+    }
+    .qrg__cam-denied-reload {
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: var(--dorado); color: var(--verde-profundo);
+      border: none; border-radius: 50px; padding: 0.55rem 1.5rem;
+      cursor: pointer; min-height: 44px; transition: background 0.2s;
+    }
+    .qrg__cam-denied-reload:hover { background: var(--dorado-claro); }
+
     .qrg__success {
       display: none; position: absolute; inset: 0; z-index: 20;
       background: rgba(21,46,11,0.92); flex-direction: column;
@@ -3347,7 +3380,13 @@
         <p class="qrg__success-label">¡Listo!</p>
       </div>
     </div>
-    <p class="qrg__hint">Apunta la cámara al código QR</p>
+    <p class="qrg__hint" id="qrg-hint">Apunta la cámara al código QR</p>
+    <div class="qrg__cam-denied" id="qrg-denied">
+      <span class="qrg__cam-denied-icon">📷</span>
+      <p class="qrg__cam-denied-title">Cámara bloqueada</p>
+      <p class="qrg__cam-denied-text">Activa el permiso de cámara en tu navegador</p>
+      <button class="qrg__cam-denied-reload" onclick="location.reload()">Reintentar →</button>
+    </div>
     <button id="qrg-skip" class="qrg__skip">Saltar →</button>
   </div>
 
@@ -3619,7 +3658,7 @@
               </div>
             </div>
             <p class="product-card__price">
-              Disponible desde <strong>$6.500 COP</strong>
+              Disponible desde <strong>$4.500 COP</strong>
             </p>
             <a href="pedido.html" class="btn-primary">Pide el tuyo <svg
                 style="width:14px;height:14px;stroke:currentColor;fill:none" viewBox="0 0 24 24" stroke-width="2.5">
@@ -4111,12 +4150,12 @@
 
               <div class="fp__prod-panel" data-animate>
                 <p class="fp__prod-title">Rentabilidad</p>
-                <p class="fp__prod-price">Precio de venta al público: <strong>$3.500 – $6.500</strong> por unidad</p>
+                <p class="fp__prod-price">Precio de venta al público: <strong>$3.500 – $4.500</strong> por unidad</p>
                 <div class="fp__prod-metrics" id="countersBlock">
                   <div class="fp__prod-metric">
                     <span class="fp__prod-metric-val counter__val" data-target="50" data-suffix="%">0%</span>
                     <p class="fp__prod-metric-label">Rentabilidad máxima</p>
-                    <p class="fp__prod-metric-sub">a $6.500 / unidad</p>
+                    <p class="fp__prod-metric-sub">a $4.500 / unidad</p>
                   </div>
                   <div class="fp__prod-metric">
                     <span class="fp__prod-metric-val counter__val" data-target="30" data-suffix="%">0%</span>
@@ -4313,7 +4352,7 @@
     <div class="mobile-cta-bar__inner">
       <div class="mobile-cta-bar__text">
         <strong>Alfajor de Guatila</strong>
-        Desde $6.500 COP
+        Desde $4.500 COP
       </div>
       <a href="pedido.html" class="mobile-cta-bar__btn">Pedir</a>
     </div>
@@ -4627,7 +4666,7 @@
         },
         {
           keys: ['precio', 'cuánto', 'cuanto', 'valor', 'costo', 'cuesta'],
-          text: 'El alfajor Guati está disponible desde $6.500 por unidad 🍪 Los packs son de 6 unidades ($39.000) o 12 unidades ($78.000). Para pedidos al por mayor, ¡escríbenos y te damos el mejor precio!',
+          text: 'El alfajor Guati está disponible desde $4.500 por unidad 🍪 Los packs son de 6 unidades ($27.000) o 12 unidades ($54.000). Para pedidos al por mayor, ¡escríbenos y te damos el mejor precio!',
           btn: { label: '💬 Pedir por WhatsApp', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero información sobre precios de Guati 🍪') }
         },
         {
@@ -4786,6 +4825,8 @@
       var viewfinder = document.getElementById('qrg-viewfinder');
       var successEl  = document.getElementById('qrg-success');
       var video      = document.getElementById('qrg-video');
+      var deniedBox  = document.getElementById('qrg-denied');
+      var hintEl     = document.getElementById('qrg-hint');
       if (!gate || !skipBtn) return;
 
       var dismissed = false;
@@ -4848,9 +4889,12 @@
         // Intenta cámara trasera primero; si falla, cualquier cámara
         startCamera({ video: { facingMode: { ideal: 'environment' } } })
           .catch(function () { return startCamera({ video: true }); })
-          .catch(function () {
-            // Sin cámara disponible — dejar solo el botón Saltar
+          .catch(function (err) {
             viewfinder.style.display = 'none';
+            if (hintEl) hintEl.style.display = 'none';
+            // Permiso denegado: mostrar instrucciones para desbloquearlo
+            var isDenied = err && (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError');
+            if (isDenied && deniedBox) deniedBox.classList.add('is-visible');
           });
       }, 400);
     })();
