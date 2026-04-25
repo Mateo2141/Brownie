@@ -304,11 +304,14 @@
       };
 
       let handled = false;
+      let readyAt = 0; // timestamp after which scans are accepted
 
       function onScanSuccess(decodedText) {
         if (handled) return;
-        handled = true;
+        if (!decodedText || !decodedText.trim()) return;
+        if (Date.now() < readyAt) return; // ignore false positives during warmup
 
+        handled = true;
         scanner.stop().catch(() => {});
         successOverlay.classList.add('is-active');
 
@@ -319,6 +322,10 @@
 
       scanner
         .start({ facingMode: 'environment' }, config, onScanSuccess)
+        .then(() => {
+          // Camera is live — accept scans after 1.5 s warmup
+          readyAt = Date.now() + 1500;
+        })
         .catch(() => {
           // Camera denied or unavailable — show fallback
           viewfinder.style.display = 'none';
