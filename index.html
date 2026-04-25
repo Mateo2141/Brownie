@@ -1,1708 +1,3001 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Antojo Criollo | Alfajor de Guatila</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
-
-    <!-- GSAP & Lenis -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"
-        crossorigin="anonymous"></script>
-    <!-- QR QR Engine -->
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript" crossorigin="anonymous"></script>
-
-    <style>
-        :root {
-            /* Alfajor Guatila - paleta referencia: verde arequipe, galleta dorada, coco, madera */
-            --bg-black: #1a1510;
-            --bg-wood: #2d2419;
-            --accent-orange: #D4A373;
-            --accent-gold-deep: #C68E4B;
-            --accent-yellow: #E8C547;
-            --neon-green: #4F772D;
-            --guatila-mint: #A3B18A;
-            --guatila-fill: #B2C28E;
-            --deep-cacao: #4A3728;
-            --warm-cream: #F8F9FA;
-            --glow-gold: rgba(212, 163, 115, 0.45);
-            --font-display: 'Bebas Neue', sans-serif;
-            --font-body: 'DM Sans', sans-serif;
-            --font-mono: 'Space Mono', monospace;
-            --font-brand: 'Caveat', cursive;
-        }
-
-        .brand-script {
-            font-family: var(--font-brand);
-            text-transform: none;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            color: var(--warm-cream);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            cursor: none;
-            /* Custom cursor */
-        }
-
-        body {
-            background: linear-gradient(165deg, var(--bg-black) 0%, var(--bg-wood) 45%, #1f1812 100%);
-            color: var(--warm-cream);
-            font-family: var(--font-body);
-            overflow-x: hidden;
-            line-height: 1.4;
-        }
-
-        h1,
-        h2,
-        h3 {
-            font-family: var(--font-display);
-            text-transform: uppercase;
-            line-height: 0.9;
-        }
-
-        /* --- UI OVERLAY --- */
-        .noise-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("https://grainy-gradients.vercel.app/noise.svg");
-            opacity: 0.08;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        .cacao-blob {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(79, 119, 45, 0.35) 0%, rgba(212, 163, 115, 0.12) 45%, transparent 70%);
-            filter: blur(80px);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        #cursor,
-        #cursor-follower {
-            display: none;
-        }
-
-        /* --- SECTION 0: QUANTUM ENTRY --- */
-        #quantum-entry {
-            height: 100vh;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: var(--bg-black);
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .entry-stage {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            /* Ensure vertical centering */
-            width: 100%;
-            height: 100%;
-            /* Take full height for better centering */
-            padding: 40px;
-        }
-
-        .entry-stage.active {
-            display: flex;
-        }
-
-        .welcome-title {
-            font-size: clamp(3rem, 12vw, 8rem);
-            /* More balanced size */
-            max-width: 800px;
-            margin: 0 auto 3rem auto;
-            color: white;
-            letter-spacing: -1px;
-            line-height: 0.9;
-            text-transform: uppercase;
-        }
-
-        #qr-reader {
-            width: 100%;
-            max-width: 320px;
-            aspect-ratio: 1 / 1;
-            border: 2px solid var(--accent-orange) !important;
-            border-radius: 20px;
-            overflow: hidden;
-            background: var(--bg-black);
-            margin: 0 auto;
-            position: relative;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-        }
-
-        #qr-reader::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--accent-orange);
-            box-shadow: 0 0 15px var(--accent-orange);
-            animation: scan-line 3s infinite linear;
-            z-index: 10;
-        }
-
-        @keyframes scan-line {
-            0% {
-                top: 0;
-            }
-
-            50% {
-                top: 100%;
-            }
-
-            100% {
-                top: 0;
-            }
-        }
-
-        #qr-reader video {
-            object-fit: cover !important;
-            width: 100% !important;
-            height: 100% !important;
-        }
-
-        /* --- PREMIUM BUTTON CLASS --- */
-        .premium-btn {
-            background: rgba(163, 177, 138, 0.12);
-            border: 1px solid var(--guatila-mint);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 1.2rem 3.5rem;
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            letter-spacing: 2px;
-            animation: subtle-pulse 2s infinite;
-            text-decoration: none;
-            width: fit-content;
-        }
-
-        .premium-btn:hover {
-            background: var(--accent-orange);
-            color: #1a1510;
-            box-shadow: 0 0 30px var(--glow-gold);
-        }
-
-        .premium-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* Subtle breathing shadow instead of monstrous scaling */
-        @keyframes subtle-pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(79, 119, 45, 0.35);
-            }
-
-            100% {
-                box-shadow: 0 0 20px 10px rgba(79, 119, 45, 0);
-            }
-        }
-
-        .fire-icon {
-            font-size: 1.5rem;
-            opacity: 0.8;
-        }
-
-        .reveal-video-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-black);
-            z-index: 2100;
-            display: none;
-            opacity: 0;
-            /* Start hidden */
-            transition: opacity 0.5s ease;
-        }
-
-        #reveal-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .reveal-overlay-text {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 8vw, 6rem);
-            color: white;
-            z-index: 2200;
-            text-align: center;
-            width: 90%;
-            max-width: 600px;
-            opacity: 0;
-            pointer-events: none;
-            line-height: 1;
-        }
-
-        /* Loading UI for Video */
-        .video-loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-black);
-            z-index: 2500;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: var(--font-mono);
-            letter-spacing: 2px;
-        }
-
-        .loader-dots span {
-            animation: loader-dots 1.4s infinite both;
-            font-size: 2rem;
-        }
-
-        .loader-dots span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .loader-dots span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes loader-dots {
-
-            0%,
-            80%,
-            100% {
-                opacity: 0;
-            }
-
-            40% {
-                opacity: 1;
-            }
-        }
-
-        /* --- CHECKOUT --- */
-        #checkout-view {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-wood);
-            z-index: 3000;
-            padding: 40px 5vw;
-            transition: right 0.8s cubic-bezier(0.8, 0, 0.2, 1);
-            overflow-y: auto;
-            /* ENABLLE SCROLL */
-            -webkit-overflow-scrolling: touch;
-            border-left: 1px solid var(--accent-orange);
-        }
-
-        #checkout-view.open {
-            right: 0;
-        }
-
-        .checkout-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 50px;
-        }
-
-        .close-checkout {
-            background: transparent;
-            border: 1px solid white;
-            color: white;
-            font-family: var(--font-mono);
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        .order-summary {
-            background: rgba(26, 21, 16, 0.85);
-            padding: 40px;
-            border: 1px solid rgba(212, 163, 115, 0.25);
-        }
-
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(212, 163, 115, 0.12);
-            padding: 20px 0;
-        }
-
-        .qty-controls {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .qty-btn {
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--accent-orange);
-            background: transparent;
-            color: white;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            margin-top: 50px;
-            font-size: 1.8rem;
-            /* Refined size */
-            background: var(--accent-orange);
-            border: none;
-            padding: 20px;
-            color: white;
-            font-family: var(--font-display);
-            cursor: pointer;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            box-shadow: 0 10px 30px rgba(212, 163, 115, 0.3);
-            border-radius: 4px;
-        }
-
-        .checkout-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* --- SECTION 0: QR HACK --- */
-        #qr-screen {
-            height: 100vh;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: var(--bg-black);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 900;
-            overflow: hidden;
-        }
-
-        .scan-line {
-            position: absolute;
-            width: 100%;
-            height: 20px;
-            background: linear-gradient(to bottom, transparent, var(--guatila-mint), transparent);
-            opacity: 0.55;
-            top: -20%;
-        }
-
-        .qr-frame {
-            position: relative;
-            width: 250px;
-            height: 250px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(5px);
-        }
-
-        .corner {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border: 3px solid var(--guatila-mint);
-        }
-
-        .tl {
-            top: -5px;
-            left: -5px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .tr {
-            top: -5px;
-            right: -5px;
-            border-left: none;
-            border-bottom: none;
-        }
-
-        .bl {
-            bottom: -5px;
-            left: -5px;
-            border-right: none;
-            border-top: none;
-        }
-
-        .br {
-            bottom: -5px;
-            right: -5px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .glitch-text {
-            font-family: var(--font-mono);
-            font-size: 14px;
-            color: var(--guatila-mint);
-            margin-top: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            opacity: 1;
-            text-shadow: 0 0 12px rgba(163, 177, 138, 0.45);
-        }
-
-        #discover-btn {
-            margin-top: 3rem;
-            background: transparent;
-            border: 1px solid var(--accent-orange);
-            color: var(--accent-orange);
-            padding: 1rem 3rem;
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            opacity: 0;
-        }
-
-        #discover-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-orange);
-            transition: left 0.4s ease;
-            z-index: -1;
-        }
-
-        #discover-btn:hover {
-            color: white;
-        }
-
-        #discover-btn:hover::before {
-            left: 0;
-        }
-
-        /* --- SECTION 1: HERO EPIC --- */
-        #content-wrapper {
-            visibility: hidden;
-            opacity: 0;
-        }
-
-        .hero {
-            height: 120vh;
-            width: 100%;
-            position: relative;
-            background: var(--bg-black);
-        }
-
-        .hero-video-container {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .hero-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-
-        .hero-content .big-text {
-            font-size: clamp(6rem, 25vw, 15rem);
-            line-height: 0.8;
-            margin: 0;
-            letter-spacing: -5px;
-        }
-
-        /* --- SECTION 2: STORY CARDS --- */
-        .story-section {
-            background: transparent;
-            padding: 0;
-        }
-
-        .story-card {
-            height: 100vh;
-            width: 100%;
-            padding: 10vw 8vw;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            border-bottom: 1px solid rgba(212, 163, 115, 0.15);
-            overflow: hidden;
-        }
-
-        .story-card .num {
-            font-family: var(--font-mono);
-            color: var(--guatila-mint);
-            font-size: 14px;
-            margin-bottom: 2rem;
-            display: block;
-            letter-spacing: 3px;
-        }
-
-        .story-card h3 {
-            font-size: clamp(3.5rem, 12vw, 6rem);
-            margin-bottom: 2rem;
-            line-height: 0.9;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        .story-card p {
-            font-size: clamp(1.05rem, 3.8vw, 1.25rem);
-            line-height: 1.55;
-            opacity: 1;
-            max-width: 95%;
-            margin-bottom: 3rem;
-            color: var(--warm-cream);
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
-        }
-
-        .story-card p strong {
-            color: var(--guatila-mint);
-            font-weight: 700;
-        }
-
-        /* --- IMPACT --- */
-        .impact-section {
-            background: var(--guatila-fill);
-            color: #1a1510;
-            padding: 100px 0;
-            transform: skewY(-2deg);
-            margin: 100px 0;
-        }
-
-        .marquee-wrapper {
-            background: var(--deep-cacao);
-            color: var(--guatila-mint);
-            padding: 20px 0;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .marquee-text {
-            font-family: var(--font-display);
-            font-size: 8rem;
-            display: inline-block;
-            padding-left: 100%;
-            animation: marquee-scroll 30s linear infinite;
-        }
-
-        @keyframes marquee-scroll {
-            0% {
-                transform: translate(0, 0);
-            }
-
-            100% {
-                transform: translate(-100%, 0);
-            }
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            padding: 100px 5vw;
-            border-top: 1px solid #222;
-            text-align: center;
-        }
-
-        footer h1 {
-            font-size: 15vw;
-            opacity: 0.1;
-            margin: 0;
-        }
-
-        /* --- MASCOT & PRODUCT --- */
-        /* --- CINEMATIC THEATER HERO --- */
-        .purchase-container {
-            background: radial-gradient(ellipse 120% 80% at 50% 20%, rgba(79, 119, 45, 0.12) 0%, transparent 55%), var(--bg-black);
-            padding: 0;
-            text-align: center;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
-            perspective: 1000px;
-        }
-
-        /* Layer 1: Background Brand Theater */
-        .theater-bg-text {
-            position: absolute;
-            font-size: 35vw;
-            font-family: var(--font-display);
-            color: rgba(255, 255, 255, 0.03);
-            line-height: 0.8;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            white-space: nowrap;
-            z-index: 0;
-            user-select: none;
-            pointer-events: none;
-            animation: theater-bg-float 20s linear infinite alternate;
-        }
-
-        .volumetric-light {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 40%, rgba(178, 194, 142, 0.18) 0%, rgba(212, 163, 115, 0.08) 40%, transparent 55%);
-            z-index: 1;
-            animation: light-sweep 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes light-sweep {
-            0% {
-                opacity: 0.3;
-                transform: scale(1);
-            }
-
-            100% {
-                opacity: 0.7;
-                transform: scale(1.2);
-            }
-        }
-
-        /* Layer 2: Iconic Midground */
-        .theater-midground {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            pointer-events: none;
-        }
-
-        .product-visual {
-            margin: 0;
-            position: relative;
-            transform-style: preserve-3d;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .product-visual .img-wrap {
-            position: relative;
-            display: inline-block;
-        }
-
-        .product-img {
-            width: 78vw;
-            max-width: 380px;
-            filter: drop-shadow(0 40px 100px rgba(0, 0, 0, 0.9));
-            animation: theater-float 6s ease-in-out infinite;
-        }
-
-        @keyframes theater-float {
-
-            0%,
-            100% {
-                transform: translateY(0) rotate(-1deg) scale(1);
-            }
-
-            50% {
-                transform: translateY(-20px) rotate(1deg) scale(1.02);
-            }
-        }
-
-        .floating-badge {
-            position: absolute;
-            background: var(--guatila-fill);
-            color: #1a1510;
-            padding: 12px 18px;
-            border-radius: 50px;
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            top: 10%;
-            right: 5%;
-            transform: rotate(5deg);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            z-index: 15;
-            animation: badge-wobble 4s ease-in-out infinite;
-        }
-
-        @keyframes badge-wobble {
-
-            0%,
-            100% {
-                transform: rotate(5deg) scale(1);
-            }
-
-            50% {
-                transform: rotate(-5deg) scale(1.1);
-            }
-        }
-
-        /* Layer 3: Foreground UI */
-        .theater-foreground {
-            position: absolute;
-            bottom: 12%;
-            left: 0;
-            width: 100%;
-            z-index: 20;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-        }
-
-        /* THE PORTAL BUTTON */
-        .cta-portal {
-            position: relative;
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            color: #fff;
-            text-decoration: none;
-            background: var(--accent-orange);
-            padding: 18px 45px;
-            border-radius: 8px;
-            overflow: hidden;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            box-shadow: 0 0 40px rgba(212, 163, 115, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            pointer-events: auto;
-        }
-
-        .cta-portal::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: 0.5s;
-        }
-
-        .cta-portal:hover::before {
-            left: 100%;
-        }
-
-        .cta-portal:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 60px rgba(212, 163, 115, 0.7);
-            letter-spacing: 6px;
-        }
-
-        /* COMPRESSED SOCIAL PROOF */
-        .sales-indicator {
-            font-family: var(--font-mono);
-            color: var(--accent-yellow);
-            font-size: 11px;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            opacity: 0.8;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 6px 15px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* MASCOT INTEGRATION */
-        .theater-kao {
-            position: absolute;
-            top: 15%;
-            left: 8%;
-            width: 80px;
-            height: 80px;
-            z-index: 12;
-            opacity: 0.9;
-            filter: drop-shadow(0 0 20px rgba(212, 163, 115, 0.3));
-        }
-
-        @keyframes theater-bg-float {
-            0% {
-                transform: translate(-50%, -50%) skewX(0deg);
-            }
-
-            100% {
-                transform: translate(-52%, -48%) skewX(2deg);
-            }
-        }
-
-
-        /* THE PORTAL BUTTON SHIMMER */
-        .cta-portal::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            animation: shimmer-portal 4s infinite;
-        }
-
-        @keyframes shimmer-portal {
-            0% {
-                left: -100%;
-            }
-
-            20% {
-                left: 100%;
-            }
-
-            100% {
-                left: 100%;
-            }
-        }
-
-        /* --- SCROLL INDICATOR --- */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            opacity: 0.8;
-            z-index: 100;
-        }
-
-        .scroll-indicator span {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            letter-spacing: 3px;
-            color: var(--accent-orange);
-            text-transform: uppercase;
-        }
-
-        .scroll-indicator .arrow-down {
-            width: 20px;
-            height: 20px;
-            border-right: 2px solid white;
-            border-bottom: 2px solid white;
-            transform: rotate(45deg);
-            animation: bounce-arrow 2s infinite;
-        }
-
-        @keyframes bounce-arrow {
-
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: rotate(45deg) translate(0, 0);
-                opacity: 1;
-            }
-
-            40% {
-                transform: rotate(45deg) translate(10px, 10px);
-                opacity: 0.5;
-            }
-        }
-
-        /* --- MASCARA --- */
-        .shutter {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            z-index: 1000;
-            transform: scaleX(0);
-            transform-origin: left;
-        }
-
-        /* --- DESKTOP BARRIER --- */
-        #desktop-barrier {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--bg-black);
-            z-index: 99999;
-            display: none;
-            /* Controlled by Media Query */
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 40px;
-        }
-
-        #desktop-barrier h1 {
-            font-size: 8vw;
-            color: var(--accent-orange);
-            margin-bottom: 2rem;
-        }
-
-        #desktop-barrier p {
-            font-family: var(--font-mono);
-            font-size: 1.5rem;
-            max-width: 600px;
-        }
-
-        /* --- PRESENCE PULSE --- */
-        .presence-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: var(--neon-green);
-            border-radius: 50%;
-            margin-right: 10px;
-            box-shadow: 0 0 12px rgba(79, 119, 45, 0.85);
-        }
-
-        /* --- SUCCESS STATE --- */
-        #checkout-success {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            height: 100%;
-        }
-
-        #checkout-success h2 {
-            font-size: 6rem;
-            color: var(--guatila-mint);
-            margin-bottom: 2rem;
-        }
-
-        #checkout-success p {
-            font-size: 1.5rem;
-            opacity: 0.8;
-            margin-bottom: 3rem;
-        }
-
-        /* --- FLOATING CTA --- */
-        #floating-buy {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--accent-orange);
-            color: white;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            text-decoration: none;
-            z-index: 1000;
-            box-shadow: 0 10px 30px rgba(212, 163, 115, 0.5);
-            transform: scale(0);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        #floating-buy.visible {
-            transform: scale(1);
-        }
-
-        @media (min-width: 1025px) {
-            #desktop-barrier {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .big-text {
-                font-size: 6rem;
-            }
-
-            .brutalist-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .marquee-text {
-                font-size: 4rem;
-            }
-
-            .cacao-blob {
-                display: none;
-            }
-
-            /*
-             * Hero móvil: equilibrio entre “no tan arriba” y que quepa
-             * título + imagen + CTA + scroll (sin amontonar).
-             */
-            .purchase-container {
-                align-items: center;
-                justify-content: flex-start;
-                height: auto;
-                min-height: 100vh;
-                min-height: 100dvh;
-                /* Un poco más abajo que el borde, sin volver al hueco enorme de antes */
-                padding-top: calc(env(safe-area-inset-top, 0px) + clamp(1.25rem, 4.5vh, 2.5rem));
-                padding-left: 4vw;
-                padding-right: 4vw;
-                padding-bottom: env(safe-area-inset-bottom, 0px);
-                box-sizing: border-box;
-            }
-
-            .theater-midground {
-                justify-content: flex-start;
-                align-items: center;
-                width: 100%;
-                max-width: 420px;
-                margin-left: auto;
-                margin-right: auto;
-                padding-top: 0;
-            }
-
-            .theater-bg-text {
-                top: 42%;
-            }
-
-            .theater-kao {
-                top: calc(env(safe-area-inset-top, 0px) + clamp(6.5rem, 18vw, 7.5rem));
-                left: 3%;
-                width: 52px;
-                height: 52px;
-            }
-
-            .theater-foreground {
-                bottom: calc(env(safe-area-inset-bottom, 0px) + 0.85rem);
-                left: 0;
-                width: 100%;
-                gap: 8px;
-                padding-left: 4vw;
-                padding-right: 4vw;
-                box-sizing: border-box;
-            }
-
-            .cta-portal {
-                font-size: clamp(1.1rem, 3.8vw, 1.35rem);
-                padding: 12px 24px;
-                letter-spacing: 1.5px;
-            }
-
-            .sales-indicator {
-                font-size: 9px;
-                letter-spacing: 0.12em;
-                padding: 5px 10px;
-                max-width: 94vw;
-                text-align: center;
-                justify-content: center;
-                line-height: 1.25;
-            }
-
-            /* Sobre el bloque CTA + ventas (que va abajo), sin taparlo */
-            .scroll-indicator {
-                bottom: calc(env(safe-area-inset-bottom, 0px) + 8.35rem);
-                gap: 8px;
-            }
-
-            .scroll-indicator span {
-                font-size: 10px;
-                letter-spacing: 0.2em;
-            }
-
-            .product-visual .brand-script {
-                margin-bottom: 0.35rem !important;
-                font-size: clamp(1.75rem, 7vw, 2.5rem) !important;
-            }
-
-            .product-visual .hero-tagline {
-                margin-bottom: 0.65rem !important;
-                font-size: 10px !important;
-                letter-spacing: 0.18em !important;
-            }
-
-            @keyframes theater-float-mobile {
-
-                0%,
-                100% {
-                    transform: translateY(0) rotate(-1deg) scale(1);
-                }
-
-                50% {
-                    transform: translateY(-8px) rotate(1deg) scale(1.01);
-                }
-            }
-
-            .product-img {
-                width: min(68vw, 300px);
-                max-width: 300px;
-                animation: theater-float-mobile 6s ease-in-out infinite;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .purchase-container {
-                padding-top: calc(env(safe-area-inset-top, 0px) + clamp(1rem, 3.8vh, 2rem));
-            }
-
-            .theater-foreground {
-                bottom: calc(env(safe-area-inset-bottom, 0px) + 0.65rem);
-            }
-
-            .scroll-indicator {
-                bottom: calc(env(safe-area-inset-bottom, 0px) + 8rem);
-            }
-
-            .product-img {
-                width: min(70vw, 280px);
-                max-width: 280px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guati · Alfajor de Guatila · Relleno con Arequipe de Guatila · Hecho en Colombia</title>
+  <meta name="description" content="Guati es el primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila. Artesanal, sin conservantes, sin gluten natural. Hecho en Colombia.">
+  <meta name="keywords" content="guati, alfajor colombiano, arequipe de guatila, galleta de yuca, snack artesanal colombiano, sin gluten, sin conservantes">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Guati Colombia">
+  <link rel="canonical" href="https://www.guati.co/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.guati.co/">
+  <meta property="og:title" content="Guati · Alfajor de Guatila · Hecho en Colombia">
+  <meta property="og:description" content="El primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila. Artesanal, sin conservantes, sin gluten natural.">
+  <meta property="og:image" content="https://www.guati.co/assets/images/Guati frontal.png">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="Guati">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Guati · Alfajor de Guatila · Hecho en Colombia">
+  <meta name="twitter:description" content="El primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila. Artesanal, sin conservantes, sin gluten natural.">
+  <meta name="twitter:image" content="https://www.guati.co/assets/images/Guati frontal.png">
+
+  <!-- Google Fonts — display=swap para FOUT rápido -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@400;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ================================
+       1. RESET & VARIABLES
+    ================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --verde-profundo: #152E0B;
+      --verde-oscuro:   #1E3A14;
+      --verde-medio:    #2D5420;
+      --verde-claro:    #4A7C35;
+      --beige-fondo:    #C4956A;
+      --beige-suave:    #EDD9B0;
+      --beige-claro:    #FAF6EE;
+      --dorado:         #C9943A;
+      --dorado-claro:   #E8C87A;
+      --marron:         #5C341A;
+      --blanco:         #FFFFFF;
+      --negro:          #0A0A0A;
+
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-serif:   'Playfair Display', serif;
+      --font-script:  'Dancing Script', cursive;
+      --font-body:    'DM Sans', sans-serif;
+
+      --nav-h: 64px;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 8px 40px rgba(21,46,11,0.12);
+      --shadow-lg: 0 24px 64px rgba(21,46,11,0.18);
+      --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--negro);
+      background: var(--beige-claro);
+      overflow-x: hidden;
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: multiply;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: var(--font-body); border: none; background: none; }
+    section { scroll-margin-top: var(--nav-h); }
+
+    /* Selection color */
+    ::selection {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+    }
+    ::-moz-selection {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+    }
+
+    /* Custom scrollbar (webkit) */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--beige-suave); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--verde-oscuro);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--verde-medio); }
+
+    /* Focus-visible — navegación por teclado */
+    :focus-visible {
+      outline: 3px solid var(--dorado);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    :focus:not(:focus-visible) { outline: none; }
+
+    /* Custom cursor sobre mascota */
+    .hero__visual,
+    .mascot-img,
+    .mascot-img--lg {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M16 28S2 19.5 2 10a8 8 0 0114-5.3A8 8 0 0130 10c0 9.5-14 18-14 18z' fill='%232D5420' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E") 16 28, pointer;
+    }
+
+    /* Skip link (accesibilidad) */
+    .skip-link {
+      position: fixed;
+      top: -100%;
+      left: 1rem;
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+      z-index: 99998;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* Loading screen */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--verde-profundo);
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader__mascot {
+      width: 72px; height: 60px;
+      position: relative;
+      animation: loader-bounce 0.7s ease-in-out infinite alternate;
+    }
+    @keyframes loader-bounce {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-10px); }
+    }
+    .loader__mascot-top {
+      width: 72px; height: 18px;
+      background: #C8963E;
+      border-radius: 14px 14px 0 0;
+      position: absolute;
+      top: 0; left: 0;
+    }
+    .loader__mascot-body {
+      width: 72px; height: 48px;
+      background: #D4A96A;
+      border-radius: 0 0 16px 16px;
+      position: absolute;
+      bottom: 0; left: 0;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1);
+    }
+    .loader__mascot-body::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px; height: 5px;
+      background: #C8963E;
+      border-radius: 3px;
+    }
+    .loader__mascot-eye {
+      width: 9px; height: 10px;
+      background: #111;
+      border-radius: 50%;
+      position: absolute;
+      top: 10px;
+    }
+    .loader__mascot-eye::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 3px; height: 3px;
+      background: rgba(255,255,255,0.75);
+      border-radius: 50%;
+    }
+    .loader__mascot-eye--l { left: 14px; }
+    .loader__mascot-eye--r { right: 14px; }
+    .loader__mascot-mouth {
+      position: absolute;
+      bottom: 8px; left: 50%;
+      transform: translateX(-50%);
+      width: 18px; height: 9px;
+      border: 2.5px solid rgba(0,0,0,0.5);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+    }
+    .loader__text {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .loader__bar {
+      width: 120px; height: 2px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .loader__bar::after {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--dorado);
+      border-radius: 2px;
+      animation: loader-fill 1.4s ease-out forwards;
+    }
+    @keyframes loader-fill {
+      to { width: 100%; }
+    }
+
+    /* ================================
+       2. TYPOGRAPHY
+    ================================ */
+    .eyebrow {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .heading-xl {
+      font-family: var(--font-display);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+    }
+
+    .heading-serif {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.05;
+    }
+
+    /* ================================
+       3. LAYOUT
+    ================================ */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 3rem);
+    }
+
+    .section-pad { padding: clamp(5rem, 10vw, 9rem) 0; }
+
+    /* Scroll reveal */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
+    }
+    [data-animate].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    [data-animate].slide-left {
+      transform: translateX(-60px) translateY(0);
+    }
+    [data-animate].slide-left.is-visible {
+      transform: translateX(0) translateY(0);
+    }
+    [data-animate].slide-right {
+      transform: translateX(60px) translateY(0);
+    }
+    [data-animate].slide-right.is-visible {
+      transform: translateX(0) translateY(0);
+    }
+
+    /* ================================
+       4. KRAFT TEXTURE
+    ================================ */
+    .kraft-bg { position: relative; }
+    .kraft-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .kraft-bg > * { position: relative; z-index: 1; }
+
+    /* ================================
+       5. NAVBAR
+    ================================ */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: transparent;
+      z-index: 1000;
+      transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
+    }
+    .nav--scrolled {
+      background: rgba(30, 58, 20, 0.92);
+      backdrop-filter: blur(20px) saturate(1.4);
+      -webkit-backdrop-filter: blur(20px) saturate(1.4);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 30px rgba(0,0,0,0.25);
+    }
+    .nav__inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .nav__logo-img {
+      height: 36px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+      transition: opacity 0.3s;
+    }
+
+    /* Desktop links */
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav__links a {
+      color: rgba(255,255,255,0.8);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.3s;
+    }
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--dorado);
+      transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .nav__links a:hover { color: var(--blanco); }
+    .nav__links a:hover::after { width: 100%; }
+
+    /* CTA pill */
+    .nav__cta {
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.6rem;
+      border-radius: 50px;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .nav__cta:hover {
+      transform: scale(1.05);
+      background: var(--dorado-claro);
+      box-shadow: 0 4px 20px rgba(201,148,58,0.4);
+    }
+
+    /* Hamburger */
+    .nav__burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      width: 40px; height: 40px;
+      padding: 6px;
+      z-index: 1010;
+    }
+    .nav__burger span {
+      display: block;
+      height: 2px;
+      background: var(--blanco);
+      border-radius: 2px;
+      transform-origin: center;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s;
+    }
+    .nav__burger.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .nav__burger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav__burger.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* Mobile menu overlay */
+    .nav__mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--verde-profundo);
+      z-index: 998;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .nav__mobile.is-open { opacity: 1; pointer-events: all; }
+    .nav__mobile a {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      text-transform: uppercase;
+      color: var(--blanco);
+      letter-spacing: 0.05em;
+      padding: 0.4em 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s;
+    }
+    .nav__mobile.is-open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .nav__mobile.is-open a:nth-child(1) { transition-delay: 0.1s; }
+    .nav__mobile.is-open a:nth-child(2) { transition-delay: 0.15s; }
+    .nav__mobile.is-open a:nth-child(3) { transition-delay: 0.2s; }
+    .nav__mobile.is-open a:nth-child(4) { transition-delay: 0.25s; }
+    .nav__mobile.is-open a:nth-child(5) { transition-delay: 0.3s; }
+    .nav__mobile a:hover { color: var(--dorado); }
+    .nav__mobile .nav__cta {
+      font-size: 1rem;
+      padding: 1rem 3rem;
+      margin-top: 1rem;
+    }
+
+    /* ================================
+       6. HERO
+    ================================ */
+    .hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: var(--verde-oscuro);
+      padding-top: var(--nav-h);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative diagonal */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 80px;
+      background: var(--beige-claro);
+      clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    }
+
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+      padding: clamp(2rem, 5vw, 4rem) 0;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--dorado-claro);
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero__h1 {
+      margin-bottom: 1.5rem;
+    }
+    .hero__h1 .line1 {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      text-transform: uppercase;
+      color: var(--blanco);
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+    }
+    .hero__h1 .line2 {
+      display: block;
+      font-family: var(--font-serif);
+      font-weight: 900;
+      font-style: italic;
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      color: var(--dorado);
+      line-height: 0.95;
+      margin-top: 0.05em;
+    }
+
+    .hero__subtitle {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(255,255,255,0.7);
+      max-width: 440px;
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+
+    .hero__descriptor {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .hero__descriptor-tag {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.85);
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+    }
+
+    .hero__ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-primary {
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      padding: 1rem 2.4rem;
+      border-radius: 50px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover {
+      background: var(--dorado-claro);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,148,58,0.35);
+    }
+
+    .btn-outline {
+      color: var(--blanco);
+      border: 2px solid rgba(255,255,255,0.3);
+      padding: 1rem 2.4rem;
+      border-radius: 50px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
+    }
+
+    .hero__stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero__stat {
+      display: flex;
+      flex-direction: column;
+    }
+    .hero__stat-val {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--dorado);
+      line-height: 1;
+    }
+    .hero__stat-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+
+    /* Hero right: mascot */
+    .hero__visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .hero__visual-ring {
+      width: clamp(280px, 35vw, 440px);
+      height: clamp(280px, 35vw, 440px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(201,148,58,0.15), rgba(201,148,58,0.03));
+      border: 1px solid rgba(201,148,58,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .hero__visual-ring::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      border: 1px dashed rgba(201,148,58,0.12);
+      animation: ring-spin 30s linear infinite;
+    }
+    @keyframes ring-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .mascot-img {
+      width: 85%;
+      border-radius: 50%;
+      object-fit: cover;
+      animation: mascot-float 4s ease-in-out infinite;
+      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.3));
+    }
+    @keyframes mascot-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .hero__chip-nuevo {
+      position: absolute;
+      bottom: 10%;
+      right: -5%;
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 16px rgba(201,148,58,0.4);
+      transform: rotate(8deg);
+      animation: chip-bounce 3s ease-in-out infinite 1s;
+    }
+    @keyframes chip-bounce {
+      0%, 100% { transform: rotate(8deg) translateY(0); }
+      50% { transform: rotate(8deg) translateY(-5px); }
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.5;
+      z-index: 2;
+    }
+    .scroll-indicator span {
+      font-family: var(--font-display);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+    }
+    .scroll-indicator svg {
+      width: 16px; height: 16px;
+      stroke: rgba(255,255,255,0.6);
+      animation: bounce-down 2s ease-in-out infinite;
+    }
+    @keyframes bounce-down {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* ================================
+       7. PRODUCTO
+    ================================ */
+    #producto { background: var(--beige-claro); }
+
+    .producto__header { text-align: center; margin-bottom: clamp(3rem, 6vw, 5rem); }
+    .producto__title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      text-transform: uppercase;
+      color: var(--verde-oscuro);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+    }
+    .producto__title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 700;
+      color: var(--dorado);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* Product card */
+    .product-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      background: var(--blanco);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+    .product-card__img {
+      position: relative;
+      min-height: 420px;
+      background: linear-gradient(135deg, #f5ead6, #e8d5b8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .product-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .product-card:hover .product-card__img img {
+      transform: scale(1.05);
+    }
+    .product-card__badge {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      z-index: 2;
+    }
+
+    .product-card__info {
+      padding: clamp(2rem, 4vw, 3.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .product-card__pre {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--dorado);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .product-card__name {
+      font-family: var(--font-serif);
+      font-weight: 900;
+      font-style: italic;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--verde-oscuro);
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .leaf-sep {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .leaf-sep::before, .leaf-sep::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--beige-suave);
+    }
+    .leaf-sep svg { width: 18px; height: 18px; fill: var(--verde-claro); flex-shrink: 0; }
+
+    .product-card__desc {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.75;
+      margin-bottom: 1.75rem;
+    }
+
+    /* Attribute grid */
+    .attr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+    .attr-item {
+      background: rgba(45,84,32,0.05);
+      border: 1px solid rgba(45,84,32,0.08);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--verde-oscuro);
+    }
+    .attr-item svg { width: 18px; height: 18px; flex-shrink: 0; fill: var(--verde-claro); }
+
+    .product-card__price {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--marron);
+      letter-spacing: 0.06em;
+      margin-bottom: 1.5rem;
+    }
+    .product-card__price strong {
+      font-size: 1.1rem;
+      color: var(--verde-oscuro);
+    }
+
+    /* Ingredient cards */
+    .ingredients {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1rem, 2vw, 1.5rem);
+    }
+    .ingr-card {
+      background: var(--blanco);
+      border-radius: var(--radius);
+      border-top: 3px solid var(--dorado);
+      padding: clamp(1.5rem, 3vw, 2rem);
+      box-shadow: var(--shadow);
+      transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
+    }
+    .ingr-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+    .ingr-card__icon { width: 48px; height: 48px; margin-bottom: 1.25rem; }
+    .ingr-card__title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--verde-oscuro);
+      margin-bottom: 0.5rem;
+    }
+    .ingr-card__text { font-size: 0.88rem; color: #777; line-height: 1.7; }
+
+    /* ================================
+       8. HISTORIA
+    ================================ */
+    #historia {
+      background: var(--verde-profundo);
+      color: var(--blanco);
+      position: relative;
+      overflow: hidden;
+    }
+    #historia::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: 0; right: 0;
+      height: 80px;
+      background: var(--beige-claro);
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+    }
+
+    .historia__leaf {
+      position: absolute;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+    .historia__leaf--1 { top: 12%; left: 4%; width: 100px; animation: leaf-float 9s ease-in-out infinite; }
+    .historia__leaf--2 { top: 55%; right: 5%; width: 70px; animation: leaf-float 12s ease-in-out infinite 2s; }
+    .historia__leaf--3 { bottom: 12%; left: 35%; width: 55px; animation: leaf-float 10s ease-in-out infinite 1s; }
+    @keyframes leaf-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(8deg); }
+      66% { transform: translateY(-8px) rotate(-5deg); }
+    }
+
+    .historia__inner {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      gap: clamp(3rem, 6vw, 6rem);
+      align-items: center;
+    }
+    .historia__eyebrow { color: var(--dorado-claro); }
+    .historia__h2 {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      text-transform: uppercase;
+      color: var(--blanco);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .historia__h2 em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 700;
+      text-transform: none;
+      color: var(--dorado);
+      letter-spacing: 0;
+    }
+    .historia__p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+    @supports not (backdrop-filter: blur(1px)) {
+      .glass-card { background: rgba(30,58,20,0.9); }
+    }
+    .glass-card p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+    .pillar {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-sm);
+      padding: 1.1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .pillar:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(201,148,58,0.2);
+    }
+    .pillar svg { width: 20px; height: 20px; fill: var(--dorado); flex-shrink: 0; margin-top: 2px; }
+    .pillar__title {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--blanco);
+      margin-bottom: 0.2rem;
+    }
+    .pillar__text { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+    .historia__deco {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .historia__product-img {
+      width: clamp(260px, 35vw, 480px);
+      border-radius: var(--radius);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.45);
+      object-fit: cover;
+      transition: transform 0.5s var(--transition);
+    }
+    .historia__product-img:hover {
+      transform: scale(1.03) rotate(-1deg);
+    }
+
+    /* ================================
+       9. POR QUE GUATI
+    ================================ */
+    #porque {
+      background: var(--beige-suave);
+      position: relative;
+    }
+    #porque::before {
+      content: '';
+      position: absolute;
+      top: -2px; left: 0; right: 0;
+      height: 80px;
+      background: var(--verde-profundo);
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+    }
+
+    .porque__header { text-align: center; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+    .porque__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--verde-oscuro);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+    }
+    .porque__title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 700;
+      text-transform: none;
+      color: var(--dorado);
+      letter-spacing: 0;
+    }
+
+    .reason-list { display: flex; flex-direction: column; gap: 0; max-width: 900px; margin: 0 auto; }
+
+    .reason-card {
+      border-bottom: 1px solid rgba(92,52,26,0.1);
+      overflow: hidden;
+    }
+    .reason-card:first-child { border-top: 1px solid rgba(92,52,26,0.1); }
+
+    .reason-card__header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 1.5rem 0;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.2s;
+    }
+    .reason-card__header:hover { opacity: 0.85; }
+    .reason-card__num {
+      font-family: var(--font-display);
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      font-weight: 900;
+      color: rgba(45,84,32,0.06);
+      line-height: 1;
+      min-width: clamp(4rem, 8vw, 6.5rem);
+      transition: color 0.4s;
+    }
+    .reason-card:hover .reason-card__num,
+    .reason-card.is-expanded .reason-card__num {
+      color: rgba(201,148,58,0.2);
+    }
+    .reason-card__icon { width: 28px; height: 28px; fill: var(--dorado); flex-shrink: 0; }
+    .reason-card__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--verde-oscuro);
+      flex: 1;
+    }
+    .reason-card__arrow {
+      width: 22px; height: 22px;
+      stroke: var(--dorado);
+      flex-shrink: 0;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    .reason-card.is-expanded .reason-card__arrow { transform: rotate(180deg); }
+
+    .reason-card__body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    @media (hover: hover) {
+      .reason-card:hover .reason-card__body { max-height: 500px; }
+    }
+    .reason-card.is-expanded .reason-card__body { max-height: 500px; }
+
+    .reason-card__text {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.8;
+      padding-bottom: 1.75rem;
+      padding-left: calc(clamp(4rem, 8vw, 6.5rem) + 1.25rem + 28px + 1.25rem);
+    }
+
+    /* ================================
+       10. MASCOTA
+    ================================ */
+    #mascota {
+      background: linear-gradient(170deg, var(--beige-fondo) 0%, var(--beige-suave) 50%, var(--beige-claro) 100%);
+    }
+    .mascota__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .mascota__title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(3rem, 7vw, 5rem);
+      text-transform: uppercase;
+      color: var(--verde-oscuro);
+      line-height: 0.9;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .mascota__title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 700;
+      color: var(--dorado);
+      text-transform: none;
+    }
+    .mascota__subtitle {
+      font-size: 1rem;
+      color: var(--marron);
+      max-width: 440px;
+      margin-bottom: 3rem;
+      opacity: 0.8;
+    }
+
+    .mascota__media {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .mascot-img--lg {
+      max-width: 320px;
+      width: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      animation: mascot-float 4s ease-in-out infinite;
+      filter: drop-shadow(0 24px 60px rgba(21,46,11,0.25));
+    }
+    .mascot-video {
+      display: none;
+      width: 320px;
+      max-width: 90vw;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      object-fit: cover;
+    }
+    .mascot-video.is-playing { display: block; }
+    .mascot-img--lg.is-hidden { display: none; }
+
+    .mascota__vid-btn {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.8rem;
+      border-radius: 50px;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .mascota__vid-btn:hover {
+      background: var(--verde-medio);
+      transform: scale(1.04);
+    }
+
+    .mascota__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+    .mascota__chip {
+      background: var(--blanco);
+      border: 1px solid rgba(45,84,32,0.1);
+      color: var(--verde-oscuro);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.5rem 1.1rem;
+      border-radius: 50px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    /* ================================
+       11. NUMEROS
+    ================================ */
+    #numeros {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      position: relative;
+    }
+
+    .numeros__header { text-align: center; margin-bottom: clamp(3rem, 6vw, 5rem); }
+    .numeros__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--blanco);
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+    }
+
+    .counters {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(2rem, 5vw, 4rem);
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+      text-align: center;
+    }
+    .counter {
+      position: relative;
+    }
+    .counter__val {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(5rem, 12vw, 9rem);
+      color: var(--dorado);
+      line-height: 0.85;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+    .counter__label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.55;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    .numeros__cta {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: clamp(2rem, 4vw, 3rem);
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .numeros__stand-img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      margin-bottom: 2rem;
+    }
+    .numeros__cta p {
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: rgba(255,255,255,0.75);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+    }
+    .btn-gold {
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      display: inline-block;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      background: var(--dorado-claro);
+      box-shadow: 0 8px 30px rgba(201,148,58,0.35);
+    }
+
+    /* ================================
+       12. CHATBOT GUATITO
+    ================================ */
+
+    /* --- Floating trigger button --- */
+    #chatbot-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.75rem;
+    }
+
+    /* Tooltip bubble above button */
+    .cb-tooltip {
+      background: var(--blanco);
+      color: var(--negro);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.55rem 1rem;
+      border-radius: 12px 12px 4px 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .cb-tooltip.show { opacity: 1; transform: translateY(0); }
+
+    /* Trigger circle */
+    .cb-trigger {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--verde-oscuro);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 6px 30px rgba(21,46,11,0.45);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
+      display: flex; align-items: center; justify-content: center;
+      padding: 0;
+    }
+    .cb-trigger:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 40px rgba(21,46,11,0.55);
+    }
+
+    /* Notification badge */
+    .cb-badge {
+      position: absolute;
+      top: -2px; right: -2px;
+      width: 20px; height: 20px;
+      background: #E53935;
+      border-radius: 50%;
+      border: 2px solid var(--beige-claro);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--blanco);
+      display: flex; align-items: center; justify-content: center;
+      animation: badge-pulse 2s ease-in-out infinite;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .cb-badge.hidden { opacity: 0; transform: scale(0); }
+    @keyframes badge-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(229,57,53,0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(229,57,53,0); }
+    }
+
+    /* Mini kawaii alfajor mascot — CSS-only 48px */
+    .cb-mascot-mini {
+      width: 44px; height: 44px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .cb-mascot-mini__body {
+      width: 44px; height: 36px;
+      background: #D4A96A;
+      border-radius: 12px;
+      position: absolute;
+      bottom: 0; left: 0;
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.12);
+    }
+    .cb-mascot-mini__body::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 32px; height: 4px;
+      background: #C8963E;
+      border-radius: 2px;
+    }
+    .cb-mascot-mini__top {
+      width: 44px; height: 12px;
+      background: #C8963E;
+      border-radius: 12px 12px 0 0;
+      position: absolute;
+      top: 0; left: 0;
+    }
+    .cb-mascot-mini__eye {
+      width: 6px; height: 7px;
+      background: var(--negro);
+      border-radius: 50%;
+      position: absolute;
+      top: 8px;
+    }
+    .cb-mascot-mini__eye::after {
+      content: '';
+      position: absolute;
+      top: 1px; left: 1px;
+      width: 2px; height: 2px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50%;
+    }
+    .cb-mascot-mini__eye--l { left: 8px; }
+    .cb-mascot-mini__eye--r { right: 8px; }
+    .cb-mascot-mini__mouth {
+      position: absolute;
+      bottom: 5px; left: 50%;
+      transform: translateX(-50%);
+      width: 12px; height: 6px;
+      border: 2px solid rgba(0,0,0,0.55);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+    .cb-mascot-mini__cheek {
+      width: 7px; height: 4px;
+      background: rgba(220,80,80,0.35);
+      border-radius: 50%;
+      position: absolute;
+      bottom: 8px;
+    }
+    .cb-mascot-mini__cheek--l { left: 4px; }
+    .cb-mascot-mini__cheek--r { right: 4px; }
+
+    /* --- Chat window --- */
+    .cb-window {
+      position: fixed;
+      bottom: 100px;
+      right: 1.5rem;
+      width: 340px;
+      height: 500px;
+      background: var(--beige-claro);
+      border-radius: 20px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1099;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(16px) scale(0.97);
+      transform-origin: bottom right;
+      transition: opacity 0.35s cubic-bezier(0.23,1,0.32,1),
+                  transform 0.35s cubic-bezier(0.23,1,0.32,1);
+    }
+    .cb-window.is-open {
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Header */
+    .cb-header {
+      background: var(--verde-oscuro);
+      padding: 0.85rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .cb-header__mascot {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .cb-header__info { flex: 1; }
+    .cb-header__name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--blanco);
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+    }
+    .cb-header__status {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.65);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .cb-header__status::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #4CAF50;
+      border-radius: 50%;
+      display: inline-block;
+      animation: status-blink 2.5s ease-in-out infinite;
+    }
+    @keyframes status-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .cb-header__close {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .cb-header__close:hover { background: rgba(255,255,255,0.18); color: var(--blanco); }
+
+    /* Messages area */
+    .cb-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      scroll-behavior: smooth;
+    }
+    .cb-messages::-webkit-scrollbar { width: 4px; }
+    .cb-messages::-webkit-scrollbar-track { background: transparent; }
+    .cb-messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 4px; }
+
+    /* Bubbles */
+    .cb-bubble {
+      max-width: 82%;
+      padding: 0.65rem 0.95rem;
+      font-size: 0.875rem;
+      line-height: 1.55;
+      animation: bubble-in 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes bubble-in {
+      from { opacity: 0; transform: scale(0.85) translateY(6px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .cb-bubble--bot {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      border-radius: 18px 18px 18px 4px;
+      align-self: flex-start;
+    }
+    .cb-bubble--user {
+      background: var(--beige-suave);
+      color: var(--negro);
+      border-radius: 18px 18px 4px 18px;
+      align-self: flex-end;
+    }
+    .cb-bubble a {
+      color: var(--dorado-claro);
+      text-decoration: underline;
+    }
+
+    /* Inline action button inside a bubble */
+    .cb-bubble__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      font-weight: 700;
+      font-size: 0.78rem;
+      padding: 0.45rem 1rem;
+      border-radius: 50px;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none !important;
+    }
+    .cb-bubble__btn:hover {
+      background: var(--dorado-claro);
+      transform: scale(1.03);
+      color: var(--verde-profundo);
+    }
+
+    /* Typing indicator */
+    .cb-typing {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0.6rem 0.9rem;
+      background: var(--verde-oscuro);
+      border-radius: 18px 18px 18px 4px;
+      align-self: flex-start;
+      width: fit-content;
+    }
+    .cb-typing span {
+      width: 7px; height: 7px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      animation: typing-dot 1.2s ease-in-out infinite;
+    }
+    .cb-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .cb-typing span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing-dot {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    /* Quick reply chips */
+    .cb-chips {
+      padding: 0.5rem 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      flex-shrink: 0;
+      background: rgba(0,0,0,0.02);
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+    .cb-chip {
+      background: var(--blanco);
+      border: 1px solid rgba(45,84,32,0.2);
+      color: var(--verde-oscuro);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .cb-chip:hover {
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      border-color: var(--verde-oscuro);
+      transform: scale(1.04);
+    }
+
+    /* Input area */
+    .cb-input-area {
+      background: var(--blanco);
+      border-top: 1px solid rgba(0,0,0,0.07);
+      padding: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .cb-input {
+      flex: 1;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 50px;
+      padding: 0.6rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--negro);
+      background: var(--beige-claro);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .cb-input:focus {
+      border-color: var(--verde-medio);
+      box-shadow: 0 0 0 3px rgba(45,84,32,0.08);
+    }
+    .cb-input::placeholder { color: #aaa; }
+    .cb-send {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .cb-send:hover { background: var(--verde-medio); transform: scale(1.08); }
+    .cb-send svg { width: 18px; height: 18px; }
+    .cb-send:disabled { opacity: 0.4; pointer-events: none; }
+
+    /* Mobile overrides */
+    @media (max-width: 768px) {
+      #chatbot-container { bottom: 5.5rem; right: 1rem; }
+      .cb-window {
+        bottom: 90px;
+        right: 0.5rem;
+        left: 0.5rem;
+        width: auto;
+        height: 72vh;
+        max-height: 520px;
+      }
+    }
+
+    /* ================================
+       13. FOOTER
+    ================================ */
+    footer {
+      background: var(--negro);
+      color: rgba(255,255,255,0.6);
+      padding: clamp(4rem, 7vw, 6rem) 0 0;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 4rem);
+      padding-bottom: clamp(3rem, 5vw, 4rem);
+    }
+    .footer__logo-img {
+      height: 56px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+    .footer__brand-made { font-size: 0.82rem; line-height: 1.6; }
+    .footer__col-title {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--blanco);
+      margin-bottom: 1.25rem;
+    }
+    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer__links a { font-size: 0.88rem; transition: color 0.2s; }
+    .footer__links a:hover { color: var(--dorado); }
+    .footer__socials { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .footer__social {
+      width: 42px; height: 42px;
+      border-radius: var(--radius-sm);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s, border-color 0.25s, transform 0.25s;
+    }
+    .footer__social:hover {
+      background: var(--dorado);
+      border-color: var(--dorado);
+      transform: translateY(-2px);
+    }
+    .footer__social:hover svg { fill: var(--verde-profundo); }
+    .footer__social svg { width: 18px; height: 18px; fill: var(--blanco); transition: fill 0.25s; }
+    .footer__contact-cta {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--dorado-claro);
+    }
+    .footer__bar {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.5rem 0;
+      text-align: center;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.02em;
+    }
+
+    /* ================================
+       14. STICKY MOBILE CTA BAR
+    ================================ */
+    .mobile-cta-bar {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--verde-profundo);
+      padding: 0.75rem 1.25rem;
+      z-index: 997;
+      box-shadow: 0 -4px 30px rgba(0,0,0,0.3);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-cta-bar.is-visible { transform: translateY(0); }
+    .mobile-cta-bar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .mobile-cta-bar__text {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .mobile-cta-bar__text strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--dorado);
+    }
+    .mobile-cta-bar__btn {
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.7rem 1.6rem;
+      border-radius: 50px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ================================
+       15. RESPONSIVE — TABLET
+    ================================ */
+    @media (max-width: 1024px) {
+      .nav__links { gap: 1.5rem; }
+      .historia__inner { grid-template-columns: 1fr; }
+      .historia__deco { justify-content: center; margin-top: 1rem; }
+      .historia__product-img { width: 100%; max-width: 500px; max-height: 340px; }
+    }
+
+    /* ================================
+       16. RESPONSIVE — MOBILE
+    ================================ */
+    @media (max-width: 768px) {
+      :root { --nav-h: 56px; }
+
+      /* Nav */
+      .nav__links, .nav__cta { display: none; }
+      .nav__burger { display: flex; }
+      .nav__mobile { display: flex; }
+
+      /* Hero */
+      .hero__inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 1.5rem 0 5rem;
+      }
+      .hero__inner > :first-child { order: 2; }
+      .hero__visual { order: 1; margin-bottom: 1rem; }
+      .hero__visual-ring {
+        width: 240px;
+        height: 240px;
+      }
+      .hero__badge { display: inline-flex; font-size: 0.6rem; }
+      .hero__h1 .line1 { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+      .hero__h1 .line2 { font-size: clamp(2.8rem, 12vw, 4.5rem); }
+      .hero__subtitle { max-width: 100%; }
+      .hero__descriptor { justify-content: center; }
+      .hero__ctas { justify-content: center; }
+      .hero__stats { justify-content: center; gap: 1.5rem; }
+      .hero__chip-nuevo { display: none; }
+      .hero::after { height: 50px; }
+
+      .mascot-img { max-width: 180px; }
+      .mascot-img--lg { max-width: 240px; }
+      .mascot-video { width: 260px; }
+
+      /* Producto */
+      .product-card { grid-template-columns: 1fr; }
+      .product-card__img { min-height: 280px; }
+      .ingredients { grid-template-columns: 1fr; }
+
+      /* Historia */
+      #historia::before { height: 50px; }
+      #porque::before { height: 50px; }
+
+      /* Counters */
+      .counters { grid-template-columns: 1fr; gap: 2.5rem; }
+      .counter__val { font-size: clamp(4.5rem, 20vw, 7rem); }
+
+      /* Footer */
+      .footer__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      /* Reason card text indent reset */
+      .reason-card__text { padding-left: 1rem; }
+      .reason-card__num { font-size: clamp(2.5rem, 12vw, 4rem); min-width: 3rem; }
+
+      /* Sticky CTA bar */
+      .mobile-cta-bar { display: block; }
+      #chatbot-container { bottom: 5rem; }
+
+      /* Give footer extra padding for the sticky bar */
+      footer { padding-bottom: 4.5rem; }
+
+      .scroll-indicator { bottom: 70px; }
+    }
+
+    @media (max-width: 480px) {
+      .attr-grid { grid-template-columns: 1fr; }
+      .mascota__chips { flex-direction: column; align-items: center; }
+      .hero__descriptor { flex-direction: column; align-items: center; }
+      .hero__stats { flex-direction: column; gap: 1rem; align-items: center; }
+      .pillars { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-
 <body>
 
-    <div id="desktop-barrier">
-        <h1>MÓVIL EXCLUSIVO</h1>
-        <p>ACCEDE DESDE TU CELULAR <br>PARA VIVIR LA EXPERIENCIA <span class="brand-script" style="font-size:1.4em;">Antojo Criollo</span>.</p>
-        <div style="margin-top: 50px; font-size: 3rem;">📱</div>
+<!-- ============================
+     LOADING SCREEN
+============================ -->
+<div id="loader" role="status" aria-label="Cargando Guati">
+  <div class="loader__mascot" aria-hidden="true">
+    <div class="loader__mascot-top"></div>
+    <div class="loader__mascot-body">
+      <div class="loader__mascot-eye loader__mascot-eye--l"></div>
+      <div class="loader__mascot-eye loader__mascot-eye--r"></div>
+      <div class="loader__mascot-mouth"></div>
     </div>
+  </div>
+  <span class="loader__text">Cargando tu momento natural...</span>
+  <div class="loader__bar" aria-hidden="true"></div>
+</div>
 
-    <div class="noise-overlay"></div>
-    <div class="cacao-blob" id="blob"></div>
-    <div class="shutter"></div>
-    <a href="#" id="floating-buy" title="Pedir alfajor">PEDIR</a>
+<!-- ============================
+     SVG SYMBOLS
+============================ -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="icon-leaf" viewBox="0 0 24 24">
+    <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 5-8 5-.5-2-1.5-6-1.5-6L12 4c0 0 3.17 2.45 5 4z"/>
+  </symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+  </symbol>
+  <symbol id="icon-ban" viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69l11.21-11.21C19.37 8.45 20 10.15 20 12c0 4.42-3.58 8-8 8z"/>
+  </symbol>
+  <symbol id="icon-globe" viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+  </symbol>
+  <symbol id="icon-plant" viewBox="0 0 24 24">
+    <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 5-8 5zM12 16c0-2.21 1.79-4 4-4v2c-1.1 0-2 .9-2 2h-2zm-2 4H8.09C9 17.18 10 14 12 12v4c-1.1 0-2 .9-2 2v2z"/>
+  </symbol>
+  <symbol id="icon-recycle" viewBox="0 0 24 24">
+    <path d="M12 6l-3 5h2v5h2v-5h2zm0-4L4.5 9H7v7H5l4 4 4-4h-2V9h2.5zM12 2L6.5 11H9v6H7l5 5 5-5h-2v-6h2.5z"/>
+  </symbol>
+  <symbol id="icon-flag" viewBox="0 0 24 24">
+    <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
+  </symbol>
+  <symbol id="icon-bulb" viewBox="0 0 24 24">
+    <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.86-3.14-7-7-7z"/>
+  </symbol>
+  <symbol id="icon-chart" viewBox="0 0 24 24">
+    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+  </symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24">
+    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+  </symbol>
+  <symbol id="icon-heart" viewBox="0 0 24 24">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </symbol>
+  <symbol id="icon-instagram" viewBox="0 0 24 24">
+    <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2zm-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 7a5 5 0 110 10A5 5 0 0112 7zm0 2a3 3 0 100 6 3 3 0 000-6z"/>
+  </symbol>
+  <symbol id="icon-tiktok" viewBox="0 0 24 24">
+    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.05a8.16 8.16 0 004.77 1.52V7.12a4.85 4.85 0 01-1-.43z"/>
+  </symbol>
+  <symbol id="icon-facebook" viewBox="0 0 24 24">
+    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+  </symbol>
+  <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </symbol>
+  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"/>
+  </symbol>
+  <symbol id="icon-yuca" viewBox="0 0 48 48">
+    <ellipse cx="24" cy="28" rx="10" ry="16" fill="#C8963E"/>
+    <path d="M24 12 C20 6 16 4 14 6 C18 10 22 12 24 12Z" fill="#3D6B2C"/>
+    <path d="M24 12 C28 6 32 4 34 6 C30 10 26 12 24 12Z" fill="#3D6B2C"/>
+    <path d="M24 12 C24 6 22 2 20 2 C20 6 22 10 24 12Z" fill="#4A7A35"/>
+  </symbol>
+  <symbol id="icon-guatila" viewBox="0 0 48 48">
+    <ellipse cx="24" cy="26" rx="14" ry="12" fill="#7BAF2A"/>
+    <path d="M24 14 C18 10 14 14 16 20 C20 16 24 14 24 14Z" fill="#3D6B2C"/>
+    <path d="M24 14 C30 10 34 14 32 20 C28 16 24 14 24 14Z" fill="#3D6B2C"/>
+    <ellipse cx="24" cy="27" rx="8" ry="6" fill="#9DC840" opacity="0.5"/>
+  </symbol>
+  <symbol id="icon-panela" viewBox="0 0 48 48">
+    <rect x="10" y="20" width="28" height="20" rx="4" fill="#C8963E"/>
+    <rect x="10" y="20" width="28" height="8" rx="4" fill="#D4A96A"/>
+    <path d="M18 20 C18 12 22 8 24 8 C26 8 30 12 30 20" fill="none" stroke="#B8832A" stroke-width="2.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+  </symbol>
+</svg>
 
-    <!-- QUANTUM ENTRY FLOW -->
-    <section id="quantum-entry">
-        <!-- Stage A: Welcome -->
-        <div class="entry-stage active" id="stage-welcome">
-            <h1 class="welcome-title">ESCANEA PARA DESCUBRIR <br><span style="color:var(--accent-orange)">EL ALFAJOR DE
-                    GUATILA</span></h1>
-            <p class="brand-script" style="font-size:clamp(1.8rem, 6vw, 2.8rem); margin-top:-1.5rem; opacity:0.95;">Antojo Criollo</p>
-            <div class="magnetic-wrap">
-                <button id="activate-camera-btn" class="premium-btn">
-                    ACTIVAR CÁMARA <span class="fire-icon">🔥</span>
-                </button>
-            </div>
+<!-- Skip to main content -->
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<!-- ============================
+     NAVBAR
+============================ -->
+<nav class="nav" id="navbar" role="navigation" aria-label="Navegacion principal">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo" aria-label="Guati inicio">
+        <img src="assets/images/logo guati.png" alt="Guati" class="nav__logo-img">
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="#producto">Producto</a></li>
+        <li><a href="#historia">Historia</a></li>
+        <li><a href="#porque">Por que Guati</a></li>
+        <li><a href="#numeros">Numeros</a></li>
+      </ul>
+      <a href="#producto" class="nav__cta">Pedir ahora</a>
+      <button class="nav__burger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="nav__mobile" id="mobileMenu" role="dialog" aria-label="Menu movil">
+  <a href="#producto">Producto</a>
+  <a href="#historia">Historia</a>
+  <a href="#porque">Por que Guati</a>
+  <a href="#numeros">Numeros</a>
+  <a href="#producto" class="nav__cta">Pedir ahora</a>
+</div>
+
+<!-- ============================
+     HERO
+============================ -->
+<main id="main-content">
+<section class="hero kraft-bg" id="hero" aria-label="Inicio">
+  <div class="container" style="width:100%;">
+    <div class="hero__inner">
+
+      <!-- Text column -->
+      <div>
+        <span class="hero__badge" data-animate>
+          Hecho en Colombia &middot; Sin conservantes &middot; Sin gluten
+        </span>
+
+        <h1 class="hero__h1" data-animate style="transition-delay:0.1s">
+          <span class="line1">Tu momento</span>
+          <span class="line2">Natural</span>
+        </h1>
+
+        <p class="hero__subtitle" data-animate style="transition-delay:0.2s">
+          El alfajor artesanal colombiano que reinventa lo ancestral. Galleta de yuca rellena de arequipe de guatila, cocido con panela de cana.
+        </p>
+
+        <div class="hero__descriptor" data-animate style="transition-delay:0.3s">
+          <span class="hero__descriptor-tag">Galleta de Yuca</span>
+          <span class="hero__descriptor-tag">Arequipe de Guatila</span>
+          <span class="hero__descriptor-tag">Panela de Cana</span>
         </div>
 
-        <!-- Stage B: QR Scanner -->
-        <div class="entry-stage" id="stage-scan">
-            <h2 style="font-family:var(--font-display); font-size:2.5rem; margin-bottom:3rem; letter-spacing:1px;">
-                ENFOCA EL CÓDIGO <br><span style="color:var(--accent-orange)">ANTOJO CRIOLLO</span></h2>
-            <div id="qr-reader"></div>
-            <p class="glitch-text" style="margin-top:3rem; font-family:var(--font-mono); font-size:14px; opacity:0.7;">[
-                ESCANEADO ACTIVO ]</p>
-        </div>
-    </section>
-
-    <div class="reveal-video-container" id="video-container">
-        <!-- [REEMPLAZAR EL SRC DE ABAJO CON TU LINK DE CLOUDINARY/MUX/DRIVE] -->
-        <video id="reveal-video" preload="auto" poster="assets/images/alfajor-guatila.png" playsinline>
-            <source src="assets/videos/reveal.mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <div class="video-loading-overlay" id="video-loader">
-        <p style="margin-bottom: 20px;">PREPARANDO EXPERIENCIA</p>
-        <div class="loader-dots">
-            <span>.</span><span>.</span><span>.</span>
-        </div>
-    </div>
-
-    <div class="reveal-overlay-text" id="reveal-text">UNA EXPERIENCIA SUAVE<br>Y DELICIOSA</div>
-
-    <!-- CHECKOUT VIEW -->
-    <div id="checkout-view">
-        <div id="checkout-main">
-            <div class="checkout-header">
-                <h2 style="font-size:4rem;">ORDENA TU ALFAJOR</h2>
-                <button class="close-checkout" id="close-checkout">VOLVER</button>
-            </div>
-            <div class="order-summary">
-                <div class="order-item">
-                    <div>
-                        <h3>Alfajor de Guatila - Antojo Criollo</h3>
-                        <p style="color:var(--accent-yellow)">$5.000 COP p/u · también $3.500 según escenario</p>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn" id="minus">-</button>
-                        <span id="qty-val" style="font-family:var(--font-display); font-size:2rem;">1</span>
-                        <button class="qty-btn" id="plus">+</button>
-                    </div>
-                </div>
-                <div style="font-family:var(--font-mono); margin-top:30px; font-size:14px; color:var(--guatila-mint)">
-                    MODO: PAGO CONTRA-ENTREGA ✅
-                </div>
-                <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:2rem;">
-                    <span>TOTAL:</span>
-                    <span id="total-price" style="color:var(--accent-orange)">$5.000 COP</span>
-                </div>
-                <button class="checkout-btn" id="confirm-order-btn">CONFIRMAR PEDIDO</button>
-            </div>
+        <div class="hero__ctas" data-animate style="transition-delay:0.4s">
+          <a href="#producto" class="btn-primary">Quiero el mio <svg style="width:16px;height:16px;stroke:currentColor;fill:none" viewBox="0 0 24 24" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="#historia" class="btn-outline">Conoce la historia</a>
         </div>
 
-        <div id="checkout-success">
-            <h2>¡LISTO!</h2>
-            <p>PEDIDO ENVIADO CON ÉXITO.<br>PREPÁRATE PARA EL AREQUIPE DE GUATILA.</p>
-            <div style="font-size: 5rem;">✨🥥✨</div>
-            <button class="close-checkout" style="margin-top:50px;" onclick="location.reload()">VOLVER AL
-                INICIO</button>
+        <div class="hero__stats" data-animate style="transition-delay:0.5s">
+          <div class="hero__stat">
+            <span class="hero__stat-val">60g</span>
+            <span class="hero__stat-label">Por unidad</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-val">15d</span>
+            <span class="hero__stat-label">Vida util</span>
+          </div>
+          <div class="hero__stat">
+            <span class="hero__stat-val">40%</span>
+            <span class="hero__stat-label">Margen</span>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- CONTENT WRAPPER -->
-    <div id="content-wrapper">
-
-        <!-- SECTION 1: CINEMATIC THEATER HERO -->
-        <section class="purchase-container">
-            <!-- Layer 1: Background -->
-            <div class="theater-bg-text">GUATILA</div>
-            <div class="volumetric-light"></div>
-
-            <!-- Layer 2: Midground -->
-            <div class="theater-kao" id="kao-mascot">
-                <svg viewBox="0 0 200 200" aria-hidden="true">
-                    <ellipse cx="100" cy="100" rx="88" ry="72" fill="#C68E4B" opacity="0.95" />
-                    <ellipse cx="100" cy="100" rx="72" ry="22" fill="#B2C28E" />
-                    <ellipse cx="100" cy="100" rx="88" ry="72" fill="none" stroke="#4A3728" stroke-width="3" opacity="0.35" />
-                    <circle cx="78" cy="88" r="10" fill="#1a1510" />
-                    <circle cx="122" cy="88" r="10" fill="#1a1510" />
-                    <ellipse cx="78" cy="86" rx="3" ry="4" fill="#F8F9FA" opacity="0.7" />
-                    <ellipse cx="122" cy="86" rx="3" ry="4" fill="#F8F9FA" opacity="0.7" />
-                    <path d="M82,118 Q100,132 118,118" stroke="#1a1510" stroke-width="4" fill="none" stroke-linecap="round" />
-                </svg>
-            </div>
-
-            <div class="theater-midground">
-                <div class="product-visual">
-                    <p class="brand-script" style="font-size:clamp(2rem, 6vw, 3rem); margin-bottom:0.5rem;">Antojo Criollo</p>
-                    <p class="hero-tagline" style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.25em; opacity:0.75; margin-bottom:1rem;">ALFAJOR DE GUATILA · AREQUIPE ARTESANAL</p>
-                    <div class="img-wrap">
-                        <div class="floating-badge">Relleno cremoso</div>
-                        <img src="assets/images/alfajor-guatila.png" alt="Alfajor de Guatila Antojo Criollo" class="product-img">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Layer 3: Foreground UI -->
-            <div class="theater-foreground">
-                <div class="sales-indicator">
-                    <span class="presence-dot"></span>
-                    <span id="sales">32</span> PERSONAS ESTÁN DISFRUTANDO ESTE ALFAJOR
-                </div>
-
-                <a href="#" class="cta-portal buy-cta">QUIERO MI ALFAJOR</a>
-            </div>
-
-            <div class="scroll-indicator">
-                <span>SCROLL DOWN</span>
-                <div class="arrow-down"></div>
-            </div>
-        </section>
-
-
-        <!-- SECTION 2: POR QUÉ COMPRARLO -->
-        <section class="story-section" id="insights">
-            <div class="story-card card-reveal">
-                <span class="num">01. SABOR QUE NO SE CONFUNDE</span>
-                <h3>AREQUIPE DE GUATILA <br><span style="color:var(--accent-yellow)">EN SU MÁXIMA EXPRESIÓN.</span></h3>
-                <p>No es “cualquier dulce”: el relleno lleva ese <strong>verde suave y cremoso</strong> que solo da la guatila, con un dulzor redondo que no empalaga. Cada mordida es <strong>puro antojo criollo</strong>: familiar, honesto y adictivo en el buen sentido.</p>
-                <button class="buy-cta premium-btn">PROBAR ESE RELLENO</button>
-            </div>
-
-            <div class="story-card card-reveal">
-                <span class="num">02. TEXTURA DE ABRAZO</span>
-                <h3>GALLETITA DORADA <br><span style="color:var(--guatila-mint)">+ COCO + CREMA.</span></h3>
-                <p>Capas que crujen suavecito, relleno que se funde y ese toque de <strong>coco</strong> que lo eleva. Es el contraste perfecto: <strong>cálido, cremoso y con carácter</strong> - el tipo de bocado que cierra los ojos y te devuelve al comedor de la casa.</p>
-                <button class="buy-cta premium-btn">QUIERO ESE MOMENTO</button>
-            </div>
-
-            <div class="story-card card-reveal">
-                <span class="num">03. HECHO CON MANOS, NO CON FÁBRICAS</span>
-                <h3>ANTOJO CRIOLLO <br><span style="color:var(--accent-orange)">ES CALIDEZ REAL.</span></h3>
-                <p>Producción casera, cuidado en cada porción y un producto que se siente <strong>recién hecho</strong>. No es un snack genérico de góndola: es el alfajor que llevas cuando quieres <strong>impresionar sin pedir permiso</strong> - regalo, premio o “hoy me lo merezco”.</p>
-                <button class="buy-cta premium-btn">LO QUIERO PARA MÍ</button>
-            </div>
-
-            <div class="story-card card-reveal">
-                <span class="num">04. EL LUJO PEQUEÑO QUE SÍ CABE</span>
-                <h3>EXPERIENCIA TOP <br><span style="color:var(--warm-cream)">SIN DRAMAS DE PRECIO.</span></h3>
-                <p>Una experiencia <strong>suave y deliciosa</strong> que puedes repetir sin culpa: calidad que se nota en la lengua y un precio que invita a llevarte uno de más “para el camino”. <strong>Antojo sí, arrepentimiento no.</strong></p>
-                <button class="buy-cta premium-btn">PEDIR MI ALFAJOR</button>
-            </div>
-        </section>
-
-        <!-- SECTION 3: IMPACT MARQUEE -->
-        <section class="impact-section">
-            <div class="marquee-wrapper">
-                <span class="marquee-text">UNA EXPERIENCIA SUAVE Y DELICIOSA · ALFAJOR DE GUATILA · ANTOJO CRIOLLO · AREQUIPE ARTESANAL ·
-                </span>
-                <span class="marquee-text">UNA EXPERIENCIA SUAVE Y DELICIOSA · ALFAJOR DE GUATILA · ANTOJO CRIOLLO · AREQUIPE ARTESANAL ·
-                </span>
-            </div>
-        </section>
-
-
-        <!-- FOOTER -->
-        <footer style="padding: 100px 5vw; border-top: 1px solid #222; text-align: center;">
-            <h1 style="font-size: 15vw; opacity: 0.1;">GUATILA</h1>
-            <div
-                style="display: flex; gap: 40px; justify-content: center; margin-top: -5vw; font-family: var(--font-mono); font-size: 12px;">
-                <a href="#" style="color: white; text-decoration: none;">INSTAGRAM</a>
-                <a href="#" style="color: white; text-decoration: none;">TIKTOK</a>
-                <a href="#" style="color: white; text-decoration: none;">WHATSAPP</a>
-            </div>
-            <p style="margin-top: 50px; opacity: 0.5;">Alfajor de guatila - hecho con sabor criollo en Colombia.</p>
-        </footer>
+      <!-- Mascot column -->
+      <div class="hero__visual" data-animate style="transition-delay:0.2s">
+        <div class="hero__visual-ring">
+          <img src="assets/images/mascota.jpg" alt="Guatito — mascota de Guati" class="mascot-img">
+        </div>
+        <span class="hero__chip-nuevo">NUEVO</span>
+      </div>
 
     </div>
+  </div>
 
-    <script>
-        // Smooth Scroll (Lenis)
-        const lenis = new Lenis();
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
+  <div class="scroll-indicator" aria-hidden="true">
+    <span>Scroll</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <use href="#icon-chevron-down"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ============================
+     PRODUCTO
+============================ -->
+<section class="section-pad" id="producto" aria-label="Nuestro Producto">
+  <div class="container">
+
+    <div class="producto__header">
+      <span class="eyebrow" data-animate>Nuestro Producto Estrella</span>
+      <h2 class="producto__title" data-animate style="transition-delay:0.1s">ALFAJOR <em>de Guatila</em></h2>
+    </div>
+
+    <div class="product-card" data-animate>
+      <div class="product-card__img">
+        <span class="product-card__badge">Nuevo</span>
+        <img src="assets/images/Guati frontal.png" alt="Empaque Guati — Alfajor de Guatila" loading="lazy">
+      </div>
+      <div class="product-card__info">
+        <p class="product-card__pre">Relleno con</p>
+        <h3 class="product-card__name">Arequipe de Guatila</h3>
+        <div class="leaf-sep">
+          <svg aria-hidden="true"><use href="#icon-leaf"/></svg>
+        </div>
+        <p class="product-card__desc">
+          Sabor floral y vegetal unico que ningun arequipe de leche puede imitar.
+          Cocido a fuego lento con panela de cana, sin aditivos ni colorantes.
+          La galleta de yuca es naturalmente libre de gluten, crujiente por fuera y tierna por dentro.
+        </p>
+        <div class="attr-grid">
+          <div class="attr-item">
+            <svg aria-hidden="true"><use href="#icon-check"/></svg>
+            Sin gluten natural
+          </div>
+          <div class="attr-item">
+            <svg aria-hidden="true"><use href="#icon-ban"/></svg>
+            Sin conservantes
+          </div>
+          <div class="attr-item">
+            <svg aria-hidden="true"><use href="#icon-ban"/></svg>
+            Sin colorantes
+          </div>
+          <div class="attr-item">
+            <svg aria-hidden="true"><use href="#icon-globe"/></svg>
+            100% Colombia
+          </div>
+        </div>
+        <p class="product-card__price">
+          Disponible desde <strong>$5.000 COP</strong>
+        </p>
+        <a href="#numeros" class="btn-primary">Pide el tuyo <svg style="width:14px;height:14px;stroke:currentColor;fill:none" viewBox="0 0 24 24" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+
+    <!-- Ingredient cards -->
+    <div class="ingredients">
+      <div class="ingr-card" data-animate>
+        <svg class="ingr-card__icon" aria-hidden="true"><use href="#icon-yuca"/></svg>
+        <h4 class="ingr-card__title">Galleta de Yuca</h4>
+        <p class="ingr-card__text">
+          Naturalmente libre de gluten. Crujiente por fuera, tierna por dentro.
+          94,4% de la produccion nacional va a consumo humano directo.
+        </p>
+      </div>
+      <div class="ingr-card" data-animate style="transition-delay:0.15s">
+        <svg class="ingr-card__icon" aria-hidden="true"><use href="#icon-guatila"/></svg>
+        <h4 class="ingr-card__title">Guatila</h4>
+        <p class="ingr-card__text">
+          Sabor floral unico. Potasio, calcio, antioxidantes y fibra.
+          Cultivo campesino de Cundinamarca, Boyaca y Narino.
+        </p>
+      </div>
+      <div class="ingr-card" data-animate style="transition-delay:0.3s">
+        <svg class="ingr-card__icon" aria-hidden="true"><use href="#icon-panela"/></svg>
+        <h4 class="ingr-card__title">Panela de Cana</h4>
+        <p class="ingr-card__text">
+          Coccion lenta y tradicional. Sin azucares refinados ni edulcorantes artificiales.
+          Endulzante ancestral colombiano.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================
+     HISTORIA
+============================ -->
+<section class="section-pad kraft-bg" id="historia" aria-label="Nuestra Historia">
+  <svg class="historia__leaf historia__leaf--1" aria-hidden="true" viewBox="0 0 24 24" fill="white">
+    <use href="#icon-leaf"/>
+  </svg>
+  <svg class="historia__leaf historia__leaf--2" aria-hidden="true" viewBox="0 0 24 24" fill="white">
+    <use href="#icon-leaf"/>
+  </svg>
+  <svg class="historia__leaf historia__leaf--3" aria-hidden="true" viewBox="0 0 24 24" fill="white">
+    <use href="#icon-leaf"/>
+  </svg>
+
+  <div class="container">
+    <div class="historia__inner">
+
+      <div>
+        <span class="eyebrow historia__eyebrow" data-animate>Nuestra Razon de Ser</span>
+        <h2 class="historia__h2" data-animate style="transition-delay:0.1s">
+          DEL CAMPO<br>COLOMBIANO<br><em>a tu mesa</em>
+        </h2>
+        <p class="historia__p" data-animate style="transition-delay:0.2s">
+          Detras de cada empaque hay una finca, una familia y una decision: transformar
+          lo que el campo siempre tuvo en algo que el mundo quiera probar. Guati nace
+          de la riqueza del campo colombiano y del deseo de convertir ingredientes
+          ancestrales en experiencias gastronomicas unicas y sostenibles.
+        </p>
+        <div class="glass-card" data-animate style="transition-delay:0.3s">
+          <p>
+            "Desarrollar productos innovadores a base de ingredientes naturales
+            colombianos, generando valor economico y social para las comunidades del campo."
+          </p>
+        </div>
+
+        <div class="pillars" data-animate style="transition-delay:0.4s">
+          <div class="pillar">
+            <svg aria-hidden="true"><use href="#icon-bulb"/></svg>
+            <div>
+              <div class="pillar__title">Innovacion</div>
+              <div class="pillar__text">Recetas que reinventan lo ancestral con estandares modernos.</div>
+            </div>
+          </div>
+          <div class="pillar">
+            <svg aria-hidden="true"><use href="#icon-flag"/></svg>
+            <div>
+              <div class="pillar__title">Identidad</div>
+              <div class="pillar__text">Alma local, orgullo regional y proyeccion nacional.</div>
+            </div>
+          </div>
+          <div class="pillar">
+            <svg aria-hidden="true"><use href="#icon-recycle"/></svg>
+            <div>
+              <div class="pillar__title">Sostenibilidad</div>
+              <div class="pillar__text">Empaque biodegradable y economia local fortalecida.</div>
+            </div>
+          </div>
+          <div class="pillar">
+            <svg aria-hidden="true"><use href="#icon-plant"/></svg>
+            <div>
+              <div class="pillar__title">Campo</div>
+              <div class="pillar__text">Trazabilidad de origen y apoyo directo al campesino.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="historia__deco" data-animate class="slide-right">
+        <img src="assets/images/empaque frontal de varios con fondo.jpg"
+             alt="Empaque Guati con galletas artesanales"
+             class="historia__product-img" loading="lazy">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     POR QUE GUATI
+============================ -->
+<section class="section-pad" id="porque" aria-label="Por que elegir Guati">
+  <div class="container">
+
+    <div class="porque__header">
+      <span class="eyebrow" data-animate>Razones que convencen</span>
+      <h2 class="porque__title" data-animate style="transition-delay:0.1s">POR QUE <em>Guati</em></h2>
+    </div>
+
+    <div class="reason-list" role="list">
+
+      <div class="reason-card" role="listitem" data-animate>
+        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+          <span class="reason-card__num">01</span>
+          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-bulb"/></svg>
+          <span class="reason-card__title">Innovador</span>
+          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </div>
+        <div class="reason-card__body" aria-hidden="true">
+          <p class="reason-card__text">
+            Un producto que reinventa lo artesanal con estandares modernos de calidad.
+            La combinacion de galleta de yuca y arequipe de guatila no existe en ninguna otra
+            marca del mercado colombiano. Guati es genuinamente unico.
+          </p>
+        </div>
+      </div>
+
+      <div class="reason-card" role="listitem" data-animate style="transition-delay:0.05s">
+        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+          <span class="reason-card__num">02</span>
+          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-leaf"/></svg>
+          <span class="reason-card__title">Nutritivo</span>
+          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </div>
+        <div class="reason-card__body" aria-hidden="true">
+          <p class="reason-card__text">
+            Sin conservantes artificiales. Ingredientes 100% naturales. Para el consumidor consciente
+            que quiere disfrutar sin culpa. La guatila aporta potasio, calcio, antioxidantes y fibra
+            natural en cada bocado.
+          </p>
+        </div>
+      </div>
+
+      <div class="reason-card" role="listitem" data-animate style="transition-delay:0.1s">
+        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+          <span class="reason-card__num">03</span>
+          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-chart"/></svg>
+          <span class="reason-card__title">Rentable</span>
+          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </div>
+        <div class="reason-card__body" aria-hidden="true">
+          <p class="reason-card__text">
+            Margen estimado del 40% para distribuidores y puntos de venta. Rotacion eficiente
+            en gondola gracias al formato de 60g ideal para compra impulsiva. Una apuesta
+            comercial con retorno rapido.
+          </p>
+        </div>
+      </div>
+
+      <div class="reason-card" role="listitem" data-animate style="transition-delay:0.15s">
+        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+          <span class="reason-card__num">04</span>
+          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-flag"/></svg>
+          <span class="reason-card__title">Colombiano</span>
+          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </div>
+        <div class="reason-card__body" aria-hidden="true">
+          <p class="reason-card__text">
+            Alma local, orgullo regional y proyeccion nacional e internacional. En un mercado
+            donde lo artesanal colombiano esta en auge, Guati llega en el momento perfecto
+            para surfear esa ola con identidad real.
+          </p>
+        </div>
+      </div>
+
+      <div class="reason-card" role="listitem" data-animate style="transition-delay:0.2s">
+        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+          <span class="reason-card__num">05</span>
+          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-recycle"/></svg>
+          <span class="reason-card__title">Sostenible</span>
+          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
+        </div>
+        <div class="reason-card__body" aria-hidden="true">
+          <p class="reason-card__text">
+            Empaque biodegradable. Economia local fortalecida. Trazabilidad de origen garantizada.
+            Cada compra conecta directamente con familias campesinas de Cundinamarca, Boyaca y Narino.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     MASCOTA
+============================ -->
+<section class="section-pad" id="mascota" aria-label="Conoce a Guatito">
+  <div class="container">
+    <div class="mascota__inner">
+
+      <span class="eyebrow" data-animate>Nuestra Mascota</span>
+      <h2 class="mascota__title" data-animate style="transition-delay:0.1s">CONOCE A <em>Guatito</em></h2>
+      <p class="mascota__subtitle" data-animate style="transition-delay:0.15s">
+        Mas que un personaje — el alma emocional de la marca.
+      </p>
+
+      <div class="mascota__media" data-animate style="transition-delay:0.25s">
+        <img src="assets/images/mascota.jpg" alt="Guatito — mascota de Guati" class="mascot-img mascot-img--lg" id="mascotImg">
+        <video id="mascotVideo" class="mascot-video" src="assets/videos/video de la mascota.mp4"
+               loop muted playsinline preload="none" aria-label="Animacion de Guatito"></video>
+        <button class="mascota__vid-btn" id="mascotVidBtn" aria-label="Ver animacion de Guatito">
+          Ver animacion
+        </button>
+      </div>
+
+      <div class="mascota__chips" data-animate style="transition-delay:0.35s">
+        <span class="mascota__chip">Representa el producto</span>
+        <span class="mascota__chip">Conexion emocional</span>
+        <span class="mascota__chip">Protagonista en redes</span>
+        <span class="mascota__chip">Elemento diferenciador</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================
+     NUMEROS
+============================ -->
+<section class="section-pad kraft-bg" id="numeros" aria-label="Oportunidad de negocio">
+  <div class="container">
+
+    <div class="numeros__header">
+      <span class="eyebrow" style="color:var(--dorado-claro);" data-animate>Una oportunidad real</span>
+      <h2 class="numeros__title" data-animate style="transition-delay:0.1s">OPORTUNIDAD DE NEGOCIO</h2>
+    </div>
+
+    <div class="counters" id="countersBlock">
+      <div class="counter" data-animate style="transition-delay:0.1s">
+        <span class="counter__val" data-target="40" data-suffix="%">0%</span>
+        <p class="counter__label">Margen estimado para distribuidores y puntos de venta</p>
+      </div>
+      <div class="counter" data-animate style="transition-delay:0.2s">
+        <span class="counter__val" data-target="60" data-suffix="g">0g</span>
+        <p class="counter__label">Formato ideal por unidad, optimizado para compra impulsiva</p>
+      </div>
+      <div class="counter" data-animate style="transition-delay:0.3s">
+        <span class="counter__val" data-target="15" data-suffix=" dias">0 dias</span>
+        <p class="counter__label">Vida util. Rotacion eficiente en gondola</p>
+      </div>
+    </div>
+
+    <div class="numeros__cta" data-animate>
+      <img src="assets/images/stand guati.jpg" alt="Stand Guati en punto de venta" class="numeros__stand-img" loading="lazy">
+      <p>
+        Listo para crecer juntos? Guati busca socios estrategicos en grandes superficies,
+        distribucion y retail en toda Colombia.
+      </p>
+      <a href="https://wa.me/573046640009?text=Hola%20Guati%2C%20quiero%20ser%20distribuidor%20%F0%9F%87%A8%F0%9F%87%B4" target="_blank" rel="noopener noreferrer" class="btn-gold">Hablemos <svg style="width:14px;height:14px;stroke:currentColor;fill:none;vertical-align:middle" viewBox="0 0 24 24" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+
+  </div>
+</section>
+
+</main><!-- /#main-content -->
+
+<!-- ============================
+     FOOTER
+============================ -->
+<footer aria-label="Pie de pagina">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <img src="assets/images/logo guati.png" alt="Guati" class="footer__logo-img">
+        <p class="footer__brand-made">Hecho en Colombia con tradicion y amor por el campo.</p>
+      </div>
+      <div>
+        <p class="footer__col-title">Navega</p>
+        <ul class="footer__links">
+          <li><a href="#producto">Producto</a></li>
+          <li><a href="#historia">Historia</a></li>
+          <li><a href="#porque">Por que Guati</a></li>
+          <li><a href="#numeros">Numeros</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer__col-title">Encuentranos</p>
+        <div class="footer__socials">
+          <a href="https://www.instagram.com/guaticriollo2026?igsh=Z2pzeTF2bThzNWZ4" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Instagram de Guati">
+            <svg aria-hidden="true"><use href="#icon-instagram"/></svg>
+          </a>
+          <a href="https://tiktok.com/@guati.co" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="TikTok de Guati">
+            <svg aria-hidden="true"><use href="#icon-tiktok"/></svg>
+          </a>
+          <a href="https://facebook.com/guati.co" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Facebook de Guati">
+            <svg aria-hidden="true"><use href="#icon-facebook"/></svg>
+          </a>
+          <a href="https://wa.me/573046640009?text=Hola%20Guati%2C%20quiero%20informaci%C3%B3n%20del%20producto%20%F0%9F%8D%AA" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="WhatsApp de Guati">
+            <svg aria-hidden="true"><use href="#icon-whatsapp"/></svg>
+          </a>
+        </div>
+        <p class="footer__contact-cta">Escribenos!</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bar">
+    <div class="container">
+      2025 Guati &middot; Todos los derechos reservados &middot;
+      Galletas Artesanales Rellenas de Arequipe de Guatila &middot; Hecho en Colombia
+    </div>
+  </div>
+</footer>
+
+<!-- ============================
+     CHATBOT GUATITO
+============================ -->
+<div id="chatbot-container" aria-label="Chat con Guatito">
+
+  <!-- Tooltip bubble -->
+  <div class="cb-tooltip" id="cbTooltip" aria-hidden="true">&#x1F36A; ¡Hola! Soy Guatito</div>
+
+  <!-- Trigger button -->
+  <button class="cb-trigger" id="cbTrigger" aria-label="Abrir chat con Guatito" aria-expanded="false" aria-controls="cbWindow">
+    <!-- Mini CSS mascot -->
+    <div class="cb-mascot-mini" aria-hidden="true">
+      <div class="cb-mascot-mini__top"></div>
+      <div class="cb-mascot-mini__body">
+        <div class="cb-mascot-mini__eye cb-mascot-mini__eye--l"></div>
+        <div class="cb-mascot-mini__eye cb-mascot-mini__eye--r"></div>
+        <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--l"></div>
+        <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--r"></div>
+        <div class="cb-mascot-mini__mouth"></div>
+      </div>
+    </div>
+    <!-- Notification badge -->
+    <span class="cb-badge" id="cbBadge" aria-hidden="true">1</span>
+  </button>
+
+  <!-- Chat window -->
+  <div class="cb-window" id="cbWindow" role="dialog" aria-label="Chat con Guatito" aria-modal="true">
+
+    <!-- Header -->
+    <div class="cb-header">
+      <div class="cb-header__mascot" aria-hidden="true">
+        <div class="cb-mascot-mini" style="transform:scale(0.85)">
+          <div class="cb-mascot-mini__top"></div>
+          <div class="cb-mascot-mini__body">
+            <div class="cb-mascot-mini__eye cb-mascot-mini__eye--l"></div>
+            <div class="cb-mascot-mini__eye cb-mascot-mini__eye--r"></div>
+            <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--l"></div>
+            <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--r"></div>
+            <div class="cb-mascot-mini__mouth"></div>
+          </div>
+        </div>
+      </div>
+      <div class="cb-header__info">
+        <div class="cb-header__name">Guatito</div>
+        <div class="cb-header__status">En línea</div>
+      </div>
+      <button class="cb-header__close" id="cbClose" aria-label="Cerrar chat">&#x2715;</button>
+    </div>
+
+    <!-- Messages -->
+    <div class="cb-messages" id="cbMessages" aria-live="polite" aria-atomic="false"></div>
+
+    <!-- Quick reply chips -->
+    <div class="cb-chips" id="cbChips" role="list" aria-label="Respuestas rápidas">
+      <button class="cb-chip" role="listitem" data-msg="¿Qué es Guati?">¿Qué es Guati?</button>
+      <button class="cb-chip" role="listitem" data-msg="¿Dónde comprar?">¿Dónde comprar?</button>
+      <button class="cb-chip" role="listitem" data-msg="Soy distribuidor">Soy distribuidor</button>
+      <button class="cb-chip" role="listitem" data-msg="¿Cuánto cuesta?">¿Precio?</button>
+    </div>
+
+    <!-- Input -->
+    <div class="cb-input-area">
+      <input class="cb-input" id="cbInput" type="text"
+             placeholder="Escríbeme algo..." autocomplete="off"
+             aria-label="Mensaje para Guatito" maxlength="200">
+      <button class="cb-send" id="cbSend" aria-label="Enviar mensaje" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+
+  </div><!-- /.cb-window -->
+</div><!-- /#chatbot-container -->
+
+<!-- ============================
+     STICKY MOBILE CTA BAR
+============================ -->
+<div class="mobile-cta-bar" id="mobileCta">
+  <div class="mobile-cta-bar__inner">
+    <div class="mobile-cta-bar__text">
+      <strong>Alfajor de Guatila</strong>
+      Desde $5.000 COP
+    </div>
+    <a href="#producto" class="mobile-cta-bar__btn">Pedir</a>
+  </div>
+</div>
+
+<!-- ============================
+     JAVASCRIPT
+============================ -->
+<script>
+  /* 0. LOADING SCREEN */
+  (function () {
+    const loader = document.getElementById('loader');
+    if (!loader) return;
+    // Quitar loader al 1.5s o cuando DOMContentLoaded, lo que ocurra último
+    function hideLoader() {
+      loader.classList.add('fade-out');
+      setTimeout(() => { loader.remove(); }, 700);
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 1200));
+    } else {
+      setTimeout(hideLoader, 1200);
+    }
+  })();
+
+  /* 1. INTERSECTION OBSERVER — fadeInUp + slide */
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        animObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('[data-animate]').forEach(el => animObserver.observe(el));
+
+  /* 2. NAVBAR SCROLL */
+  const navbar = document.getElementById('navbar');
+  let rafNavPending = false;
+  window.addEventListener('scroll', () => {
+    if (!rafNavPending) {
+      rafNavPending = true;
+      requestAnimationFrame(() => {
+        navbar.classList.toggle('nav--scrolled', window.scrollY > 60);
+        rafNavPending = false;
+      });
+    }
+  }, { passive: true });
+
+  /* 3. SMOOTH SCROLL + CLOSE MENU */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (!target) return;
+      e.preventDefault();
+      closeMobileMenu();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  /* 4. HAMBURGER MENU */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  function closeMobileMenu() {
+    hamburger.classList.remove('is-open');
+    mobileMenu.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = hamburger.classList.toggle('is-open');
+    mobileMenu.classList.toggle('is-open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  /* 5. COUNTER ANIMATION */
+  let countersAnimated = false;
+  const counterObserver = new IntersectionObserver((entries) => {
+    if (countersAnimated) return;
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        countersAnimated = true;
+        counterObserver.disconnect();
+        animateAllCounters();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const countersBlock = document.getElementById('countersBlock');
+  if (countersBlock) counterObserver.observe(countersBlock);
+
+  function animateAllCounters() {
+    document.querySelectorAll('.counter__val[data-target]').forEach(el => {
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 2200;
+      const start = performance.now();
+      function tick(now) {
+        const elapsed = now - start;
+        const t = Math.min(elapsed / duration, 1);
+        const progress = 1 - (1 - t) * (1 - t);
+        el.textContent = Math.round(target * progress) + suffix;
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  /* 6. MASCOT VIDEO TOGGLE */
+  const mascotVidBtn = document.getElementById('mascotVidBtn');
+  const mascotVideo  = document.getElementById('mascotVideo');
+  const mascotImg    = document.getElementById('mascotImg');
+
+  if (mascotVidBtn && mascotVideo && mascotImg) {
+    mascotVidBtn.addEventListener('click', () => {
+      const isPlaying = mascotVideo.classList.contains('is-playing');
+      if (isPlaying) {
+        mascotVideo.pause();
+        mascotVideo.classList.remove('is-playing');
+        mascotImg.classList.remove('is-hidden');
+        mascotVidBtn.textContent = 'Ver animacion';
+      } else {
+        mascotVideo.classList.add('is-playing');
+        mascotImg.classList.add('is-hidden');
+        mascotVideo.play();
+        mascotVidBtn.textContent = 'Volver a imagen';
+      }
+    });
+  }
+
+  /* 7. EXPANDABLE REASON CARDS */
+  const isTouch = !window.matchMedia('(hover: hover)').matches;
+
+  document.querySelectorAll('.reason-card__header').forEach(header => {
+    if (isTouch) {
+      header.addEventListener('click', () => {
+        const card = header.closest('.reason-card');
+        const body = card.querySelector('.reason-card__body');
+        const isExpanded = card.classList.contains('is-expanded');
+
+        document.querySelectorAll('.reason-card.is-expanded').forEach(c => {
+          c.classList.remove('is-expanded');
+          c.querySelector('.reason-card__body').style.maxHeight = '0';
+          c.querySelector('.reason-card__header').setAttribute('aria-expanded', 'false');
+          c.querySelector('.reason-card__body').setAttribute('aria-hidden', 'true');
+        });
+
+        if (!isExpanded) {
+          card.classList.add('is-expanded');
+          body.style.maxHeight = body.scrollHeight + 'px';
+          header.setAttribute('aria-expanded', 'true');
+          body.setAttribute('aria-hidden', 'false');
         }
-        requestAnimationFrame(raf);
-
-        // --- CUSTOM CURSOR REMOVED FOR MOBILE ELEGANCE ---
-        const blob = document.getElementById('blob');
-        gsap.to(blob, {
-            scale: 1.2,
-            opacity: 0.3,
-            repeat: -1,
-            yoyo: true,
-            duration: 10,
-            ease: "sine.inOut"
-        });
-
-        // Magnetic Effect
-        const magnets = document.querySelectorAll('.magnetic-wrap');
-        magnets.forEach((m) => {
-            m.addEventListener('mousemove', (e) => {
-                const rect = m.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                gsap.to(m, { x: x * 0.5, y: y * 0.5, duration: 0.4, ease: "power2.out" });
-
-                // Extra wow: Shift blob color on hover
-                gsap.to(blob, { background: "radial-gradient(circle, rgba(212, 163, 115, 0.35) 0%, rgba(79, 119, 45, 0.2) 50%, transparent 70%)", duration: 0.5 });
-            });
-            m.addEventListener('mouseleave', () => {
-                gsap.to(m, { x: 0, y: 0, duration: 0.6, ease: "elastic.out(1, 0.3)" });
-                gsap.to(blob, { background: "radial-gradient(circle, rgba(79, 119, 45, 0.35) 0%, rgba(212, 163, 115, 0.12) 45%, transparent 70%)", duration: 0.5 });
-            });
-        });
-
-        // Floating Mascot Logic
-        gsap.to("#kao-mascot", {
-            y: 30, x: 20, rotate: 10, repeat: -1, yoyo: true, duration: 2, ease: "sine.inOut"
-        });
-
-        // --- QUANTUM FLOW LOGIC ---
-        const welcomeBtn = document.getElementById('activate-camera-btn');
-        const stageWelcome = document.getElementById('stage-welcome');
-        const stageScan = document.getElementById('stage-scan');
-        const videoContainer = document.getElementById('video-container');
-        const revealVideo = document.getElementById('reveal-video');
-        const revealText = document.getElementById('reveal-text');
-        const contentWrapper = document.getElementById('content-wrapper');
-        const quantumEntry = document.getElementById('quantum-entry');
-
-        welcomeBtn.addEventListener('click', () => {
-            stageWelcome.classList.remove('active');
-            stageScan.classList.add('active');
-            // Optimization: Start buffering the reveal video as soon as they activate the camera
-            // This buys us 5-15 seconds of background loading time during the scanning phase
-            if (revealVideo) {
-                revealVideo.load();
-                console.log("Preloading reveal video...");
-            }
-            startScanner();
-        });
-
-        function startScanner() {
-            const html5QrCode = new Html5Qrcode("qr-reader");
-
-            // High-performance configuration
-            const config = {
-                fps: 30, // Much smoother for fast motion
-                qrbox: { width: 250, height: 250 },
-                aspectRatio: 1,
-                experimentalFeatures: {
-                    useBarCodeDetectorIfSupported: true // Native OS decoding is much faster
-                },
-                videoConstraints: {
-                    facingMode: "environment",
-                    focusMode: "continuous",
-                    whiteBalanceMode: "continuous"
-                }
-            };
-
-            html5QrCode.start({ facingMode: "environment" }, config, (decodedText) => {
-                // Audio feedback if possible? html5-qrcode doesn't have it built-in, but we can add haptic
-                if (globalThis.navigator.vibrate) globalThis.navigator.vibrate(100);
-
-                html5QrCode.stop().then(() => {
-                    playRevealSequence();
-                }).catch(err => {
-                    // Even if stop fails, we proceed
-                    playRevealSequence();
-                });
-            }).catch(err => {
-                console.error("Camera fail:", err);
-                // Fallback for desktop/testing
-                setTimeout(playRevealSequence, 1500);
-            });
+      });
+    } else {
+      header.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const card = header.closest('.reason-card');
+          card.classList.toggle('is-expanded');
+          const expanded = card.classList.contains('is-expanded');
+          header.setAttribute('aria-expanded', String(expanded));
+          const body = card.querySelector('.reason-card__body');
+          body.setAttribute('aria-hidden', String(!expanded));
+          body.style.maxHeight = expanded ? body.scrollHeight + 'px' : '0';
         }
+      });
+    }
+  });
 
-        function playRevealSequence() {
-            const videoLoader = document.getElementById('video-loader');
-            quantumEntry.style.display = 'none';
-            videoLoader.style.display = 'flex';
+  /* ================================
+     8. CHATBOT GUATITO — lógica completa
+  ================================ */
+  (function () {
+    const WA_NUMBER   = '573046640009';
+    const WA_BASE     = 'https://wa.me/' + WA_NUMBER;
 
-            let isRevealing = false;
-            let hasSignal = false;
+    const trigger     = document.getElementById('cbTrigger');
+    const window_el   = document.getElementById('cbWindow');
+    const closeBtn    = document.getElementById('cbClose');
+    const messages    = document.getElementById('cbMessages');
+    const input       = document.getElementById('cbInput');
+    const sendBtn     = document.getElementById('cbSend');
+    const chips       = document.getElementById('cbChips');
+    const badge       = document.getElementById('cbBadge');
+    const tooltip     = document.getElementById('cbTooltip');
 
-            const triggerReveal = () => {
-                if (isRevealing) return;
-                isRevealing = true;
+    let isOpen          = false;
+    let welcomeSent     = false;
+    let tooltipShown    = false;
 
-                if (globalThis.revealTimeout) clearTimeout(globalThis.revealTimeout);
-                if (videoLoader) videoLoader.style.display = 'none';
+    /* --- Restore session state --- */
+    if (sessionStorage.getItem('cb_open') === '1') openChat(false);
 
-                // ABSOLUTE SYNC: Kill video audio immediately
-                if (revealVideo) {
-                    revealVideo.pause();
-                    revealVideo.currentTime = 0;
-                }
+    /* --- Tooltip: show once on first hover --- */
+    trigger.addEventListener('mouseenter', () => {
+      if (!tooltipShown && !isOpen) {
+        tooltip.classList.add('show');
+      }
+    });
+    trigger.addEventListener('mouseleave', () => {
+      tooltip.classList.remove('show');
+    });
 
-                const tl = gsap.timeline();
-                videoContainer.style.display = 'block';
+    /* --- Open / Close --- */
+    trigger.addEventListener('click', () => {
+      isOpen ? closeChat() : openChat(true);
+    });
+    closeBtn.addEventListener('click', closeChat);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) closeChat();
+    });
 
-                tl.to(videoContainer, { opacity: 0, duration: 0.5, ease: "power2.inOut" })
-                    .add(() => {
-                        lenis.start();
-                        lenis.scrollTo(0, { immediate: true });
-                        contentWrapper.style.visibility = 'visible';
-                        contentWrapper.style.opacity = '1';
-                    }, 0.2)
-                    .from(".purchase-container > *", { y: 50, opacity: 0, stagger: 0.1, duration: 0.8, ease: "power3.out" }, 0.3)
-                    .set(videoContainer, { display: 'none' });
+    function openChat(animate) {
+      isOpen = true;
+      window_el.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      badge.classList.add('hidden');
+      tooltip.classList.remove('show');
+      tooltipShown = true;
+      sessionStorage.setItem('cb_open', '1');
 
-                gsap.to(revealText, {
-                    opacity: 1, y: 0, duration: 0.4,
-                    onComplete: () => {
-                        gsap.to(revealText, { opacity: 0, y: -20, delay: 0.8, duration: 0.4 });
-                    }
-                });
-            };
+      if (!welcomeSent) {
+        welcomeSent = true;
+        setTimeout(() => {
+          showTyping(900).then(() => {
+            addBotMsg('¡Hola! 🍪 Soy Guatito, el alfajor más sabroso de Colombia. ¿En qué te puedo ayudar hoy?');
+          });
+        }, animate ? 600 : 0);
+      } else {
+        scrollToBottom();
+      }
+    }
 
-            // ABSOLUTE LAST RESORT: 30 seconds
-            globalThis.revealTimeout = setTimeout(() => {
-                console.warn("30s Sync timeout reached.");
-                triggerReveal();
-            }, 30000);
+    function closeChat() {
+      isOpen = false;
+      window_el.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      sessionStorage.setItem('cb_open', '0');
+    }
 
-            revealVideo.play().catch(err => {
-                console.error("Playback start blocked:", err);
-            });
+    /* --- Response map --- */
+    const RESPONSES = [
+      {
+        keys: ['guati', 'qué es', 'que es', 'producto', 'alfajor'],
+        text: '¡Guati es el primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila 🌿 — un sabor floral único que ningún arequipe de leche puede imitar. ¡100% artesanal, sin conservantes y hecho en Colombia! 🇨🇴',
+        btn: null
+      },
+      {
+        keys: ['precio', 'cuánto', 'cuanto', 'valor', 'costo', 'cuesta'],
+        text: 'El alfajor Guati está disponible desde $5.000 por unidad 🍪 Para pedidos al por mayor o distribución, ¡escríbenos y te damos el mejor precio!',
+        btn: { label: '💬 Pedir por WhatsApp', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero información sobre precios de Guati 🍪') }
+      },
+      {
+        keys: ['comprar', 'dónde', 'donde', 'conseguir', 'venta', 'pedir', 'pedido'],
+        text: 'Puedes conseguir Guati en tiendas saludables, cafeterías y puntos de venta especializados 🏪 También puedes hacer tu pedido directo por WhatsApp y te lo llevamos. ¿Cuántos quieres? 😊',
+        btn: { label: '💬 Pedir ahora', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero hacer un pedido de Guati 🍪') }
+      },
+      {
+        keys: ['distribuidor', 'distribución', 'distribucion', 'mayorista', 'negocio', 'socio', 'revender'],
+        text: '¡Qué buena noticia! 🎉 Guati tiene un margen del 40% para distribuidores y puntos de venta. Nuestro alfajor tiene 15 días de vida útil y rota súper bien en góndola. ¿Hablamos de los detalles?',
+        btn: { label: '📞 Contactar equipo comercial', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Estoy interesado en ser distribuidor de Guati 🇨🇴') }
+      },
+      {
+        keys: ['ingredientes', 'yuca', 'guatila', 'sin gluten', 'gluten', 'panela'],
+        text: 'Guati está hecho con:\n🌿 Galleta de YUCA — naturalmente sin gluten\n🍬 Arequipe de GUATILA — fruto colombiano único, sabor floral\n🫙 Panela de caña — sin azúcares refinados\n¡Puro campo colombiano! ❤️',
+        btn: null
+      },
+      {
+        keys: ['conservante', 'natural', 'saludable', 'artificial', 'colorante', 'aditivo'],
+        text: '¡Cero artificiales! 🚫 Guati no tiene conservantes, colorantes ni edulcorantes artificiales. Solo ingredientes naturales colombianos. ¡Lo que el campo da! 🌿',
+        btn: null
+      },
+      {
+        keys: ['hola', 'buenos', 'buenas', 'hey', 'hi'],
+        text: '¡Hola, hola! 🍪 ¿En qué te puedo ayudar hoy? Puedo contarte sobre el producto, precios, dónde comprar o cómo ser distribuidor.',
+        btn: null
+      }
+    ];
 
-            revealVideo.addEventListener('timeupdate', () => {
-                // 1. SIGNAL CHECK: Only show video when it has actually moved
-                if (!hasSignal && revealVideo.currentTime > 0.1) {
-                    hasSignal = true;
-                    // DYNAMIC PROTECTION: Once video starts, cancel the emergency timeout
-                    // This prevents the site from jumping to home while the video is playing slowly
-                    if (globalThis.revealTimeout) {
-                        clearTimeout(globalThis.revealTimeout);
-                        console.log("Video started. Emergency timeout cancelled.");
-                    }
-                    videoLoader.style.display = 'none';
-                    videoContainer.style.display = 'block';
-                    gsap.to(videoContainer, { opacity: 1, duration: 0.5 });
-                }
+    const FALLBACK = {
+      text: 'Mmm, no entendí bien tu pregunta 🍪 Pero te puedo conectar directo con nuestro equipo — ellos te cuentan todo sobre Guati.',
+      btn: { label: '💬 Hablar por WhatsApp', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Tengo una pregunta sobre Guati 🍪') }
+    };
 
-                // 2. REVEAL CHECK: Snappy transition at the very end (0.1s before end)
-                if (hasSignal && revealVideo.duration > 0 && revealVideo.currentTime > revealVideo.duration - 0.1) {
-                    triggerReveal();
-                }
-            });
+    function matchResponse(text) {
+      const normalized = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      for (const entry of RESPONSES) {
+        if (entry.keys.some(k => {
+          const kn = k.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          return normalized.includes(kn);
+        })) return entry;
+      }
+      return FALLBACK;
+    }
 
-            revealVideo.onended = () => {
-                if (hasSignal) triggerReveal();
-            };
-        }
+    /* --- Message rendering --- */
+    function addBotMsg(text, btn) {
+      const bubble = document.createElement('div');
+      bubble.className = 'cb-bubble cb-bubble--bot';
+      // Handle newlines
+      bubble.innerHTML = text.replace(/\n/g, '<br>');
+      if (btn) {
+        const a = document.createElement('a');
+        a.href = btn.href;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'cb-bubble__btn';
+        a.textContent = btn.label;
+        const wrapper = document.createElement('div');
+        wrapper.style.marginTop = '0.5rem';
+        wrapper.appendChild(a);
+        bubble.appendChild(wrapper);
+      }
+      messages.appendChild(bubble);
+      scrollToBottom();
+    }
 
-        // --- CHECKOUT LOGIC ---
-        const buyCtas = document.querySelectorAll('.buy-cta, #floating-buy');
-        const floatingBuy = document.getElementById('floating-buy');
-        const checkoutView = document.getElementById('checkout-view');
-        const checkoutMain = document.getElementById('checkout-main');
-        const checkoutSuccess = document.getElementById('checkout-success');
-        const confirmOrderBtn = document.getElementById('confirm-order-btn');
-        const closeCheckout = document.getElementById('close-checkout');
-        const qtyVal = document.getElementById('qty-val');
-        const totalPrice = document.getElementById('total-price');
+    function addUserMsg(text) {
+      const bubble = document.createElement('div');
+      bubble.className = 'cb-bubble cb-bubble--user';
+      bubble.textContent = text;
+      messages.appendChild(bubble);
+      scrollToBottom();
+    }
 
-        let quantity = 1;
-        const pricePerUnit = 5000;
+    function showTyping(duration) {
+      return new Promise(resolve => {
+        const typing = document.createElement('div');
+        typing.className = 'cb-typing';
+        typing.innerHTML = '<span></span><span></span><span></span>';
+        typing.id = 'cbTyping';
+        messages.appendChild(typing);
+        scrollToBottom();
+        setTimeout(() => {
+          const existing = document.getElementById('cbTyping');
+          if (existing) existing.remove();
+          resolve();
+        }, duration);
+      });
+    }
 
-        buyCtas.forEach(cta => {
-            cta.addEventListener('click', (e) => {
-                e.preventDefault();
-                checkoutView.classList.add('open');
-                lenis.stop();
-            });
+    function scrollToBottom() {
+      requestAnimationFrame(() => { messages.scrollTop = messages.scrollHeight; });
+    }
+
+    /* --- Send logic --- */
+    function handleSend() {
+      const text = input.value.trim();
+      if (!text) return;
+      addUserMsg(text);
+      input.value = '';
+      sendBtn.disabled = true;
+
+      const response = matchResponse(text);
+      const delay = 700 + Math.random() * 400;
+
+      showTyping(delay).then(() => {
+        addBotMsg(response.text, response.btn || null);
+      });
+    }
+
+    sendBtn.addEventListener('click', handleSend);
+    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSend(); });
+    input.addEventListener('input', () => {
+      sendBtn.disabled = input.value.trim().length === 0;
+    });
+
+    /* --- Quick reply chips --- */
+    chips.querySelectorAll('.cb-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const msg = chip.dataset.msg;
+        if (!isOpen) openChat(true);
+        setTimeout(() => {
+          addUserMsg(msg);
+          const response = matchResponse(msg);
+          showTyping(800 + Math.random() * 300).then(() => {
+            addBotMsg(response.text, response.btn || null);
+          });
+        }, isOpen ? 0 : 900);
+      });
+    });
+
+  })(); // end chatbot IIFE
+
+  /* 9. STICKY MOBILE CTA BAR */
+  const mobileCta = document.getElementById('mobileCta');
+  if (mobileCta) {
+    let rafCtaPending = false;
+    window.addEventListener('scroll', () => {
+      if (!rafCtaPending) {
+        rafCtaPending = true;
+        requestAnimationFrame(() => {
+          mobileCta.classList.toggle('is-visible', window.scrollY > 500);
+          rafCtaPending = false;
         });
+      }
+    }, { passive: true });
+  }
+</script>
 
-        closeCheckout.addEventListener('click', () => {
-            checkoutView.classList.remove('open');
-            lenis.start();
-        });
-
-        confirmOrderBtn.addEventListener('click', () => {
-            gsap.to(checkoutMain, {
-                opacity: 0, y: -20, duration: 0.5, onComplete: () => {
-                    checkoutMain.style.display = 'none';
-                    checkoutSuccess.style.display = 'flex';
-                    gsap.from(checkoutSuccess, { opacity: 0, y: 20, duration: 0.5 });
-                }
-            });
-        });
-
-        document.getElementById('plus').addEventListener('click', () => {
-            quantity++;
-            updateCheckout();
-        });
-
-        document.getElementById('minus').addEventListener('click', () => {
-            if (quantity > 1) quantity--;
-            updateCheckout();
-        });
-
-        function updateCheckout() {
-            qtyVal.innerText = quantity;
-            const total = quantity * pricePerUnit;
-            totalPrice.innerText = `$${total.toLocaleString()} COP`;
-            gsap.from(totalPrice, { scale: 1.2, duration: 0.3, ease: "back.out" });
-        }
-
-        // Presence Pulse Animation
-        gsap.to(".presence-dot", { scale: 1.5, opacity: 0.5, repeat: -1, yoyo: true, duration: 0.8 });
-
-        // Floating Buy Visibility
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) { // Lowered threshold because hero is gone
-                floatingBuy.classList.add('visible');
-            } else {
-                floatingBuy.classList.remove('visible');
-            }
-        });
-
-        // Scroll Animations (GSAP ScrollTrigger)
-        gsap.registerPlugin(ScrollTrigger);
-
-
-        // Stagger Reveal Cards
-        gsap.utils.toArray(".story-card").forEach((card, i) => {
-            gsap.from(card.children, {
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 70%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 50,
-                opacity: 0,
-                stagger: 0.1,
-                duration: 1,
-                ease: "power3.out"
-            });
-        });
-
-        // Marquee Logic (Manual Sync for extreme smoothness)
-        gsap.to(".marquee-text", {
-            xPercent: -100,
-            repeat: -1,
-            duration: 20,
-            ease: "none"
-        });
-
-        // Social Proof Counter
-        setInterval(() => {
-            const sales = document.getElementById('sales');
-            if (!sales) return;
-            const currentText = sales.innerText.trim();
-            const val = Number.parseInt(currentText);
-
-            if (Number.isNaN(val)) {
-                sales.innerText = "32";
-            } else {
-                let newVal = val;
-                if (Math.random() > 0.4) newVal++;
-                sales.innerText = newVal.toString();
-            }
-        }, 4000);
-
-    </script>
 </body>
-
 </html>
