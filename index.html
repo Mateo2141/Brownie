@@ -3566,7 +3566,7 @@
       <span class="qrg__corner-tr" aria-hidden="true"></span>
       <span class="qrg__corner-bl" aria-hidden="true"></span>
       <div class="qrg__scan-line" aria-hidden="true"></div>
-      <video id="qrg-video" autoplay playsinline muted></video>
+      <video id="qrg-video" autoplay playsinline webkit-playsinline muted></video>
       <div class="qrg__success" id="qrg-success" aria-live="polite">
         <div class="qrg__check">
           <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-width="3"
@@ -5075,44 +5075,54 @@
 
       // Iniciar cámara
       setTimeout(function () {
+        // iOS Safari a veces no expone mediaDevices en HTTP — mostrar aviso
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
           viewfinder.style.display = 'none';
+          if (hintEl) hintEl.style.display = 'none';
+          if (deniedBox) deniedBox.classList.add('is-visible');
           return;
         }
-        function startCamera(constraints) {
-          return navigator.mediaDevices.getUserMedia(constraints)
-            .then(function (stream) {
-              mediaStream = stream;
-              video.srcObject = stream;
-              video.play().catch(function () { });
 
-              if (!('BarcodeDetector' in window)) return;
-              var detector = new BarcodeDetector({ formats: ['qr_code'] });
-              var readyAt = Date.now() + 1500;
-              function tick() {
-                if (dismissed) return;
-                if (video.readyState >= 2 && Date.now() >= readyAt) {
-                  detector.detect(video).then(function (codes) {
-                    if (!dismissed && codes.length && codes[0].rawValue) dismiss(true);
-                  }).catch(function () { });
-                }
-                rafId = requestAnimationFrame(tick);
-              }
-              rafId = requestAnimationFrame(tick);
-            });
+        function attachStream(stream) {
+          mediaStream = stream;
+          // Atributos extra para iOS Safari
+          video.setAttribute('webkit-playsinline', '');
+          video.setAttribute('playsinline', '');
+          video.muted = true;
+          video.srcObject = stream;
+          video.load();
+          video.play().catch(function () { });
+
+          if (!('BarcodeDetector' in window)) return;
+          var detector = new BarcodeDetector({ formats: ['qr_code'] });
+          var readyAt = Date.now() + 1500;
+          function tick() {
+            if (dismissed) return;
+            if (video.readyState >= 2 && Date.now() >= readyAt) {
+              detector.detect(video).then(function (codes) {
+                if (!dismissed && codes.length && codes[0].rawValue) dismiss(true);
+              }).catch(function () { });
+            }
+            rafId = requestAnimationFrame(tick);
+          }
+          rafId = requestAnimationFrame(tick);
         }
 
-        // Intenta cámara trasera primero; si falla, cualquier cámara
-        startCamera({ video: { facingMode: { ideal: 'environment' } } })
-          .catch(function () { return startCamera({ video: true }); })
-          .catch(function (err) {
-            viewfinder.style.display = 'none';
-            if (hintEl) hintEl.style.display = 'none';
-            // Permiso denegado: mostrar instrucciones para desbloquearlo
-            var isDenied = err && (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError');
-            if (isDenied && deniedBox) deniedBox.classList.add('is-visible');
+        function showCameraError(err) {
+          viewfinder.style.display = 'none';
+          if (hintEl) hintEl.style.display = 'none';
+          if (deniedBox) deniedBox.classList.add('is-visible');
+        }
+
+        // Intenta cámara trasera → cualquier cámara → error
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+          .then(attachStream)
+          .catch(function () {
+            return navigator.mediaDevices.getUserMedia({ video: true })
+              .then(attachStream)
+              .catch(showCameraError);
           });
-      }, 400);
+      }, 600);
     })();
   </script>
 
