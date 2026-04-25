@@ -3255,7 +3255,6 @@
       pointer-events: none;
     }
     #qr-gate.is-visible  { opacity: 1; visibility: visible; pointer-events: auto; }
-    #qr-gate.is-closing  { opacity: 0; visibility: hidden; pointer-events: none; }
 
     .qrg__logo  { height: clamp(36px, 8vw, 48px); filter: brightness(0) invert(1); opacity: 0.95; position: relative; z-index: 2; }
     .qrg__title { font-family: var(--font-script); font-size: clamp(1.7rem, 6vw, 2.4rem); color: var(--blanco); line-height: 1.1; position: relative; z-index: 2; }
@@ -4801,8 +4800,8 @@
         if (handled) return;
         handled = true;
         if (scanner) scanner.stop().catch(() => {});
-        gate.classList.add('is-closing');
-        setTimeout(() => { gate.remove(); }, 500);
+        gate.classList.remove('is-visible');   // dispara fade-out por transition
+        setTimeout(() => { gate.remove(); }, 520);
       }
 
       function onScanSuccess(decodedText) {
@@ -4813,17 +4812,19 @@
         if (scanner) scanner.stop().catch(() => {});
         success.classList.add('is-active');
         setTimeout(() => {
-          gate.classList.add('is-closing');
-          setTimeout(() => { gate.remove(); }, 500);
+          gate.classList.remove('is-visible');
+          setTimeout(() => { gate.remove(); }, 520);
         }, 950);
       }
 
-      // Mostrar gate después de que termina el loader (~1.95s)
-      setTimeout(function () {
+      // Mostrar la gate de inmediato (el loader la cubre mientras carga)
+      requestAnimationFrame(function () {
         gate.classList.add('is-visible');
+      });
 
-        if (typeof Html5Qrcode === 'undefined') return; // CDN falló
-
+      // Iniciar cámara tras 400ms (tiempo para que el DOM se estabilice)
+      setTimeout(function () {
+        if (typeof Html5Qrcode === 'undefined') return;
         try {
           scanner = new Html5Qrcode('qrg-reader');
           scanner
@@ -4834,13 +4835,12 @@
             )
             .then(function () { readyAt = Date.now() + 1500; })
             .catch(function () {
-              // Cámara no disponible: ocultar visor pero dejar el skip
               viewfinder.style.display = 'none';
             });
         } catch (e) {
           viewfinder.style.display = 'none';
         }
-      }, 1950);
+      }, 400);
 
       skipBtn.addEventListener('click', dismissGate);
     })();
