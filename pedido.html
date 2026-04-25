@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacer Pedido · Guati Alfajor de Guatila</title>
+  <meta name="description" content="Pide tu pack de Alfajores Guati. Packs de 6 o 12 unidades. Pedido directo por WhatsApp.">
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --verde-profundo: #152E0B;
+      --verde-oscuro:   #1E3A14;
+      --verde-medio:    #2D5420;
+      --verde-claro:    #4A7C35;
+      --beige-fondo:    #C4956A;
+      --beige-suave:    #EDD9B0;
+      --beige-claro:    #FAF6EE;
+      --dorado:         #C9943A;
+      --dorado-claro:   #E8C87A;
+      --marron:         #5C341A;
+      --blanco:         #FFFFFF;
+      --negro:          #0A0A0A;
+      --error:          #E53935;
+      --exito:          #2E7D32;
+
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-serif:   'Playfair Display', serif;
+      --font-body:    'DM Sans', sans-serif;
+
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 24px rgba(21,46,11,0.10);
+      --shadow-lg: 0 16px 56px rgba(21,46,11,0.16);
+      --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--beige-claro);
+      color: var(--negro);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    ::selection { background: var(--verde-oscuro); color: var(--blanco); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--beige-suave); }
+    ::-webkit-scrollbar-thumb { background: var(--verde-oscuro); border-radius: 10px; }
+    :focus-visible { outline: 3px solid var(--dorado); outline-offset: 3px; border-radius: 4px; }
+    :focus:not(:focus-visible) { outline: none; }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: var(--font-body); border: none; background: none; }
+
+    /* Grain */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ========== HEADER ========== */
+    .page-header {
+      background: var(--verde-oscuro);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+    }
+    .page-header__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .page-header__logo img {
+      height: 34px;
+      filter: brightness(0) invert(1);
+    }
+    .page-header__back {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.75);
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .page-header__back:hover { color: var(--blanco); }
+    .page-header__back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
+
+    /* ========== HERO BAND ========== */
+    .order-hero {
+      background: linear-gradient(135deg, var(--verde-profundo) 0%, var(--verde-oscuro) 100%);
+      padding: 3rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .order-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 60px;
+      background: var(--beige-claro);
+      clip-path: polygon(0 100%, 100% 100%, 100% 0);
+    }
+    .order-hero__eyebrow {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .order-hero__title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      text-transform: uppercase;
+      color: var(--blanco);
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+    }
+    .order-hero__title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 700;
+      text-transform: none;
+      color: var(--dorado);
+    }
+    .order-hero__sub {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ========== MAIN LAYOUT ========== */
+    .order-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* ========== LEFT COLUMN ========== */
+
+    /* Step indicator */
+    .steps {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 2.5rem;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex: 1;
+    }
+    .step__num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(45,84,32,0.1);
+      border: 2px solid rgba(45,84,32,0.2);
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--verde-oscuro);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+    .step.is-active .step__num {
+      background: var(--verde-oscuro);
+      border-color: var(--verde-oscuro);
+      color: var(--blanco);
+    }
+    .step.is-done .step__num {
+      background: var(--dorado);
+      border-color: var(--dorado);
+      color: var(--verde-profundo);
+    }
+    .step__label {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #aaa;
+      transition: color var(--transition);
+    }
+    .step.is-active .step__label { color: var(--verde-oscuro); }
+    .step.is-done .step__label { color: var(--dorado); }
+    .step__line {
+      flex: 1;
+      height: 2px;
+      background: rgba(45,84,32,0.12);
+      margin: 0 0.5rem;
+    }
+
+    /* Section card */
+    .order-card {
+      background: var(--blanco);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      transition: box-shadow var(--transition);
+    }
+    .order-card--inactive { opacity: 0.5; pointer-events: none; }
+    .order-card__head {
+      background: rgba(45,84,32,0.04);
+      border-bottom: 1px solid rgba(45,84,32,0.08);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .order-card__head-num {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .order-card__head-title {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--verde-oscuro);
+    }
+    .order-card__body { padding: 1.5rem; }
+
+    /* ---- PACK SELECTOR ---- */
+    .pack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .pack-option {
+      border: 2px solid rgba(45,84,32,0.12);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      cursor: pointer;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+      position: relative;
+      background: var(--beige-claro);
+      text-align: center;
+      user-select: none;
+    }
+    .pack-option:hover {
+      border-color: var(--verde-claro);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .pack-option.is-selected {
+      border-color: var(--verde-oscuro);
+      background: var(--blanco);
+      box-shadow: 0 0 0 4px rgba(45,84,32,0.08), var(--shadow);
+    }
+    .pack-option__check {
+      position: absolute;
+      top: 0.75rem; right: 0.75rem;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(45,84,32,0.2);
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .pack-option__check svg {
+      width: 12px; height: 12px;
+      stroke: var(--blanco);
+      fill: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .pack-option.is-selected .pack-option__check {
+      background: var(--verde-oscuro);
+      border-color: var(--verde-oscuro);
+    }
+    .pack-option.is-selected .pack-option__check svg { opacity: 1; }
+
+    .pack-option__img {
+      width: 80px; height: 80px;
+      object-fit: contain;
+      margin: 0 auto 0.75rem;
+    }
+    .pack-option__units {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.6rem;
+      color: var(--verde-oscuro);
+      line-height: 1;
+    }
+    .pack-option__label {
+      font-size: 0.78rem;
+      color: #888;
+      margin-bottom: 0.75rem;
+    }
+    .pack-option__price {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.3rem;
+      color: var(--dorado);
+      line-height: 1;
+    }
+    .pack-option__unit-price {
+      font-size: 0.7rem;
+      color: #aaa;
+      margin-top: 0.2rem;
+    }
+    .pack-option__badge {
+      position: absolute;
+      top: -10px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--dorado);
+      color: var(--verde-profundo);
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    /* ---- QUANTITY ---- */
+    .qty-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .qty-label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #555;
+    }
+    .qty-label strong { color: var(--negro); }
+    .qty-control {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border: 2px solid rgba(45,84,32,0.15);
+      border-radius: 50px;
+      overflow: hidden;
+    }
+    .qty-btn {
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--verde-oscuro);
+      background: transparent;
+      transition: background var(--transition);
+      flex-shrink: 0;
+    }
+    .qty-btn:hover { background: rgba(45,84,32,0.07); }
+    .qty-btn:disabled { opacity: 0.3; pointer-events: none; }
+    .qty-val {
+      min-width: 48px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--verde-oscuro);
+    }
+    .qty-units-info {
+      width: 100%;
+      font-size: 0.78rem;
+      color: #999;
+      margin-top: 0.5rem;
+    }
+    .qty-units-info strong { color: var(--verde-medio); }
+
+    /* ---- DATOS DE CONTACTO ---- */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .form-group--full { grid-column: 1 / -1; }
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .form-label .req { color: var(--error); margin-left: 2px; }
+    .form-input {
+      border: 1.5px solid rgba(45,84,32,0.15);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 0.9rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--negro);
+      background: var(--beige-claro);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+    .form-input:focus {
+      border-color: var(--verde-medio);
+      box-shadow: 0 0 0 3px rgba(45,84,32,0.08);
+      outline: none;
+    }
+    .form-input::placeholder { color: #bbb; }
+    .form-input.has-error { border-color: var(--error); }
+    .form-hint {
+      font-size: 0.72rem;
+      color: #aaa;
+      margin-top: 0.1rem;
+    }
+    .form-hint.is-error { color: var(--error); }
+
+    /* ---- NOTAS ---- */
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* ========== RIGHT COLUMN — RESUMEN ========== */
+    .summary {
+      background: var(--blanco);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      position: sticky;
+      top: 80px;
+    }
+    .summary__head {
+      background: var(--verde-oscuro);
+      padding: 1.25rem 1.5rem;
+    }
+    .summary__head-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .summary__head-brand {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.4rem;
+      color: var(--blanco);
+    }
+    .summary__head-brand em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--dorado);
+    }
+
+    .summary__body { padding: 1.5rem; }
+
+    .summary__product {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(45,84,32,0.08);
+      margin-bottom: 1.25rem;
+    }
+    .summary__product-img {
+      width: 72px; height: 72px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      background: var(--beige-suave);
+      flex-shrink: 0;
+    }
+    .summary__product-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--negro);
+    }
+    .summary__product-desc {
+      font-size: 0.78rem;
+      color: #888;
+      margin-top: 0.2rem;
+    }
+
+    .summary__lines {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+    .summary__line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+    .summary__line-label { color: #777; }
+    .summary__line-val { font-weight: 600; color: var(--negro); }
+    .summary__line--empty { color: #bbb; font-style: italic; font-size: 0.82rem; }
+
+    .summary__divider {
+      border: none;
+      border-top: 1px solid rgba(45,84,32,0.08);
+      margin: 1.25rem 0;
+    }
+
+    .summary__total {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.5rem;
+    }
+    .summary__total-label {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #777;
+    }
+    .summary__total-val {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--verde-oscuro);
+      line-height: 1;
+    }
+    .summary__total-val span {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #aaa;
+      margin-right: 0.3rem;
+    }
+
+    /* CTA button — único botón de pedido */
+    .btn-order {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      width: 100%;
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 1.15rem 1.5rem;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+    }
+    .btn-order::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .btn-order:hover {
+      background: var(--verde-medio);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(30,58,20,0.32);
+    }
+    .btn-order:active { transform: translateY(0); }
+    .btn-order:disabled {
+      background: #ccc;
+      box-shadow: none;
+      transform: none;
+      cursor: not-allowed;
+    }
+    .btn-order svg { width: 20px; height: 20px; fill: none; stroke: currentColor; flex-shrink: 0; }
+
+    /* Spinner dentro del botón */
+    .btn-order .spinner {
+      display: none;
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-top-color: var(--blanco);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+    .btn-order.is-loading .btn-order__label { opacity: 0; }
+    .btn-order.is-loading .spinner { display: block; }
+    .btn-order.is-loading svg { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Pantalla de confirmación (overlay sobre el resumen) */
+    .confirm-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(21,46,11,0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 500;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .confirm-overlay.is-active { display: flex; }
+
+    .confirm-box {
+      background: var(--blanco);
+      border-radius: var(--radius);
+      padding: clamp(2rem, 5vw, 3rem);
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.3);
+      animation: confirm-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes confirm-pop {
+      from { opacity: 0; transform: scale(0.85) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .confirm-check {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: rgba(46,125,50,0.08);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .confirm-check svg {
+      width: 44px; height: 44px;
+      stroke: #2E7D32;
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: draw-check 0.5s ease forwards 0.2s;
+    }
+    @keyframes draw-check { to { stroke-dashoffset: 0; } }
+
+    .confirm-order-num {
+      display: inline-block;
+      background: var(--beige-suave);
+      color: var(--marron);
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .confirm-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      color: var(--verde-oscuro);
+      line-height: 0.95;
+      margin-bottom: 0.5rem;
+    }
+    .confirm-title em {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 700;
+      text-transform: none;
+      color: var(--dorado);
+    }
+    .confirm-msg {
+      font-size: 0.92rem;
+      color: #888;
+      line-height: 1.7;
+      margin-bottom: 1.75rem;
+    }
+
+    .confirm-summary {
+      background: var(--beige-claro);
+      border-radius: var(--radius-sm);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.75rem;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .confirm-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+    .confirm-row__label { color: #aaa; }
+    .confirm-row__val   { font-weight: 600; color: var(--negro); }
+    .confirm-row--total .confirm-row__val {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--verde-oscuro);
+    }
+
+    .confirm-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      transition: background var(--transition), transform var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+    .confirm-back:hover { background: var(--verde-medio); transform: translateY(-1px); }
+
+    .summary__guarantee {
+      margin-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .summary__guarantee-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: #aaa;
+    }
+    .summary__guarantee-item svg {
+      width: 14px; height: 14px;
+      fill: var(--verde-claro);
+      flex-shrink: 0;
+    }
+
+    /* ========== CONFIRMATION SCREEN ========== */
+    .confirmation {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    .confirmation.is-active { display: block; }
+    .confirmation__icon {
+      width: 72px; height: 72px;
+      background: rgba(46,125,50,0.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .confirmation__icon svg { width: 36px; height: 36px; fill: var(--exito); }
+    .confirmation__title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.8rem;
+      color: var(--verde-oscuro);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .confirmation__msg {
+      font-size: 0.95rem;
+      color: #777;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    /* ========== TOAST ========== */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--negro);
+      color: var(--blanco);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.7rem 1.4rem;
+      border-radius: 50px;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .order-wrap {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem 4rem;
+      }
+      .summary { position: static; }
+    }
+
+    @media (max-width: 600px) {
+      .pack-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+      .pack-option__img { width: 60px; height: 60px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group--full { grid-column: 1; }
+      .order-hero { padding: 2rem 1rem 3.5rem; }
+      .steps { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="page-header" role="banner">
+  <div class="page-header__inner">
+    <a href="index.html" class="page-header__logo" aria-label="Volver a inicio Guati">
+      <img src="assets/images/logo guati.png" alt="Guati">
+    </a>
+    <a href="index.html" class="page-header__back" aria-label="Volver a la página principal">
+      <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      Volver
+    </a>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<div class="order-hero" role="banner">
+  <span class="order-hero__eyebrow">Pedido directo</span>
+  <h1 class="order-hero__title">PIDE TU <em>Guati</em></h1>
+  <p class="order-hero__sub">Elige tu pack, déjanos tus datos y nosotros nos encargamos</p>
+</div>
+
+<!-- ========== MAIN ========== -->
+<main>
+<div class="order-wrap" id="orderWrap">
+
+  <!-- LEFT: form steps -->
+  <div>
+
+    <!-- Step indicator -->
+    <div class="steps" aria-label="Pasos del pedido" role="list">
+      <div class="step is-active" id="step1Ind" role="listitem">
+        <div class="step__num">1</div>
+        <span class="step__label">Pack</span>
+      </div>
+      <div class="step__line"></div>
+      <div class="step" id="step2Ind" role="listitem">
+        <div class="step__num">2</div>
+        <span class="step__label">Cantidad</span>
+      </div>
+      <div class="step__line"></div>
+      <div class="step" id="step3Ind" role="listitem">
+        <div class="step__num">3</div>
+        <span class="step__label">Datos</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: Elige tu pack -->
+    <div class="order-card" id="cardStep1">
+      <div class="order-card__head">
+        <div class="order-card__head-num">1</div>
+        <span class="order-card__head-title">Elige tu pack</span>
+      </div>
+      <div class="order-card__body">
+        <div class="pack-grid" role="radiogroup" aria-label="Opciones de pack">
+
+          <div class="pack-option" id="pack6" role="radio" aria-checked="false" tabindex="0"
+               data-units="6" data-price="27000" data-unit-price="4500">
+            <div class="pack-option__check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <img class="pack-option__img" src="assets/images/paquete personal.jpg"
+                 alt="Pack de 6 alfajores Guati" loading="lazy"
+                 onerror="this.style.display='none'">
+            <div class="pack-option__units">6</div>
+            <div class="pack-option__label">unidades</div>
+            <div class="pack-option__price">$27.000</div>
+            <div class="pack-option__unit-price">$4.500 c/u</div>
+          </div>
+
+          <div class="pack-option" id="pack12" role="radio" aria-checked="false" tabindex="0"
+               data-units="12" data-price="54000" data-unit-price="4500">
+            <div class="pack-option__badge">Más popular</div>
+            <div class="pack-option__check" aria-hidden="true">
+              <svg viewBox="0 0 24 24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <img class="pack-option__img" src="assets/images/vairos paquetes con fondo.jpg"
+                 alt="Pack de 12 alfajores Guati" loading="lazy"
+                 onerror="this.style.display='none'">
+            <div class="pack-option__units">12</div>
+            <div class="pack-option__label">unidades</div>
+            <div class="pack-option__price">$54.000</div>
+            <div class="pack-option__unit-price">$4.500 c/u</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: Cantidad de packs -->
+    <div class="order-card order-card--inactive" id="cardStep2">
+      <div class="order-card__head">
+        <div class="order-card__head-num">2</div>
+        <span class="order-card__head-title">¿Cuántos packs quieres?</span>
+      </div>
+      <div class="order-card__body">
+        <div class="qty-row">
+          <div class="qty-label">
+            Cantidad de packs<br>
+            <strong id="qtyDesc">—</strong>
+          </div>
+          <div class="qty-control" role="group" aria-label="Selector de cantidad">
+            <button class="qty-btn" id="qtyMinus" aria-label="Reducir cantidad" disabled>−</button>
+            <span class="qty-val" id="qtyVal" aria-live="polite" aria-atomic="true">1</span>
+            <button class="qty-btn" id="qtyPlus" aria-label="Aumentar cantidad">+</button>
+          </div>
+        </div>
+        <p class="qty-units-info">
+          Total de unidades: <strong id="totalUnitsInfo">—</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- STEP 3: Datos de contacto -->
+    <div class="order-card order-card--inactive" id="cardStep3">
+      <div class="order-card__head">
+        <div class="order-card__head-num">3</div>
+        <span class="order-card__head-title">Tus datos de contacto</span>
+      </div>
+      <div class="order-card__body">
+        <form id="orderForm" novalidate>
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label class="form-label" for="inputNombre">
+                Nombre <span class="req" aria-label="requerido">*</span>
+              </label>
+              <input class="form-input" type="text" id="inputNombre"
+                     name="nombre" placeholder="Tu nombre" autocomplete="given-name" required>
+              <span class="form-hint is-error" id="errorNombre" hidden>Por favor ingresa tu nombre</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inputCelular">
+                Celular <span class="req" aria-label="requerido">*</span>
+              </label>
+              <input class="form-input" type="tel" id="inputCelular"
+                     name="celular" placeholder="3XX XXX XXXX" autocomplete="tel" required
+                     pattern="[0-9\s\+\-]{7,15}">
+              <span class="form-hint is-error" id="errorCelular" hidden>Ingresa un número válido</span>
+            </div>
+
+            <div class="form-group form-group--full">
+              <label class="form-label" for="inputCiudad">
+                Ciudad <span class="req" aria-label="requerido">*</span>
+              </label>
+              <input class="form-input" type="text" id="inputCiudad"
+                     name="ciudad" placeholder="¿Desde dónde nos pides?" autocomplete="address-level2" required>
+              <span class="form-hint is-error" id="errorCiudad" hidden>Por favor ingresa tu ciudad</span>
+            </div>
+
+            <div class="form-group form-group--full">
+              <label class="form-label" for="inputNotas">Notas adicionales</label>
+              <textarea class="form-input form-textarea" id="inputNotas"
+                        name="notas" placeholder="¿Algo especial? Dirección de entrega, fecha, etc."
+                        rows="3"></textarea>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div><!-- /LEFT -->
+
+  <!-- RIGHT: Resumen del pedido -->
+  <aside aria-label="Resumen de tu pedido">
+    <div class="summary">
+
+      <div class="summary__head">
+        <div class="summary__head-title">Tu pedido</div>
+        <div class="summary__head-brand">Guati <em>Alfajor</em></div>
+      </div>
+
+      <div class="summary__body">
+
+        <div class="summary__product">
+          <img src="assets/images/Guati frontal.png"
+               alt="Alfajor de Guatila Guati"
+               class="summary__product-img" loading="lazy">
+          <div>
+            <div class="summary__product-name">Alfajor de Guatila</div>
+            <div class="summary__product-desc">Galleta de yuca · Arequipe de guatila · Panela de caña</div>
+          </div>
+        </div>
+
+        <div class="summary__lines" id="summaryLines">
+          <div class="summary__line summary__line--empty">Selecciona un pack para continuar</div>
+        </div>
+
+        <hr class="summary__divider">
+
+        <div class="summary__total">
+          <div>
+            <div class="summary__total-label">Total</div>
+          </div>
+          <div class="summary__total-val" id="summaryTotal" aria-live="polite">
+            <span>COP</span>$0
+          </div>
+        </div>
+
+        <button class="btn-order" id="btnPedir" disabled aria-label="Confirmar pedido">
+          <span class="spinner" aria-hidden="true"></span>
+          <svg viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          <span class="btn-order__label">Confirmar pedido</span>
+        </button>
+
+        <div class="summary__guarantee" aria-label="Garantías">
+          <div class="summary__guarantee-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Pedido registrado al instante
+          </div>
+          <div class="summary__guarantee-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            100% artesanal, fresco y natural
+          </div>
+          <div class="summary__guarantee-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Hecho en Colombia con amor
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </aside>
+
+</div>
+</main>
+
+<!-- Overlay de confirmación -->
+<div class="confirm-overlay" id="confirmOverlay" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="confirm-box">
+    <div class="confirm-check" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <span class="confirm-order-num" id="confirmOrderNum">GUA-0000</span>
+    <h2 class="confirm-title" id="confirmTitle">Pedido <em>recibido</em></h2>
+    <p class="confirm-msg" id="confirmMsg">
+      ¡Listo! Tu pedido fue registrado exitosamente.<br>
+      Pronto nos pondremos en contacto contigo.
+    </p>
+    <div class="confirm-summary" id="confirmSummary" aria-label="Detalles del pedido"></div>
+    <button class="confirm-back" id="confirmBack" onclick="window.location.href='index.html'">
+      Volver al inicio
+    </button>
+  </div>
+</div>
+
+<!-- Toast de validación -->
+<div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+
+<script>
+  /* ---- State ---- */
+  let state = { packId: null, packUnits: 0, packPrice: 0, qty: 1 };
+
+  /* ---- DOM refs ---- */
+  const pack6El        = document.getElementById('pack6');
+  const pack12El       = document.getElementById('pack12');
+  const cardStep2      = document.getElementById('cardStep2');
+  const cardStep3      = document.getElementById('cardStep3');
+  const step1Ind       = document.getElementById('step1Ind');
+  const step2Ind       = document.getElementById('step2Ind');
+  const step3Ind       = document.getElementById('step3Ind');
+  const qtyMinus       = document.getElementById('qtyMinus');
+  const qtyPlus        = document.getElementById('qtyPlus');
+  const qtyVal         = document.getElementById('qtyVal');
+  const qtyDesc        = document.getElementById('qtyDesc');
+  const totalUnitsInfo = document.getElementById('totalUnitsInfo');
+  const summaryLines   = document.getElementById('summaryLines');
+  const summaryTotal   = document.getElementById('summaryTotal');
+  const btnPedir       = document.getElementById('btnPedir');
+  const inputNombre    = document.getElementById('inputNombre');
+  const inputCelular   = document.getElementById('inputCelular');
+  const inputCiudad    = document.getElementById('inputCiudad');
+  const inputNotas     = document.getElementById('inputNotas');
+  const toastEl        = document.getElementById('toast');
+  const confirmOverlay = document.getElementById('confirmOverlay');
+  const confirmOrderNum= document.getElementById('confirmOrderNum');
+  const confirmMsg     = document.getElementById('confirmMsg');
+  const confirmSummary = document.getElementById('confirmSummary');
+
+  /* ---- Helpers ---- */
+  function fmt(n) {
+    return '$' + n.toLocaleString('es-CO');
+  }
+
+  function genOrderNum() {
+    const n = Math.floor(1000 + Math.random() * 9000);
+    return 'GUA-' + n;
+  }
+
+  let toastTimer = null;
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3000);
+  }
+
+  /* ---- Update resumen lateral ---- */
+  function updateSummary() {
+    const total = state.packPrice * state.qty;
+    summaryTotal.innerHTML = '<span>COP</span>' + fmt(total);
+    if (!state.packId) {
+      summaryLines.innerHTML = '<div class="summary__line summary__line--empty">Selecciona un pack para continuar</div>';
+    } else {
+      summaryLines.innerHTML = `
+        <div class="summary__line">
+          <span class="summary__line-label">Pack de ${state.packUnits} unidades</span>
+          <span class="summary__line-val">${fmt(state.packPrice)}</span>
+        </div>
+        <div class="summary__line">
+          <span class="summary__line-label">Cantidad</span>
+          <span class="summary__line-val">× ${state.qty}</span>
+        </div>
+        <div class="summary__line">
+          <span class="summary__line-label">Total alfajores</span>
+          <span class="summary__line-val">${state.packUnits * state.qty} und.</span>
+        </div>`;
+    }
+  }
+
+  function updateQtyInfo() {
+    if (!state.packId) return;
+    const total = state.packUnits * state.qty;
+    qtyDesc.textContent = `Pack de ${state.packUnits} × ${state.qty} = ${total} alfajores`;
+    totalUnitsInfo.textContent = `${total} alfajores · ${fmt(state.packPrice * state.qty)}`;
+    qtyMinus.disabled = state.qty <= 1;
+  }
+
+  function refreshCTA() {
+    const ready = state.packId
+      && inputNombre.value.trim()
+      && inputCelular.value.trim()
+      && inputCiudad.value.trim();
+    btnPedir.disabled = !ready;
+  }
+
+  /* ---- Pack selection ---- */
+  function selectPack(el) {
+    [pack6El, pack12El].forEach(p => {
+      p.classList.remove('is-selected');
+      p.setAttribute('aria-checked', 'false');
+    });
+    el.classList.add('is-selected');
+    el.setAttribute('aria-checked', 'true');
+
+    state.packId    = el.id;
+    state.packUnits = parseInt(el.dataset.units, 10);
+    state.packPrice = parseInt(el.dataset.price, 10);
+    state.qty       = 1;
+
+    cardStep2.classList.remove('order-card--inactive');
+    cardStep3.classList.remove('order-card--inactive');
+
+    step1Ind.classList.remove('is-active');
+    step1Ind.classList.add('is-done');
+    step2Ind.classList.add('is-active');
+    step3Ind.classList.add('is-active');
+
+    qtyVal.textContent = '1';
+    qtyMinus.disabled = true;
+
+    updateQtyInfo();
+    updateSummary();
+    refreshCTA();
+
+    if (window.innerWidth < 900) {
+      setTimeout(() => cardStep2.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+    }
+  }
+
+  pack6El.addEventListener('click',  () => selectPack(pack6El));
+  pack12El.addEventListener('click', () => selectPack(pack12El));
+  pack6El.addEventListener('keydown',  e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectPack(pack6El); } });
+  pack12El.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectPack(pack12El); } });
+
+  /* ---- Quantity ---- */
+  qtyMinus.addEventListener('click', () => {
+    if (state.qty <= 1) return;
+    state.qty--;
+    qtyVal.textContent = state.qty;
+    qtyMinus.disabled = state.qty <= 1;
+    updateQtyInfo(); updateSummary(); refreshCTA();
+  });
+  qtyPlus.addEventListener('click', () => {
+    if (state.qty >= 99) return;
+    state.qty++;
+    qtyVal.textContent = state.qty;
+    qtyMinus.disabled = false;
+    updateQtyInfo(); updateSummary(); refreshCTA();
+  });
+
+  [inputNombre, inputCelular, inputCiudad].forEach(inp => inp.addEventListener('input', refreshCTA));
+
+  /* ---- Validation ---- */
+  function validate() {
+    let ok = true;
+    const fields = [
+      { el: inputNombre, errId: 'errorNombre', msg: 'Por favor ingresa tu nombre' },
+      { el: inputCelular, errId: 'errorCelular', msg: 'Ingresa un número de celular válido' },
+      { el: inputCiudad, errId: 'errorCiudad', msg: 'Por favor ingresa tu ciudad' },
+    ];
+    fields.forEach(({ el, errId, msg }) => {
+      const errEl = document.getElementById(errId);
+      if (!el.value.trim()) {
+        el.classList.add('has-error');
+        errEl.textContent = msg;
+        errEl.hidden = false;
+        ok = false;
+      } else {
+        el.classList.remove('has-error');
+        errEl.hidden = true;
+      }
+    });
+    if (!state.packId) { showToast('Primero selecciona un pack'); ok = false; }
+    return ok;
+  }
+
+  /* ---- Clear error on focus ---- */
+  [inputNombre, inputCelular, inputCiudad].forEach(inp => {
+    inp.addEventListener('focus', () => {
+      inp.classList.remove('has-error');
+      const errEl = document.getElementById('error' + inp.id.replace('input', ''));
+      if (errEl) errEl.hidden = true;
+    });
+  });
+
+  /* ---- Simular envío del pedido ---- */
+  btnPedir.addEventListener('click', () => {
+    if (!validate()) return;
+
+    // Estado de carga
+    btnPedir.classList.add('is-loading');
+    btnPedir.disabled = true;
+
+    // Simular procesamiento de 1.6s
+    setTimeout(() => {
+      btnPedir.classList.remove('is-loading');
+
+      const nombre   = inputNombre.value.trim();
+      const celular  = inputCelular.value.trim();
+      const ciudad   = inputCiudad.value.trim();
+      const notas    = inputNotas.value.trim();
+      const total    = state.packPrice * state.qty;
+      const orderNum = genOrderNum();
+
+      // Poblar confirmación
+      confirmOrderNum.textContent = orderNum;
+      confirmMsg.innerHTML = `¡Genial, <strong>${nombre}</strong>! Tu pedido fue registrado.<br>
+        Nos pondremos en contacto contigo pronto.`;
+
+      confirmSummary.innerHTML = `
+        <div class="confirm-row">
+          <span class="confirm-row__label">Pack elegido</span>
+          <span class="confirm-row__val">Pack de ${state.packUnits} und.</span>
+        </div>
+        <div class="confirm-row">
+          <span class="confirm-row__label">Cantidad</span>
+          <span class="confirm-row__val">${state.qty} pack(s) · ${state.packUnits * state.qty} alfajores</span>
+        </div>
+        <div class="confirm-row">
+          <span class="confirm-row__label">Celular</span>
+          <span class="confirm-row__val">${celular}</span>
+        </div>
+        <div class="confirm-row">
+          <span class="confirm-row__label">Ciudad</span>
+          <span class="confirm-row__val">${ciudad}</span>
+        </div>
+        ${notas ? `<div class="confirm-row"><span class="confirm-row__label">Notas</span><span class="confirm-row__val">${notas}</span></div>` : ''}
+        <div class="confirm-row confirm-row--total">
+          <span class="confirm-row__label">Total</span>
+          <span class="confirm-row__val">${fmt(total)} COP</span>
+        </div>`;
+
+      // Mostrar overlay
+      confirmOverlay.classList.add('is-active');
+      document.getElementById('confirmTitle').focus();
+    }, 1600);
+  });
+
+  /* ---- Cerrar overlay con Escape ---- */
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && confirmOverlay.classList.contains('is-active')) {
+      window.location.href = 'index.html';
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guati · Alfajor de Guatila · Relleno con Arequipe de Guatila · Hecho en Colombia</title>
-  <meta name="description" content="Guati es el primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila. Artesanal, sin conservantes, sin gluten natural. Hecho en Colombia.">
-  <meta name="keywords" content="guati, alfajor colombiano, arequipe de guatila, galleta de yuca, snack artesanal colombiano, sin gluten, sin conservantes">
+  <meta name="description"
+    content="Guati es el primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila. Artesanal, sin conservantes, sin gluten natural. Hecho en Colombia.">
+  <meta name="keywords"
+    content="guati, alfajor colombiano, arequipe de guatila, galleta de yuca, snack artesanal colombiano, sin gluten, sin conservantes">
   <meta name="robots" content="index, follow">
   <meta name="author" content="Guati Colombia">
   <link rel="canonical" href="https://www.guati.co/">
@@ -14,7 +17,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.guati.co/">
   <meta property="og:title" content="Guati · Alfajor de Guatila · Hecho en Colombia">
-  <meta property="og:description" content="El primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila. Artesanal, sin conservantes, sin gluten natural.">
+  <meta property="og:description"
+    content="El primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila. Artesanal, sin conservantes, sin gluten natural.">
   <meta property="og:image" content="https://www.guati.co/assets/images/Guati frontal.png">
   <meta property="og:locale" content="es_CO">
   <meta property="og:site_name" content="Guati">
@@ -22,48 +26,60 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Guati · Alfajor de Guatila · Hecho en Colombia">
-  <meta name="twitter:description" content="El primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila. Artesanal, sin conservantes, sin gluten natural.">
+  <meta name="twitter:description"
+    content="El primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila. Artesanal, sin conservantes, sin gluten natural.">
   <meta name="twitter:image" content="https://www.guati.co/assets/images/Guati frontal.png">
 
-  <!-- Google Fonts — display=swap para FOUT rápido -->
+  <!-- Google Fonts - display=swap para FOUT rápido -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@400;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,900;1,900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=DM+Sans:wght@400;500;700&family=Dancing+Script:wght@700&display=swap"
+    rel="stylesheet">
 
   <style>
     /* ================================
        1. RESET & VARIABLES
     ================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --verde-profundo: #152E0B;
-      --verde-oscuro:   #1E3A14;
-      --verde-medio:    #2D5420;
-      --verde-claro:    #4A7C35;
-      --beige-fondo:    #C4956A;
-      --beige-suave:    #EDD9B0;
-      --beige-claro:    #FAF6EE;
-      --dorado:         #C9943A;
-      --dorado-claro:   #E8C87A;
-      --marron:         #5C341A;
-      --blanco:         #FFFFFF;
-      --negro:          #0A0A0A;
+      --verde-oscuro: #1E3A14;
+      --verde-medio: #2D5420;
+      --verde-claro: #4A7C35;
+      --beige-fondo: #C4956A;
+      --beige-suave: #EDD9B0;
+      --beige-claro: #FAF6EE;
+      --dorado: #C9943A;
+      --dorado-claro: #E8C87A;
+      --marron: #5C341A;
+      --blanco: #FFFFFF;
+      --negro: #0A0A0A;
 
       --font-display: 'Barlow Condensed', sans-serif;
-      --font-serif:   'Playfair Display', serif;
-      --font-script:  'Dancing Script', cursive;
-      --font-body:    'DM Sans', sans-serif;
+      --font-serif: 'Playfair Display', serif;
+      --font-script: 'Dancing Script', cursive;
+      --font-body: 'DM Sans', sans-serif;
 
       --nav-h: 64px;
       --radius: 16px;
       --radius-sm: 10px;
-      --shadow: 0 8px 40px rgba(21,46,11,0.12);
-      --shadow-lg: 0 24px 64px rgba(21,46,11,0.18);
+      --shadow: 0 8px 40px rgba(21, 46, 11, 0.12);
+      --shadow-lg: 0 24px 64px rgba(21, 46, 11, 0.18);
       --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
-    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
 
     body {
       font-family: var(--font-body);
@@ -87,37 +103,67 @@
       mix-blend-mode: multiply;
     }
 
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
-    button { cursor: pointer; font-family: var(--font-body); border: none; background: none; }
-    section { scroll-margin-top: var(--nav-h); }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: var(--font-body);
+      border: none;
+      background: none;
+    }
+
+    section {
+      scroll-margin-top: var(--nav-h);
+    }
 
     /* Selection color */
     ::selection {
       background: var(--verde-oscuro);
       color: var(--blanco);
     }
+
     ::-moz-selection {
       background: var(--verde-oscuro);
       color: var(--blanco);
     }
 
     /* Custom scrollbar (webkit) */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: var(--beige-suave); }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--beige-suave);
+    }
+
     ::-webkit-scrollbar-thumb {
       background: var(--verde-oscuro);
       border-radius: 10px;
     }
-    ::-webkit-scrollbar-thumb:hover { background: var(--verde-medio); }
 
-    /* Focus-visible — navegación por teclado */
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--verde-medio);
+    }
+
+    /* Focus-visible - navegación por teclado */
     :focus-visible {
       outline: 3px solid var(--dorado);
       outline-offset: 3px;
       border-radius: 4px;
     }
-    :focus:not(:focus-visible) { outline: none; }
+
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
 
     /* Custom cursor sobre mascota */
     .hero__visual,
@@ -141,7 +187,10 @@
       z-index: 99998;
       transition: top 0.2s;
     }
-    .skip-link:focus { top: 0; }
+
+    .skip-link:focus {
+      top: 0;
+    }
 
     /* Loading screen */
     #loader {
@@ -156,84 +205,120 @@
       gap: 1.5rem;
       transition: opacity 0.6s ease, visibility 0.6s ease;
     }
+
     #loader.fade-out {
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
     }
+
     .loader__mascot {
-      width: 72px; height: 60px;
+      width: 72px;
+      height: 60px;
       position: relative;
       animation: loader-bounce 0.7s ease-in-out infinite alternate;
     }
+
     @keyframes loader-bounce {
-      from { transform: translateY(0); }
-      to   { transform: translateY(-10px); }
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-10px);
+      }
     }
+
     .loader__mascot-top {
-      width: 72px; height: 18px;
+      width: 72px;
+      height: 18px;
       background: #C8963E;
       border-radius: 14px 14px 0 0;
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
     }
+
     .loader__mascot-body {
-      width: 72px; height: 48px;
+      width: 72px;
+      height: 48px;
       background: #D4A96A;
       border-radius: 0 0 16px 16px;
       position: absolute;
-      bottom: 0; left: 0;
-      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1);
+      bottom: 0;
+      left: 0;
+      box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.1);
     }
+
     .loader__mascot-body::before {
       content: '';
       position: absolute;
-      top: 50%; left: 50%;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      width: 44px; height: 5px;
+      width: 44px;
+      height: 5px;
       background: #C8963E;
       border-radius: 3px;
     }
+
     .loader__mascot-eye {
-      width: 9px; height: 10px;
+      width: 9px;
+      height: 10px;
       background: #111;
       border-radius: 50%;
       position: absolute;
       top: 10px;
     }
+
     .loader__mascot-eye::after {
       content: '';
       position: absolute;
-      top: 2px; left: 2px;
-      width: 3px; height: 3px;
-      background: rgba(255,255,255,0.75);
+      top: 2px;
+      left: 2px;
+      width: 3px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.75);
       border-radius: 50%;
     }
-    .loader__mascot-eye--l { left: 14px; }
-    .loader__mascot-eye--r { right: 14px; }
+
+    .loader__mascot-eye--l {
+      left: 14px;
+    }
+
+    .loader__mascot-eye--r {
+      right: 14px;
+    }
+
     .loader__mascot-mouth {
       position: absolute;
-      bottom: 8px; left: 50%;
+      bottom: 8px;
+      left: 50%;
       transform: translateX(-50%);
-      width: 18px; height: 9px;
-      border: 2.5px solid rgba(0,0,0,0.5);
+      width: 18px;
+      height: 9px;
+      border: 2.5px solid rgba(0, 0, 0, 0.5);
       border-top: none;
       border-radius: 0 0 12px 12px;
     }
+
     .loader__text {
       font-family: var(--font-display);
       font-weight: 600;
       font-size: 0.82rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
     }
+
     .loader__bar {
-      width: 120px; height: 2px;
-      background: rgba(255,255,255,0.1);
+      width: 120px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 2px;
       overflow: hidden;
     }
+
     .loader__bar::after {
       content: '';
       display: block;
@@ -243,8 +328,11 @@
       border-radius: 2px;
       animation: loader-fill 1.4s ease-out forwards;
     }
+
     @keyframes loader-fill {
-      to { width: 100%; }
+      to {
+        width: 100%;
+      }
     }
 
     /* ================================
@@ -285,7 +373,9 @@
       padding: 0 clamp(1.25rem, 4vw, 3rem);
     }
 
-    .section-pad { padding: clamp(5rem, 10vw, 9rem) 0; }
+    .section-pad {
+      padding: clamp(5rem, 10vw, 9rem) 0;
+    }
 
     /* Scroll reveal */
     [data-animate] {
@@ -293,19 +383,24 @@
       transform: translateY(40px);
       transition: opacity 0.7s var(--transition), transform 0.7s var(--transition);
     }
+
     [data-animate].is-visible {
       opacity: 1;
       transform: translateY(0);
     }
+
     [data-animate].slide-left {
       transform: translateX(-60px) translateY(0);
     }
+
     [data-animate].slide-left.is-visible {
       transform: translateX(0) translateY(0);
     }
+
     [data-animate].slide-right {
       transform: translateX(60px) translateY(0);
     }
+
     [data-animate].slide-right.is-visible {
       transform: translateX(0) translateY(0);
     }
@@ -313,7 +408,10 @@
     /* ================================
        4. KRAFT TEXTURE
     ================================ */
-    .kraft-bg { position: relative; }
+    .kraft-bg {
+      position: relative;
+    }
+
     .kraft-bg::before {
       content: '';
       position: absolute;
@@ -323,25 +421,33 @@
       pointer-events: none;
       z-index: 0;
     }
-    .kraft-bg > * { position: relative; z-index: 1; }
+
+    .kraft-bg>* {
+      position: relative;
+      z-index: 1;
+    }
 
     /* ================================
        5. NAVBAR
     ================================ */
     .nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: var(--nav-h);
       background: transparent;
       z-index: 1000;
       transition: background 0.4s, box-shadow 0.4s, backdrop-filter 0.4s;
     }
+
     .nav--scrolled {
       background: rgba(30, 58, 20, 0.92);
       backdrop-filter: blur(20px) saturate(1.4);
       -webkit-backdrop-filter: blur(20px) saturate(1.4);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.06), 0 4px 30px rgba(0,0,0,0.25);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 4px 30px rgba(0, 0, 0, 0.25);
     }
+
     .nav__inner {
       height: 100%;
       display: flex;
@@ -349,11 +455,13 @@
       justify-content: space-between;
       gap: 1rem;
     }
+
     .nav__logo {
       display: flex;
       align-items: center;
       flex-shrink: 0;
     }
+
     .nav__logo-img {
       height: 36px;
       width: auto;
@@ -369,8 +477,9 @@
       gap: 2.5rem;
       list-style: none;
     }
+
     .nav__links a {
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       font-family: var(--font-display);
       font-size: 0.8rem;
       font-weight: 600;
@@ -380,16 +489,25 @@
       padding-bottom: 4px;
       transition: color 0.3s;
     }
+
     .nav__links a::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 0;
-      width: 0; height: 2px;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
       background: var(--dorado);
       transition: width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .nav__links a:hover { color: var(--blanco); }
-    .nav__links a:hover::after { width: 100%; }
+
+    .nav__links a:hover {
+      color: var(--blanco);
+    }
+
+    .nav__links a:hover::after {
+      width: 100%;
+    }
 
     /* CTA pill */
     .nav__cta {
@@ -406,10 +524,11 @@
       flex-shrink: 0;
       white-space: nowrap;
     }
+
     .nav__cta:hover {
       transform: scale(1.05);
       background: var(--dorado-claro);
-      box-shadow: 0 4px 20px rgba(201,148,58,0.4);
+      box-shadow: 0 4px 20px rgba(201, 148, 58, 0.4);
     }
 
     /* Hamburger */
@@ -418,10 +537,12 @@
       flex-direction: column;
       justify-content: center;
       gap: 6px;
-      width: 40px; height: 40px;
+      width: 40px;
+      height: 40px;
       padding: 6px;
       z-index: 1010;
     }
+
     .nav__burger span {
       display: block;
       height: 2px;
@@ -430,9 +551,19 @@
       transform-origin: center;
       transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s;
     }
-    .nav__burger.is-open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .nav__burger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav__burger.is-open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    .nav__burger.is-open span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .nav__burger.is-open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .nav__burger.is-open span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
 
     /* Mobile menu overlay */
     .nav__mobile {
@@ -449,7 +580,12 @@
       pointer-events: none;
       transition: opacity 0.4s ease;
     }
-    .nav__mobile.is-open { opacity: 1; pointer-events: all; }
+
+    .nav__mobile.is-open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
     .nav__mobile a {
       font-family: var(--font-display);
       font-weight: 900;
@@ -462,16 +598,36 @@
       transform: translateY(20px);
       transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s;
     }
+
     .nav__mobile.is-open a {
       opacity: 1;
       transform: translateY(0);
     }
-    .nav__mobile.is-open a:nth-child(1) { transition-delay: 0.1s; }
-    .nav__mobile.is-open a:nth-child(2) { transition-delay: 0.15s; }
-    .nav__mobile.is-open a:nth-child(3) { transition-delay: 0.2s; }
-    .nav__mobile.is-open a:nth-child(4) { transition-delay: 0.25s; }
-    .nav__mobile.is-open a:nth-child(5) { transition-delay: 0.3s; }
-    .nav__mobile a:hover { color: var(--dorado); }
+
+    .nav__mobile.is-open a:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .nav__mobile.is-open a:nth-child(2) {
+      transition-delay: 0.15s;
+    }
+
+    .nav__mobile.is-open a:nth-child(3) {
+      transition-delay: 0.2s;
+    }
+
+    .nav__mobile.is-open a:nth-child(4) {
+      transition-delay: 0.25s;
+    }
+
+    .nav__mobile.is-open a:nth-child(5) {
+      transition-delay: 0.3s;
+    }
+
+    .nav__mobile a:hover {
+      color: var(--dorado);
+    }
+
     .nav__mobile .nav__cta {
       font-size: 1rem;
       padding: 1rem 3rem;
@@ -491,11 +647,14 @@
       position: relative;
       overflow: hidden;
     }
+
     /* Decorative diagonal */
     .hero::after {
       content: '';
       position: absolute;
-      bottom: -2px; left: 0; right: 0;
+      bottom: -2px;
+      left: 0;
+      right: 0;
       height: 80px;
       background: var(--beige-claro);
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
@@ -513,8 +672,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       color: var(--dorado-claro);
       font-family: var(--font-display);
       font-size: 0.7rem;
@@ -530,6 +689,7 @@
     .hero__h1 {
       margin-bottom: 1.5rem;
     }
+
     .hero__h1 .line1 {
       display: block;
       font-family: var(--font-display);
@@ -540,6 +700,7 @@
       line-height: 0.85;
       letter-spacing: -0.03em;
     }
+
     .hero__h1 .line2 {
       display: block;
       font-family: var(--font-serif);
@@ -553,7 +714,7 @@
 
     .hero__subtitle {
       font-size: clamp(1rem, 1.8vw, 1.2rem);
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       max-width: 440px;
       margin-bottom: 1rem;
       line-height: 1.7;
@@ -565,10 +726,11 @@
       gap: 0.5rem;
       margin-bottom: 2.5rem;
     }
+
     .hero__descriptor-tag {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.85);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.85);
       font-family: var(--font-display);
       font-size: 0.72rem;
       font-weight: 600;
@@ -600,15 +762,16 @@
       align-items: center;
       gap: 0.5rem;
     }
+
     .btn-primary:hover {
       background: var(--dorado-claro);
       transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(201,148,58,0.35);
+      box-shadow: 0 8px 30px rgba(201, 148, 58, 0.35);
     }
 
     .btn-outline {
       color: var(--blanco);
-      border: 2px solid rgba(255,255,255,0.3);
+      border: 2px solid rgba(255, 255, 255, 0.3);
       padding: 1rem 2.4rem;
       border-radius: 50px;
       font-family: var(--font-display);
@@ -618,9 +781,10 @@
       text-transform: uppercase;
       transition: background 0.25s, border-color 0.25s, transform 0.25s;
     }
+
     .btn-outline:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.5);
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
       transform: translateY(-2px);
     }
 
@@ -629,10 +793,12 @@
       gap: 2rem;
       flex-wrap: wrap;
     }
+
     .hero__stat {
       display: flex;
       flex-direction: column;
     }
+
     .hero__stat-val {
       font-family: var(--font-display);
       font-weight: 900;
@@ -640,9 +806,10 @@
       color: var(--dorado);
       line-height: 1;
     }
+
     .hero__stat-label {
       font-size: 0.7rem;
-      color: rgba(255,255,255,0.5);
+      color: rgba(255, 255, 255, 0.5);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       font-weight: 500;
@@ -657,27 +824,32 @@
       justify-content: center;
       position: relative;
     }
+
     .hero__visual-ring {
       width: clamp(280px, 35vw, 440px);
       height: clamp(280px, 35vw, 440px);
       border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(201,148,58,0.15), rgba(201,148,58,0.03));
-      border: 1px solid rgba(201,148,58,0.15);
+      background: radial-gradient(circle at 30% 30%, rgba(201, 148, 58, 0.15), rgba(201, 148, 58, 0.03));
+      border: 1px solid rgba(201, 148, 58, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
     }
+
     .hero__visual-ring::before {
       content: '';
       position: absolute;
       inset: -20px;
       border-radius: 50%;
-      border: 1px dashed rgba(201,148,58,0.12);
+      border: 1px dashed rgba(201, 148, 58, 0.12);
       animation: ring-spin 30s linear infinite;
     }
+
     @keyframes ring-spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .mascot-img {
@@ -685,11 +857,19 @@
       border-radius: 50%;
       object-fit: cover;
       animation: mascot-float 4s ease-in-out infinite;
-      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3));
     }
+
     @keyframes mascot-float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
     }
 
     .hero__chip-nuevo {
@@ -705,13 +885,21 @@
       text-transform: uppercase;
       padding: 0.5rem 1.2rem;
       border-radius: 50px;
-      box-shadow: 0 4px 16px rgba(201,148,58,0.4);
+      box-shadow: 0 4px 16px rgba(201, 148, 58, 0.4);
       transform: rotate(8deg);
       animation: chip-bounce 3s ease-in-out infinite 1s;
     }
+
     @keyframes chip-bounce {
-      0%, 100% { transform: rotate(8deg) translateY(0); }
-      50% { transform: rotate(8deg) translateY(-5px); }
+
+      0%,
+      100% {
+        transform: rotate(8deg) translateY(0);
+      }
+
+      50% {
+        transform: rotate(8deg) translateY(-5px);
+      }
     }
 
     .scroll-indicator {
@@ -726,30 +914,47 @@
       opacity: 0.5;
       z-index: 2;
     }
+
     .scroll-indicator span {
       font-family: var(--font-display);
       font-size: 0.6rem;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
       font-weight: 600;
     }
+
     .scroll-indicator svg {
-      width: 16px; height: 16px;
-      stroke: rgba(255,255,255,0.6);
+      width: 16px;
+      height: 16px;
+      stroke: rgba(255, 255, 255, 0.6);
       animation: bounce-down 2s ease-in-out infinite;
     }
+
     @keyframes bounce-down {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(8px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(8px);
+      }
     }
 
     /* ================================
        7. PRODUCTO
     ================================ */
-    #producto { background: var(--beige-claro); }
+    #producto {
+      background: var(--beige-claro);
+    }
 
-    .producto__header { text-align: center; margin-bottom: clamp(3rem, 6vw, 5rem); }
+    .producto__header {
+      text-align: center;
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+
     .producto__title {
       font-family: var(--font-display);
       font-weight: 900;
@@ -759,6 +964,7 @@
       line-height: 0.9;
       letter-spacing: -0.02em;
     }
+
     .producto__title em {
       font-family: var(--font-serif);
       font-style: italic;
@@ -780,6 +986,7 @@
       box-shadow: var(--shadow-lg);
       margin-bottom: clamp(3rem, 6vw, 5rem);
     }
+
     .product-card__img {
       position: relative;
       min-height: 420px;
@@ -789,18 +996,22 @@
       justify-content: center;
       overflow: hidden;
     }
+
     .product-card__img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
+
     .product-card:hover .product-card__img img {
       transform: scale(1.05);
     }
+
     .product-card__badge {
       position: absolute;
-      top: 1.5rem; right: 1.5rem;
+      top: 1.5rem;
+      right: 1.5rem;
       background: var(--dorado);
       color: var(--verde-profundo);
       font-family: var(--font-display);
@@ -819,6 +1030,7 @@
       flex-direction: column;
       justify-content: center;
     }
+
     .product-card__pre {
       font-family: var(--font-display);
       font-size: 0.72rem;
@@ -828,6 +1040,7 @@
       text-transform: uppercase;
       margin-bottom: 0.5rem;
     }
+
     .product-card__name {
       font-family: var(--font-serif);
       font-weight: 900;
@@ -837,19 +1050,28 @@
       line-height: 1.05;
       margin-bottom: 1rem;
     }
+
     .leaf-sep {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       margin: 1rem 0;
     }
-    .leaf-sep::before, .leaf-sep::after {
+
+    .leaf-sep::before,
+    .leaf-sep::after {
       content: '';
       flex: 1;
       height: 1px;
       background: var(--beige-suave);
     }
-    .leaf-sep svg { width: 18px; height: 18px; fill: var(--verde-claro); flex-shrink: 0; }
+
+    .leaf-sep svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--verde-claro);
+      flex-shrink: 0;
+    }
 
     .product-card__desc {
       font-size: 0.95rem;
@@ -865,9 +1087,10 @@
       gap: 0.6rem;
       margin-bottom: 2rem;
     }
+
     .attr-item {
-      background: rgba(45,84,32,0.05);
-      border: 1px solid rgba(45,84,32,0.08);
+      background: rgba(45, 84, 32, 0.05);
+      border: 1px solid rgba(45, 84, 32, 0.08);
       border-radius: var(--radius-sm);
       padding: 0.65rem 0.75rem;
       display: flex;
@@ -877,7 +1100,13 @@
       font-weight: 600;
       color: var(--verde-oscuro);
     }
-    .attr-item svg { width: 18px; height: 18px; flex-shrink: 0; fill: var(--verde-claro); }
+
+    .attr-item svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      fill: var(--verde-claro);
+    }
 
     .product-card__price {
       font-family: var(--font-display);
@@ -887,6 +1116,7 @@
       letter-spacing: 0.06em;
       margin-bottom: 1.5rem;
     }
+
     .product-card__price strong {
       font-size: 1.1rem;
       color: var(--verde-oscuro);
@@ -898,6 +1128,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: clamp(1rem, 2vw, 1.5rem);
     }
+
     .ingr-card {
       background: var(--blanco);
       border-radius: var(--radius);
@@ -906,11 +1137,18 @@
       box-shadow: var(--shadow);
       transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
     }
+
     .ingr-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-lg);
     }
-    .ingr-card__icon { width: 48px; height: 48px; margin-bottom: 1.25rem; }
+
+    .ingr-card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 1.25rem;
+    }
+
     .ingr-card__title {
       font-family: var(--font-display);
       font-size: 1.1rem;
@@ -920,7 +1158,12 @@
       color: var(--verde-oscuro);
       margin-bottom: 0.5rem;
     }
-    .ingr-card__text { font-size: 0.88rem; color: #777; line-height: 1.7; }
+
+    .ingr-card__text {
+      font-size: 0.88rem;
+      color: #777;
+      line-height: 1.7;
+    }
 
     /* ================================
        8. HISTORIA
@@ -931,10 +1174,13 @@
       position: relative;
       overflow: hidden;
     }
+
     #historia::before {
       content: '';
       position: absolute;
-      top: -2px; left: 0; right: 0;
+      top: -2px;
+      left: 0;
+      right: 0;
       height: 80px;
       background: var(--beige-claro);
       clip-path: polygon(0 0, 100% 0, 0 100%);
@@ -945,13 +1191,42 @@
       opacity: 0.06;
       pointer-events: none;
     }
-    .historia__leaf--1 { top: 12%; left: 4%; width: 100px; animation: leaf-float 9s ease-in-out infinite; }
-    .historia__leaf--2 { top: 55%; right: 5%; width: 70px; animation: leaf-float 12s ease-in-out infinite 2s; }
-    .historia__leaf--3 { bottom: 12%; left: 35%; width: 55px; animation: leaf-float 10s ease-in-out infinite 1s; }
+
+    .historia__leaf--1 {
+      top: 12%;
+      left: 4%;
+      width: 100px;
+      animation: leaf-float 9s ease-in-out infinite;
+    }
+
+    .historia__leaf--2 {
+      top: 55%;
+      right: 5%;
+      width: 70px;
+      animation: leaf-float 12s ease-in-out infinite 2s;
+    }
+
+    .historia__leaf--3 {
+      bottom: 12%;
+      left: 35%;
+      width: 55px;
+      animation: leaf-float 10s ease-in-out infinite 1s;
+    }
+
     @keyframes leaf-float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      33% { transform: translateY(-20px) rotate(8deg); }
-      66% { transform: translateY(-8px) rotate(-5deg); }
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      33% {
+        transform: translateY(-20px) rotate(8deg);
+      }
+
+      66% {
+        transform: translateY(-8px) rotate(-5deg);
+      }
     }
 
     .historia__inner {
@@ -960,7 +1235,11 @@
       gap: clamp(3rem, 6vw, 6rem);
       align-items: center;
     }
-    .historia__eyebrow { color: var(--dorado-claro); }
+
+    .historia__eyebrow {
+      color: var(--dorado-claro);
+    }
+
     .historia__h2 {
       font-family: var(--font-display);
       font-weight: 900;
@@ -971,6 +1250,7 @@
       letter-spacing: -0.02em;
       margin-bottom: 1.5rem;
     }
+
     .historia__h2 em {
       font-family: var(--font-serif);
       font-style: italic;
@@ -979,27 +1259,32 @@
       color: var(--dorado);
       letter-spacing: 0;
     }
+
     .historia__p {
       font-size: 1rem;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       line-height: 1.8;
       margin-bottom: 2rem;
     }
 
     .glass-card {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: var(--radius);
       padding: 1.75rem;
     }
+
     @supports not (backdrop-filter: blur(1px)) {
-      .glass-card { background: rgba(30,58,20,0.9); }
+      .glass-card {
+        background: rgba(30, 58, 20, 0.9);
+      }
     }
+
     .glass-card p {
       font-size: 0.95rem;
-      color: rgba(255,255,255,0.85);
+      color: rgba(255, 255, 255, 0.85);
       line-height: 1.75;
       font-style: italic;
     }
@@ -1010,9 +1295,10 @@
       gap: 0.75rem;
       margin-top: 2rem;
     }
+
     .pillar {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: var(--radius-sm);
       padding: 1.1rem;
       display: flex;
@@ -1020,11 +1306,20 @@
       gap: 0.75rem;
       transition: background 0.3s, border-color 0.3s;
     }
+
     .pillar:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(201,148,58,0.2);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(201, 148, 58, 0.2);
     }
-    .pillar svg { width: 20px; height: 20px; fill: var(--dorado); flex-shrink: 0; margin-top: 2px; }
+
+    .pillar svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--dorado);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
     .pillar__title {
       font-family: var(--font-display);
       font-size: 0.82rem;
@@ -1034,20 +1329,27 @@
       color: var(--blanco);
       margin-bottom: 0.2rem;
     }
-    .pillar__text { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+    .pillar__text {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.5;
+    }
 
     .historia__deco {
       display: flex;
       align-items: center;
       justify-content: center;
     }
+
     .historia__product-img {
       width: clamp(260px, 35vw, 480px);
       border-radius: var(--radius);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.45);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.45);
       object-fit: cover;
       transition: transform 0.5s var(--transition);
     }
+
     .historia__product-img:hover {
       transform: scale(1.03) rotate(-1deg);
     }
@@ -1059,16 +1361,23 @@
       background: var(--beige-suave);
       position: relative;
     }
+
     #porque::before {
       content: '';
       position: absolute;
-      top: -2px; left: 0; right: 0;
+      top: -2px;
+      left: 0;
+      right: 0;
       height: 80px;
       background: var(--verde-profundo);
       clip-path: polygon(0 0, 100% 0, 100% 100%);
     }
 
-    .porque__header { text-align: center; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+    .porque__header {
+      text-align: center;
+      margin-bottom: clamp(3rem, 6vw, 4.5rem);
+    }
+
     .porque__title {
       font-family: var(--font-display);
       font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -1078,6 +1387,7 @@
       line-height: 0.92;
       letter-spacing: -0.02em;
     }
+
     .porque__title em {
       font-family: var(--font-serif);
       font-style: italic;
@@ -1087,13 +1397,22 @@
       letter-spacing: 0;
     }
 
-    .reason-list { display: flex; flex-direction: column; gap: 0; max-width: 900px; margin: 0 auto; }
+    .reason-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
     .reason-card {
-      border-bottom: 1px solid rgba(92,52,26,0.1);
+      border-bottom: 1px solid rgba(92, 52, 26, 0.1);
       overflow: hidden;
     }
-    .reason-card:first-child { border-top: 1px solid rgba(92,52,26,0.1); }
+
+    .reason-card:first-child {
+      border-top: 1px solid rgba(92, 52, 26, 0.1);
+    }
 
     .reason-card__header {
       display: flex;
@@ -1104,21 +1423,33 @@
       user-select: none;
       transition: opacity 0.2s;
     }
-    .reason-card__header:hover { opacity: 0.85; }
+
+    .reason-card__header:hover {
+      opacity: 0.85;
+    }
+
     .reason-card__num {
       font-family: var(--font-display);
       font-size: clamp(3.5rem, 8vw, 6rem);
       font-weight: 900;
-      color: rgba(45,84,32,0.06);
+      color: rgba(45, 84, 32, 0.06);
       line-height: 1;
       min-width: clamp(4rem, 8vw, 6.5rem);
       transition: color 0.4s;
     }
+
     .reason-card:hover .reason-card__num,
     .reason-card.is-expanded .reason-card__num {
-      color: rgba(201,148,58,0.2);
+      color: rgba(201, 148, 58, 0.2);
     }
-    .reason-card__icon { width: 28px; height: 28px; fill: var(--dorado); flex-shrink: 0; }
+
+    .reason-card__icon {
+      width: 28px;
+      height: 28px;
+      fill: var(--dorado);
+      flex-shrink: 0;
+    }
+
     .reason-card__title {
       font-family: var(--font-display);
       font-size: clamp(1.1rem, 2.5vw, 1.5rem);
@@ -1128,23 +1459,34 @@
       color: var(--verde-oscuro);
       flex: 1;
     }
+
     .reason-card__arrow {
-      width: 22px; height: 22px;
+      width: 22px;
+      height: 22px;
       stroke: var(--dorado);
       flex-shrink: 0;
       transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     }
-    .reason-card.is-expanded .reason-card__arrow { transform: rotate(180deg); }
+
+    .reason-card.is-expanded .reason-card__arrow {
+      transform: rotate(180deg);
+    }
 
     .reason-card__body {
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     }
+
     @media (hover: hover) {
-      .reason-card:hover .reason-card__body { max-height: 500px; }
+      .reason-card:hover .reason-card__body {
+        max-height: 500px;
+      }
     }
-    .reason-card.is-expanded .reason-card__body { max-height: 500px; }
+
+    .reason-card.is-expanded .reason-card__body {
+      max-height: 500px;
+    }
 
     .reason-card__text {
       font-size: 0.95rem;
@@ -1160,12 +1502,14 @@
     #mascota {
       background: linear-gradient(170deg, var(--beige-fondo) 0%, var(--beige-suave) 50%, var(--beige-claro) 100%);
     }
+
     .mascota__inner {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
+
     .mascota__title {
       font-family: var(--font-display);
       font-weight: 900;
@@ -1176,6 +1520,7 @@
       margin-bottom: 0.75rem;
       letter-spacing: -0.02em;
     }
+
     .mascota__title em {
       font-family: var(--font-serif);
       font-style: italic;
@@ -1183,6 +1528,7 @@
       color: var(--dorado);
       text-transform: none;
     }
+
     .mascota__subtitle {
       font-size: 1rem;
       color: var(--marron);
@@ -1198,14 +1544,16 @@
       gap: 1.25rem;
       margin-bottom: 1rem;
     }
+
     .mascot-img--lg {
       max-width: 320px;
       width: 100%;
       border-radius: 50%;
       object-fit: cover;
       animation: mascot-float 4s ease-in-out infinite;
-      filter: drop-shadow(0 24px 60px rgba(21,46,11,0.25));
+      filter: drop-shadow(0 24px 60px rgba(21, 46, 11, 0.25));
     }
+
     .mascot-video {
       display: none;
       width: 320px;
@@ -1214,8 +1562,14 @@
       box-shadow: var(--shadow-lg);
       object-fit: cover;
     }
-    .mascot-video.is-playing { display: block; }
-    .mascot-img--lg.is-hidden { display: none; }
+
+    .mascot-video.is-playing {
+      display: block;
+    }
+
+    .mascot-img--lg.is-hidden {
+      display: none;
+    }
 
     .mascota__vid-btn {
       background: var(--verde-oscuro);
@@ -1229,6 +1583,7 @@
       border-radius: 50px;
       transition: background 0.25s, transform 0.25s;
     }
+
     .mascota__vid-btn:hover {
       background: var(--verde-medio);
       transform: scale(1.04);
@@ -1241,88 +1596,705 @@
       justify-content: center;
       margin-top: 2.5rem;
     }
+
     .mascota__chip {
       background: var(--blanco);
-      border: 1px solid rgba(45,84,32,0.1);
+      border: 1px solid rgba(45, 84, 32, 0.1);
       color: var(--verde-oscuro);
       font-size: 0.78rem;
       font-weight: 600;
       padding: 0.5rem 1.1rem;
       border-radius: 50px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
     /* ================================
-       11. NUMEROS
+       11. FICHA-PRODUCTO - tab editorial
     ================================ */
-    #numeros {
+    #ficha-producto {
       background: var(--verde-oscuro);
       color: var(--blanco);
       position: relative;
+      padding-bottom: 0;
     }
 
-    .numeros__header { text-align: center; margin-bottom: clamp(3rem, 6vw, 5rem); }
-    .numeros__title {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 900;
-      text-transform: uppercase;
-      color: var(--blanco);
-      line-height: 0.92;
-      letter-spacing: -0.02em;
-    }
-
-    .counters {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(2rem, 5vw, 4rem);
-      margin-bottom: clamp(3rem, 6vw, 5rem);
+    /* Header */
+    .fp__header {
       text-align: center;
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
     }
-    .counter {
+
+    .fp__title {
+      font-family: var(--font-script);
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      color: var(--blanco);
+      line-height: 1.1;
+      margin-bottom: 0.6rem;
+    }
+
+    .fp__subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(0.92rem, 1.6vw, 1.05rem);
+      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.7;
+    }
+
+    /* ── Tab nav ── */
+    .fp__tab-nav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 0 1rem 4px;
+    }
+
+    .fp__tab-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .fp__tab-nav-inner {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50px;
+      padding: 4px;
       position: relative;
+      flex-shrink: 0;
     }
-    .counter__val {
+
+    .fp__tab-indicator {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      background: var(--dorado);
+      border-radius: 50px;
+      transition: left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        width 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .fp__tab-btn {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-display);
+      font-size: clamp(0.72rem, 1.4vw, 0.86rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      padding: 0.65rem 1.35rem;
+      border-radius: 50px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.22s;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 44px;
+    }
+
+    .fp__tab-btn.is-active {
+      color: var(--verde-profundo);
+      pointer-events: none;
+    }
+
+    @media (hover: hover) {
+      .fp__tab-btn:not(.is-active):hover {
+        color: rgba(255, 255, 255, 0.85);
+      }
+    }
+
+    /* ── Panels ── */
+    .fp__panels {
+      position: relative;
+      min-height: 320px;
+    }
+
+    .fp__panel {
+      display: none;
+    }
+
+    .fp__panel.is-active {
+      display: block;
+      animation: fp-panel-in 0.38s ease forwards;
+    }
+
+    @keyframes fp-panel-in {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Panel 1: Ingredientes ── */
+    .fp__ing-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1rem, 2.5vw, 2rem);
+    }
+
+    .fp__ing-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(237, 217, 176, 0.14);
+      border-radius: 20px;
+      padding: clamp(1.4rem, 3vw, 2.25rem);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .fp__ing-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(237, 217, 176, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @media (hover: hover) {
+      .fp__ing-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(237, 217, 176, 0.3);
+      }
+    }
+
+    .fp__ing-card-icon {
+      width: 52px;
+      height: 52px;
+      margin-bottom: 1.1rem;
+    }
+
+    .fp__ing-card-name {
       display: block;
       font-family: var(--font-display);
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
       font-weight: 900;
-      font-size: clamp(5rem, 12vw, 9rem);
-      color: var(--dorado);
-      line-height: 0.85;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.01em;
+      color: var(--beige-suave);
+      line-height: 1;
       margin-bottom: 0.75rem;
     }
-    .counter__label {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.55;
-      max-width: 200px;
-      margin: 0 auto;
+
+    .fp__ing-card-tag {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--verde-profundo);
+      background: var(--dorado);
+      padding: 0.2rem 0.7rem;
+      border-radius: 50px;
+      margin-bottom: 1.1rem;
     }
 
-    .numeros__cta {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius);
-      padding: clamp(2rem, 4vw, 3rem);
+    .fp__ing-card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .fp__ing-card-list li {
+      font-family: var(--font-body);
+      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.6;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+
+    .fp__ing-card-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6rem;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--dorado);
+    }
+
+    /* ── Panel 2: Nutrición ── */
+    .fp__nut-layout {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: start;
+    }
+
+    .fp__kcal-callout {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(237, 217, 176, 0.18);
+      border-radius: 20px;
+      padding: 1.75rem 1.5rem;
       text-align: center;
-      max-width: 780px;
-      margin: 0 auto;
+      position: sticky;
+      top: calc(var(--nav-h) + 1rem);
+    }
+
+    .fp__kcal-num {
+      font-family: var(--font-script);
+      font-size: 4.5rem;
+      color: var(--dorado);
+      line-height: 0.92;
+      margin-bottom: 0.4rem;
+    }
+
+    .fp__kcal-unit {
+      font-family: var(--font-display);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.48);
+      margin-bottom: 0.25rem;
+    }
+
+    .fp__kcal-por {
+      font-family: var(--font-body);
+      font-size: 0.66rem;
+      color: rgba(255, 255, 255, 0.32);
+    }
+
+    .fp__kcal-divider {
+      width: 36px;
+      height: 2px;
+      background: var(--dorado);
+      opacity: 0.32;
+      margin: 1.1rem auto;
+    }
+
+    .fp__invima-mini {
+      background: rgba(201, 148, 58, 0.12);
+      border: 1px solid rgba(201, 148, 58, 0.28);
+      border-radius: 10px;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .fp__invima-mini-label {
+      font-family: var(--font-display);
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 0.3rem;
+    }
+
+    .fp__invima-mini-text {
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      color: rgba(255, 255, 255, 0.52);
+      line-height: 1.45;
+    }
+
+    .fp__macros {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+
+    .fp__macro-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.45rem;
+    }
+
+    .fp__macro-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--blanco);
+    }
+
+    .fp__macro-name--sub {
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.45);
+      font-weight: 600;
+    }
+
+    .fp__macro-val {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--beige-suave);
+    }
+
+    .fp__macro-track {
+      height: 7px;
+      background: rgba(255, 255, 255, 0.09);
+      border-radius: 50px;
       overflow: hidden;
     }
-    .numeros__stand-img {
-      width: 100%;
-      max-height: 280px;
-      object-fit: cover;
-      border-radius: var(--radius-sm);
-      margin-bottom: 2rem;
+
+    .fp__macro-fill {
+      height: 100%;
+      border-radius: 50px;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .numeros__cta p {
-      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
-      color: rgba(255,255,255,0.75);
+
+    .fp__macros.is-animated .fp__macro-fill {
+      transform: scaleX(1);
+    }
+
+    .fp__sin-sello {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .fp__chip {
+      font-family: var(--font-display);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(74, 124, 53, 0.22);
+      border: 1px solid rgba(74, 124, 53, 0.45);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+
+    /* ── Panel 3: Impacto ── */
+    .fp__impact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      align-items: start;
+    }
+
+    .fp__ods-section-title {
+      font-family: var(--font-display);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--beige-suave);
+      margin-bottom: 1.1rem;
+    }
+
+    .fp__ods-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .fp__ods-card {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 1rem;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1rem;
+      opacity: 0;
+      transform: scale(0.92);
+    }
+
+    .fp__ods-card.is-visible {
+      animation: ods-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes ods-bounce {
+      from {
+        opacity: 0;
+        transform: scale(0.92);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .fp__ods-square {
+      width: 72px;
+      height: 72px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .fp__ods-num {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--blanco);
+      line-height: 1;
+    }
+
+    .fp__ods-label-tag {
+      font-family: var(--font-body);
+      font-size: 0.46rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.82);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .fp__ods-text {
+      font-family: var(--font-body);
+      font-size: clamp(0.82rem, 1.4vw, 0.9rem);
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.55;
+    }
+
+    .fp__prod-panel {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(237, 217, 176, 0.13);
+      border-radius: 20px;
+      padding: clamp(1.4rem, 3vw, 2rem);
+    }
+
+    .fp__prod-title {
+      font-family: var(--font-display);
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--beige-suave);
+      margin-bottom: 0.5rem;
+    }
+
+    .fp__prod-price {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.58);
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .fp__prod-price strong {
+      color: var(--blanco);
+    }
+
+    .fp__prod-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .fp__prod-metric {
+      text-align: center;
+    }
+
+    .fp__prod-metric-val {
+      display: block;
+      font-family: var(--font-script);
+      font-size: clamp(2.8rem, 5vw, 3.8rem);
+      color: var(--beige-suave);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .fp__prod-metric-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.35;
+      margin-bottom: 0.15rem;
+    }
+
+    .fp__prod-metric-sub {
+      font-family: var(--font-body);
+      font-size: 0.6rem;
+      color: rgba(255, 255, 255, 0.32);
+    }
+
+    .fp__prod-equil {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.42);
+      line-height: 1.55;
+      text-align: center;
+      padding-top: 1.1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* ── Panel 4: Historia ── */
+    .fp__historia-panel {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+      padding: clamp(0.5rem, 2vw, 1.5rem) 0;
+    }
+
+    .fp__historia-deco {
+      font-family: var(--font-script);
+      font-size: 7rem;
+      color: rgba(237, 217, 176, 0.1);
+      line-height: 0.65;
+      margin-bottom: -0.5rem;
+      user-select: none;
+      display: block;
+    }
+
+    .fp__historia-quote {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+      color: rgba(255, 255, 255, 0.88);
       line-height: 1.75;
       margin-bottom: 2rem;
     }
+
+    .fp__historia-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+
+    .fp__historia-divider-line {
+      width: 48px;
+      height: 1px;
+      background: rgba(237, 217, 176, 0.35);
+    }
+
+    .fp__historia-divider-icon {
+      fill: var(--dorado);
+      opacity: 0.6;
+      width: 18px;
+      height: 18px;
+    }
+
+    .fp__historia-desc {
+      font-family: var(--font-script);
+      font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+      color: var(--beige-suave);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    .fp__historia-origin {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(237, 217, 176, 0.12);
+      border-radius: 16px;
+      padding: 1.4rem 1.75rem;
+      font-family: var(--font-body);
+      font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+      color: rgba(255, 255, 255, 0.58);
+      line-height: 1.75;
+    }
+
+    /* Wave */
+    .fp__wave {
+      display: block;
+      width: 100%;
+      line-height: 0;
+      margin-top: clamp(3rem, 6vw, 5rem);
+    }
+
+    /* Responsive - tablet 900px */
+    @media (max-width: 900px) {
+      .fp__nut-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .fp__kcal-callout {
+        position: static;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1.5rem;
+        text-align: left;
+        align-items: start;
+      }
+
+      .fp__kcal-divider {
+        display: none;
+      }
+
+      .fp__impact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Responsive - mobile 768px */
+    @media (max-width: 768px) {
+      .fp__tab-btn {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.68rem;
+      }
+
+      .fp__ing-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .fp__kcal-callout {
+        display: block;
+        text-align: center;
+      }
+
+      .fp__kcal-divider {
+        display: block;
+      }
+
+      .fp__ods-card {
+        grid-template-columns: 60px 1fr;
+        gap: 0.85rem;
+      }
+
+      .fp__ods-square {
+        width: 60px;
+        height: 60px;
+        border-radius: 8px;
+      }
+
+      .fp__ods-num {
+        font-size: 1.45rem;
+      }
+
+      .fp__prod-metrics {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .fp__historia-deco {
+        font-size: 4.5rem;
+      }
+
+      .fp__historia-quote {
+        font-size: 1rem;
+      }
+    }
+
     .btn-gold {
       background: var(--dorado);
       color: var(--verde-profundo);
@@ -1336,10 +2308,11 @@
       display: inline-block;
       transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
     }
+
     .btn-gold:hover {
       transform: translateY(-2px);
       background: var(--dorado-claro);
-      box-shadow: 0 8px 30px rgba(201,148,58,0.35);
+      box-shadow: 0 8px 30px rgba(201, 148, 58, 0.35);
     }
 
     /* ================================
@@ -1366,119 +2339,175 @@
       font-weight: 600;
       padding: 0.55rem 1rem;
       border-radius: 12px 12px 4px 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
       white-space: nowrap;
       pointer-events: none;
       opacity: 0;
       transform: translateY(6px);
       transition: opacity 0.3s, transform 0.3s;
     }
-    .cb-tooltip.show { opacity: 1; transform: translateY(0); }
+
+    .cb-tooltip.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* Trigger circle */
     .cb-trigger {
-      width: 64px; height: 64px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       background: var(--verde-oscuro);
       border: none;
       cursor: pointer;
       position: relative;
-      box-shadow: 0 6px 30px rgba(21,46,11,0.45);
-      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s;
-      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 30px rgba(21, 46, 11, 0.45);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 0;
     }
+
     .cb-trigger:hover {
       transform: scale(1.1);
-      box-shadow: 0 10px 40px rgba(21,46,11,0.55);
+      box-shadow: 0 10px 40px rgba(21, 46, 11, 0.55);
     }
 
     /* Notification badge */
     .cb-badge {
       position: absolute;
-      top: -2px; right: -2px;
-      width: 20px; height: 20px;
+      top: -2px;
+      right: -2px;
+      width: 20px;
+      height: 20px;
       background: #E53935;
       border-radius: 50%;
       border: 2px solid var(--beige-claro);
       font-size: 0.65rem;
       font-weight: 700;
       color: var(--blanco);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       animation: badge-pulse 2s ease-in-out infinite;
       transition: opacity 0.2s, transform 0.2s;
     }
-    .cb-badge.hidden { opacity: 0; transform: scale(0); }
-    @keyframes badge-pulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(229,57,53,0.4); }
-      50% { box-shadow: 0 0 0 6px rgba(229,57,53,0); }
+
+    .cb-badge.hidden {
+      opacity: 0;
+      transform: scale(0);
     }
 
-    /* Mini kawaii alfajor mascot — CSS-only 48px */
+    @keyframes badge-pulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(229, 57, 53, 0);
+      }
+    }
+
+    /* Mini kawaii alfajor mascot - CSS-only 48px */
     .cb-mascot-mini {
-      width: 44px; height: 44px;
+      width: 44px;
+      height: 44px;
       position: relative;
       flex-shrink: 0;
     }
+
     .cb-mascot-mini__body {
-      width: 44px; height: 36px;
+      width: 44px;
+      height: 36px;
       background: #D4A96A;
       border-radius: 12px;
       position: absolute;
-      bottom: 0; left: 0;
-      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.12);
+      bottom: 0;
+      left: 0;
+      box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.12);
     }
+
     .cb-mascot-mini__body::before {
       content: '';
       position: absolute;
-      top: 50%; left: 50%;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      width: 32px; height: 4px;
+      width: 32px;
+      height: 4px;
       background: #C8963E;
       border-radius: 2px;
     }
+
     .cb-mascot-mini__top {
-      width: 44px; height: 12px;
+      width: 44px;
+      height: 12px;
       background: #C8963E;
       border-radius: 12px 12px 0 0;
       position: absolute;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
     }
+
     .cb-mascot-mini__eye {
-      width: 6px; height: 7px;
+      width: 6px;
+      height: 7px;
       background: var(--negro);
       border-radius: 50%;
       position: absolute;
       top: 8px;
     }
+
     .cb-mascot-mini__eye::after {
       content: '';
       position: absolute;
-      top: 1px; left: 1px;
-      width: 2px; height: 2px;
-      background: rgba(255,255,255,0.7);
+      top: 1px;
+      left: 1px;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.7);
       border-radius: 50%;
     }
-    .cb-mascot-mini__eye--l { left: 8px; }
-    .cb-mascot-mini__eye--r { right: 8px; }
+
+    .cb-mascot-mini__eye--l {
+      left: 8px;
+    }
+
+    .cb-mascot-mini__eye--r {
+      right: 8px;
+    }
+
     .cb-mascot-mini__mouth {
       position: absolute;
-      bottom: 5px; left: 50%;
+      bottom: 5px;
+      left: 50%;
       transform: translateX(-50%);
-      width: 12px; height: 6px;
-      border: 2px solid rgba(0,0,0,0.55);
+      width: 12px;
+      height: 6px;
+      border: 2px solid rgba(0, 0, 0, 0.55);
       border-top: none;
       border-radius: 0 0 8px 8px;
     }
+
     .cb-mascot-mini__cheek {
-      width: 7px; height: 4px;
-      background: rgba(220,80,80,0.35);
+      width: 7px;
+      height: 4px;
+      background: rgba(220, 80, 80, 0.35);
       border-radius: 50%;
       position: absolute;
       bottom: 8px;
     }
-    .cb-mascot-mini__cheek--l { left: 4px; }
-    .cb-mascot-mini__cheek--r { right: 4px; }
+
+    .cb-mascot-mini__cheek--l {
+      left: 4px;
+    }
+
+    .cb-mascot-mini__cheek--r {
+      right: 4px;
+    }
 
     /* --- Chat window --- */
     .cb-window {
@@ -1489,7 +2518,7 @@
       height: 500px;
       background: var(--beige-claro);
       border-radius: 20px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.22), 0 0 0 1px rgba(0,0,0,0.04);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.04);
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -1498,9 +2527,10 @@
       pointer-events: none;
       transform: translateY(16px) scale(0.97);
       transform-origin: bottom right;
-      transition: opacity 0.35s cubic-bezier(0.23,1,0.32,1),
-                  transform 0.35s cubic-bezier(0.23,1,0.32,1);
+      transition: opacity 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+        transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
     }
+
     .cb-window.is-open {
       opacity: 1;
       pointer-events: all;
@@ -1516,14 +2546,22 @@
       gap: 0.75rem;
       flex-shrink: 0;
     }
+
     .cb-header__mascot {
-      width: 40px; height: 40px;
-      background: rgba(255,255,255,0.12);
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
-    .cb-header__info { flex: 1; }
+
+    .cb-header__info {
+      flex: 1;
+    }
+
     .cb-header__name {
       font-family: var(--font-display);
       font-weight: 700;
@@ -1532,36 +2570,55 @@
       letter-spacing: 0.03em;
       line-height: 1.2;
     }
+
     .cb-header__status {
       font-size: 0.7rem;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255, 255, 255, 0.65);
       display: flex;
       align-items: center;
       gap: 0.3rem;
     }
+
     .cb-header__status::before {
       content: '';
-      width: 6px; height: 6px;
+      width: 6px;
+      height: 6px;
       background: #4CAF50;
       border-radius: 50%;
       display: inline-block;
       animation: status-blink 2.5s ease-in-out infinite;
     }
+
     @keyframes status-blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
     }
+
     .cb-header__close {
-      width: 32px; height: 32px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.7);
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 1rem;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: background 0.2s, color 0.2s;
       flex-shrink: 0;
     }
-    .cb-header__close:hover { background: rgba(255,255,255,0.18); color: var(--blanco); }
+
+    .cb-header__close:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: var(--blanco);
+    }
 
     /* Messages area */
     .cb-messages {
@@ -1573,9 +2630,19 @@
       gap: 0.75rem;
       scroll-behavior: smooth;
     }
-    .cb-messages::-webkit-scrollbar { width: 4px; }
-    .cb-messages::-webkit-scrollbar-track { background: transparent; }
-    .cb-messages::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 4px; }
+
+    .cb-messages::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .cb-messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .cb-messages::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
+    }
 
     /* Bubbles */
     .cb-bubble {
@@ -1583,24 +2650,35 @@
       padding: 0.65rem 0.95rem;
       font-size: 0.875rem;
       line-height: 1.55;
-      animation: bubble-in 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      animation: bubble-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
+
     @keyframes bubble-in {
-      from { opacity: 0; transform: scale(0.85) translateY(6px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
+      from {
+        opacity: 0;
+        transform: scale(0.85) translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
+
     .cb-bubble--bot {
       background: var(--verde-oscuro);
       color: var(--blanco);
       border-radius: 18px 18px 18px 4px;
       align-self: flex-start;
     }
+
     .cb-bubble--user {
       background: var(--beige-suave);
       color: var(--negro);
       border-radius: 18px 18px 4px 18px;
       align-self: flex-end;
     }
+
     .cb-bubble a {
       color: var(--dorado-claro);
       text-decoration: underline;
@@ -1621,6 +2699,7 @@
       transition: background 0.2s, transform 0.2s;
       text-decoration: none !important;
     }
+
     .cb-bubble__btn:hover {
       background: var(--dorado-claro);
       transform: scale(1.03);
@@ -1638,17 +2717,36 @@
       align-self: flex-start;
       width: fit-content;
     }
+
     .cb-typing span {
-      width: 7px; height: 7px;
-      background: rgba(255,255,255,0.6);
+      width: 7px;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.6);
       border-radius: 50%;
       animation: typing-dot 1.2s ease-in-out infinite;
     }
-    .cb-typing span:nth-child(2) { animation-delay: 0.2s; }
-    .cb-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    .cb-typing span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .cb-typing span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
     @keyframes typing-dot {
-      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-      30% { transform: translateY(-5px); opacity: 1; }
+
+      0%,
+      60%,
+      100% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+
+      30% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
     }
 
     /* Quick reply chips */
@@ -1658,12 +2756,13 @@
       flex-wrap: wrap;
       gap: 0.4rem;
       flex-shrink: 0;
-      background: rgba(0,0,0,0.02);
-      border-top: 1px solid rgba(0,0,0,0.05);
+      background: rgba(0, 0, 0, 0.02);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
     }
+
     .cb-chip {
       background: var(--blanco);
-      border: 1px solid rgba(45,84,32,0.2);
+      border: 1px solid rgba(45, 84, 32, 0.2);
       color: var(--verde-oscuro);
       font-size: 0.72rem;
       font-weight: 600;
@@ -1673,6 +2772,7 @@
       transition: background 0.2s, border-color 0.2s, transform 0.15s;
       white-space: nowrap;
     }
+
     .cb-chip:hover {
       background: var(--verde-oscuro);
       color: var(--blanco);
@@ -1683,16 +2783,17 @@
     /* Input area */
     .cb-input-area {
       background: var(--blanco);
-      border-top: 1px solid rgba(0,0,0,0.07);
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
       padding: 0.75rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
       flex-shrink: 0;
     }
+
     .cb-input {
       flex: 1;
-      border: 1px solid rgba(0,0,0,0.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 50px;
       padding: 0.6rem 1rem;
       font-family: var(--font-body);
@@ -1702,27 +2803,51 @@
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
+
     .cb-input:focus {
       border-color: var(--verde-medio);
-      box-shadow: 0 0 0 3px rgba(45,84,32,0.08);
+      box-shadow: 0 0 0 3px rgba(45, 84, 32, 0.08);
     }
-    .cb-input::placeholder { color: #aaa; }
+
+    .cb-input::placeholder {
+      color: #aaa;
+    }
+
     .cb-send {
-      width: 38px; height: 38px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--verde-oscuro);
       color: var(--blanco);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
       transition: background 0.2s, transform 0.2s;
     }
-    .cb-send:hover { background: var(--verde-medio); transform: scale(1.08); }
-    .cb-send svg { width: 18px; height: 18px; }
-    .cb-send:disabled { opacity: 0.4; pointer-events: none; }
+
+    .cb-send:hover {
+      background: var(--verde-medio);
+      transform: scale(1.08);
+    }
+
+    .cb-send svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .cb-send:disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
 
     /* Mobile overrides */
     @media (max-width: 768px) {
-      #chatbot-container { bottom: 5.5rem; right: 1rem; }
+      #chatbot-container {
+        bottom: 5.5rem;
+        right: 1rem;
+      }
+
       .cb-window {
         bottom: 90px;
         right: 0.5rem;
@@ -1738,15 +2863,17 @@
     ================================ */
     footer {
       background: var(--negro);
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
       padding: clamp(4rem, 7vw, 6rem) 0 0;
     }
+
     .footer__grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr;
       gap: clamp(2rem, 4vw, 4rem);
       padding-bottom: clamp(3rem, 5vw, 4rem);
     }
+
     .footer__logo-img {
       height: 56px;
       width: auto;
@@ -1755,7 +2882,12 @@
       margin-bottom: 1rem;
       opacity: 0.9;
     }
-    .footer__brand-made { font-size: 0.82rem; line-height: 1.6; }
+
+    .footer__brand-made {
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
     .footer__col-title {
       font-family: var(--font-display);
       font-size: 0.72rem;
@@ -1765,36 +2897,71 @@
       color: var(--blanco);
       margin-bottom: 1.25rem;
     }
-    .footer__links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
-    .footer__links a { font-size: 0.88rem; transition: color 0.2s; }
-    .footer__links a:hover { color: var(--dorado); }
-    .footer__socials { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+
+    .footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer__links a {
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+
+    .footer__links a:hover {
+      color: var(--dorado);
+    }
+
+    .footer__socials {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
     .footer__social {
-      width: 42px; height: 42px;
+      width: 42px;
+      height: 42px;
       border-radius: var(--radius-sm);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      display: flex; align-items: center; justify-content: center;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: background 0.25s, border-color 0.25s, transform 0.25s;
     }
+
     .footer__social:hover {
       background: var(--dorado);
       border-color: var(--dorado);
       transform: translateY(-2px);
     }
-    .footer__social:hover svg { fill: var(--verde-profundo); }
-    .footer__social svg { width: 18px; height: 18px; fill: var(--blanco); transition: fill 0.25s; }
+
+    .footer__social:hover svg {
+      fill: var(--verde-profundo);
+    }
+
+    .footer__social svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--blanco);
+      transition: fill 0.25s;
+    }
+
     .footer__contact-cta {
       font-size: 0.85rem;
       font-weight: 600;
       color: var(--dorado-claro);
     }
+
     .footer__bar {
-      border-top: 1px solid rgba(255,255,255,0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
       padding: 1.5rem 0;
       text-align: center;
       font-size: 0.72rem;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255, 255, 255, 0.3);
       letter-spacing: 0.02em;
     }
 
@@ -1804,16 +2971,22 @@
     .mobile-cta-bar {
       display: none;
       position: fixed;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       background: var(--verde-profundo);
       padding: 0.75rem 1.25rem;
       z-index: 997;
-      box-shadow: 0 -4px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.3);
       transform: translateY(100%);
       transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      border-top: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .mobile-cta-bar.is-visible { transform: translateY(0); }
+
+    .mobile-cta-bar.is-visible {
+      transform: translateY(0);
+    }
+
     .mobile-cta-bar__inner {
       display: flex;
       align-items: center;
@@ -1822,19 +2995,22 @@
       max-width: 480px;
       margin: 0 auto;
     }
+
     .mobile-cta-bar__text {
       font-family: var(--font-display);
       font-size: 0.78rem;
       font-weight: 600;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
+
     .mobile-cta-bar__text strong {
       display: block;
       font-size: 0.88rem;
       color: var(--dorado);
     }
+
     .mobile-cta-bar__btn {
       background: var(--dorado);
       color: var(--verde-profundo);
@@ -1850,25 +3026,50 @@
     }
 
     /* ================================
-       15. RESPONSIVE — TABLET
+       15. RESPONSIVE - TABLET
     ================================ */
     @media (max-width: 1024px) {
-      .nav__links { gap: 1.5rem; }
-      .historia__inner { grid-template-columns: 1fr; }
-      .historia__deco { justify-content: center; margin-top: 1rem; }
-      .historia__product-img { width: 100%; max-width: 500px; max-height: 340px; }
+      .nav__links {
+        gap: 1.5rem;
+      }
+
+      .historia__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .historia__deco {
+        justify-content: center;
+        margin-top: 1rem;
+      }
+
+      .historia__product-img {
+        width: 100%;
+        max-width: 500px;
+        max-height: 340px;
+      }
     }
 
     /* ================================
-       16. RESPONSIVE — MOBILE
+       16. RESPONSIVE - MOBILE
     ================================ */
     @media (max-width: 768px) {
-      :root { --nav-h: 56px; }
+      :root {
+        --nav-h: 56px;
+      }
 
       /* Nav */
-      .nav__links, .nav__cta { display: none; }
-      .nav__burger { display: flex; }
-      .nav__mobile { display: flex; }
+      .nav__links,
+      .nav__cta {
+        display: none;
+      }
+
+      .nav__burger {
+        display: flex;
+      }
+
+      .nav__mobile {
+        display: flex;
+      }
 
       /* Hero */
       .hero__inner {
@@ -1876,1126 +3077,1587 @@
         text-align: center;
         padding: 1.5rem 0 5rem;
       }
-      .hero__inner > :first-child { order: 2; }
-      .hero__visual { order: 1; margin-bottom: 1rem; }
+
+      .hero__inner> :first-child {
+        order: 2;
+      }
+
+      .hero__visual {
+        order: 1;
+        margin-bottom: 1rem;
+      }
+
       .hero__visual-ring {
         width: 240px;
         height: 240px;
       }
-      .hero__badge { display: inline-flex; font-size: 0.6rem; }
-      .hero__h1 .line1 { font-size: clamp(2.8rem, 12vw, 4.5rem); }
-      .hero__h1 .line2 { font-size: clamp(2.8rem, 12vw, 4.5rem); }
-      .hero__subtitle { max-width: 100%; }
-      .hero__descriptor { justify-content: center; }
-      .hero__ctas { justify-content: center; }
-      .hero__stats { justify-content: center; gap: 1.5rem; }
-      .hero__chip-nuevo { display: none; }
-      .hero::after { height: 50px; }
 
-      .mascot-img { max-width: 180px; }
-      .mascot-img--lg { max-width: 240px; }
-      .mascot-video { width: 260px; }
+      .hero__badge {
+        display: inline-flex;
+        font-size: 0.6rem;
+      }
+
+      .hero__h1 .line1 {
+        font-size: clamp(2.8rem, 12vw, 4.5rem);
+      }
+
+      .hero__h1 .line2 {
+        font-size: clamp(2.8rem, 12vw, 4.5rem);
+      }
+
+      .hero__subtitle {
+        max-width: 100%;
+      }
+
+      .hero__descriptor {
+        justify-content: center;
+      }
+
+      .hero__ctas {
+        justify-content: center;
+      }
+
+      .hero__stats {
+        justify-content: center;
+        gap: 1.5rem;
+      }
+
+      .hero__chip-nuevo {
+        display: none;
+      }
+
+      .hero::after {
+        height: 50px;
+      }
+
+      .mascot-img {
+        max-width: 180px;
+      }
+
+      .mascot-img--lg {
+        max-width: 240px;
+      }
+
+      .mascot-video {
+        width: 260px;
+      }
 
       /* Producto */
-      .product-card { grid-template-columns: 1fr; }
-      .product-card__img { min-height: 280px; }
-      .ingredients { grid-template-columns: 1fr; }
+      .product-card {
+        grid-template-columns: 1fr;
+      }
+
+      .product-card__img {
+        min-height: 280px;
+      }
+
+      .ingredients {
+        grid-template-columns: 1fr;
+      }
 
       /* Historia */
-      #historia::before { height: 50px; }
-      #porque::before { height: 50px; }
+      #historia::before {
+        height: 50px;
+      }
 
-      /* Counters */
-      .counters { grid-template-columns: 1fr; gap: 2.5rem; }
-      .counter__val { font-size: clamp(4.5rem, 20vw, 7rem); }
+      #porque::before {
+        height: 50px;
+      }
 
       /* Footer */
-      .footer__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
 
       /* Reason card text indent reset */
-      .reason-card__text { padding-left: 1rem; }
-      .reason-card__num { font-size: clamp(2.5rem, 12vw, 4rem); min-width: 3rem; }
+      .reason-card__text {
+        padding-left: 1rem;
+      }
+
+      .reason-card__num {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+        min-width: 3rem;
+      }
 
       /* Sticky CTA bar */
-      .mobile-cta-bar { display: block; }
-      #chatbot-container { bottom: 5rem; }
+      .mobile-cta-bar {
+        display: block;
+      }
+
+      #chatbot-container {
+        bottom: 5rem;
+      }
 
       /* Give footer extra padding for the sticky bar */
-      footer { padding-bottom: 4.5rem; }
+      footer {
+        padding-bottom: 4.5rem;
+      }
 
-      .scroll-indicator { bottom: 70px; }
+      .scroll-indicator {
+        bottom: 70px;
+      }
     }
 
     @media (max-width: 480px) {
-      .attr-grid { grid-template-columns: 1fr; }
-      .mascota__chips { flex-direction: column; align-items: center; }
-      .hero__descriptor { flex-direction: column; align-items: center; }
-      .hero__stats { flex-direction: column; gap: 1rem; align-items: center; }
-      .pillars { grid-template-columns: 1fr; }
+      .attr-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mascota__chips {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero__descriptor {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero__stats {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .pillars {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- ============================
+  <!-- ============================
      LOADING SCREEN
 ============================ -->
-<div id="loader" role="status" aria-label="Cargando Guati">
-  <div class="loader__mascot" aria-hidden="true">
-    <div class="loader__mascot-top"></div>
-    <div class="loader__mascot-body">
-      <div class="loader__mascot-eye loader__mascot-eye--l"></div>
-      <div class="loader__mascot-eye loader__mascot-eye--r"></div>
-      <div class="loader__mascot-mouth"></div>
+  <div id="loader" role="status" aria-label="Cargando Guati">
+    <div class="loader__mascot" aria-hidden="true">
+      <div class="loader__mascot-top"></div>
+      <div class="loader__mascot-body">
+        <div class="loader__mascot-eye loader__mascot-eye--l"></div>
+        <div class="loader__mascot-eye loader__mascot-eye--r"></div>
+        <div class="loader__mascot-mouth"></div>
+      </div>
     </div>
+    <span class="loader__text">Cargando tu momento natural...</span>
+    <div class="loader__bar" aria-hidden="true"></div>
   </div>
-  <span class="loader__text">Cargando tu momento natural...</span>
-  <div class="loader__bar" aria-hidden="true"></div>
-</div>
 
-<!-- ============================
+  <!-- ============================
      SVG SYMBOLS
 ============================ -->
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
-  <symbol id="icon-leaf" viewBox="0 0 24 24">
-    <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 5-8 5-.5-2-1.5-6-1.5-6L12 4c0 0 3.17 2.45 5 4z"/>
-  </symbol>
-  <symbol id="icon-check" viewBox="0 0 24 24">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-  </symbol>
-  <symbol id="icon-ban" viewBox="0 0 24 24">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69l11.21-11.21C19.37 8.45 20 10.15 20 12c0 4.42-3.58 8-8 8z"/>
-  </symbol>
-  <symbol id="icon-globe" viewBox="0 0 24 24">
-    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-  </symbol>
-  <symbol id="icon-plant" viewBox="0 0 24 24">
-    <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 5-8 5zM12 16c0-2.21 1.79-4 4-4v2c-1.1 0-2 .9-2 2h-2zm-2 4H8.09C9 17.18 10 14 12 12v4c-1.1 0-2 .9-2 2v2z"/>
-  </symbol>
-  <symbol id="icon-recycle" viewBox="0 0 24 24">
-    <path d="M12 6l-3 5h2v5h2v-5h2zm0-4L4.5 9H7v7H5l4 4 4-4h-2V9h2.5zM12 2L6.5 11H9v6H7l5 5 5-5h-2v-6h2.5z"/>
-  </symbol>
-  <symbol id="icon-flag" viewBox="0 0 24 24">
-    <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/>
-  </symbol>
-  <symbol id="icon-bulb" viewBox="0 0 24 24">
-    <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.86-3.14-7-7-7z"/>
-  </symbol>
-  <symbol id="icon-chart" viewBox="0 0 24 24">
-    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
-  </symbol>
-  <symbol id="icon-star" viewBox="0 0 24 24">
-    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-  </symbol>
-  <symbol id="icon-heart" viewBox="0 0 24 24">
-    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-  </symbol>
-  <symbol id="icon-instagram" viewBox="0 0 24 24">
-    <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2zm-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 7a5 5 0 110 10A5 5 0 0112 7zm0 2a3 3 0 100 6 3 3 0 000-6z"/>
-  </symbol>
-  <symbol id="icon-tiktok" viewBox="0 0 24 24">
-    <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.05a8.16 8.16 0 004.77 1.52V7.12a4.85 4.85 0 01-1-.43z"/>
-  </symbol>
-  <symbol id="icon-facebook" viewBox="0 0 24 24">
-    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-  </symbol>
-  <symbol id="icon-whatsapp" viewBox="0 0 24 24">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-  </symbol>
-  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <polyline points="6 9 12 15 18 9"/>
-  </symbol>
-  <symbol id="icon-yuca" viewBox="0 0 48 48">
-    <ellipse cx="24" cy="28" rx="10" ry="16" fill="#C8963E"/>
-    <path d="M24 12 C20 6 16 4 14 6 C18 10 22 12 24 12Z" fill="#3D6B2C"/>
-    <path d="M24 12 C28 6 32 4 34 6 C30 10 26 12 24 12Z" fill="#3D6B2C"/>
-    <path d="M24 12 C24 6 22 2 20 2 C20 6 22 10 24 12Z" fill="#4A7A35"/>
-  </symbol>
-  <symbol id="icon-guatila" viewBox="0 0 48 48">
-    <ellipse cx="24" cy="26" rx="14" ry="12" fill="#7BAF2A"/>
-    <path d="M24 14 C18 10 14 14 16 20 C20 16 24 14 24 14Z" fill="#3D6B2C"/>
-    <path d="M24 14 C30 10 34 14 32 20 C28 16 24 14 24 14Z" fill="#3D6B2C"/>
-    <ellipse cx="24" cy="27" rx="8" ry="6" fill="#9DC840" opacity="0.5"/>
-  </symbol>
-  <symbol id="icon-panela" viewBox="0 0 48 48">
-    <rect x="10" y="20" width="28" height="20" rx="4" fill="#C8963E"/>
-    <rect x="10" y="20" width="28" height="8" rx="4" fill="#D4A96A"/>
-    <path d="M18 20 C18 12 22 8 24 8 C26 8 30 12 30 20" fill="none" stroke="#B8832A" stroke-width="2.5" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-  </symbol>
-</svg>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+    <symbol id="icon-leaf" viewBox="0 0 24 24">
+      <path
+        d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 5-8 5-.5-2-1.5-6-1.5-6L12 4c0 0 3.17 2.45 5 4z" />
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+    </symbol>
+    <symbol id="icon-ban" viewBox="0 0 24 24">
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-4.42 3.58-8 8-8 1.85 0 3.55.63 4.9 1.69L5.69 16.9C4.63 15.55 4 13.85 4 12zm8 8c-1.85 0-3.55-.63-4.9-1.69l11.21-11.21C19.37 8.45 20 10.15 20 12c0 4.42-3.58 8-8 8z" />
+    </symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24">
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+    </symbol>
+    <symbol id="icon-plant" viewBox="0 0 24 24">
+      <path
+        d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 5-8 5zM12 16c0-2.21 1.79-4 4-4v2c-1.1 0-2 .9-2 2h-2zm-2 4H8.09C9 17.18 10 14 12 12v4c-1.1 0-2 .9-2 2v2z" />
+    </symbol>
+    <symbol id="icon-recycle" viewBox="0 0 24 24">
+      <path d="M12 6l-3 5h2v5h2v-5h2zm0-4L4.5 9H7v7H5l4 4 4-4h-2V9h2.5zM12 2L6.5 11H9v6H7l5 5 5-5h-2v-6h2.5z" />
+    </symbol>
+    <symbol id="icon-flag" viewBox="0 0 24 24">
+      <path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z" />
+    </symbol>
+    <symbol id="icon-bulb" viewBox="0 0 24 24">
+      <path
+        d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26C17.81 13.47 19 11.38 19 9c0-3.86-3.14-7-7-7z" />
+    </symbol>
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
+    </symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24">
+      <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+    </symbol>
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path
+        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+    </symbol>
+    <symbol id="icon-instagram" viewBox="0 0 24 24">
+      <path
+        d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 01-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 017.8 2zm-.2 2A3.6 3.6 0 004 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 003.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6zm9.65 1.5a1.25 1.25 0 110 2.5 1.25 1.25 0 010-2.5zM12 7a5 5 0 110 10A5 5 0 0112 7zm0 2a3 3 0 100 6 3 3 0 000-6z" />
+    </symbol>
+    <symbol id="icon-tiktok" viewBox="0 0 24 24">
+      <path
+        d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V9.05a8.16 8.16 0 004.77 1.52V7.12a4.85 4.85 0 01-1-.43z" />
+    </symbol>
+    <symbol id="icon-facebook" viewBox="0 0 24 24">
+      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+    </symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"
+      stroke-linejoin="round">
+      <polyline points="6 9 12 15 18 9" />
+    </symbol>
+    <symbol id="icon-yuca" viewBox="0 0 48 48">
+      <ellipse cx="24" cy="28" rx="10" ry="16" fill="#C8963E" />
+      <path d="M24 12 C20 6 16 4 14 6 C18 10 22 12 24 12Z" fill="#3D6B2C" />
+      <path d="M24 12 C28 6 32 4 34 6 C30 10 26 12 24 12Z" fill="#3D6B2C" />
+      <path d="M24 12 C24 6 22 2 20 2 C20 6 22 10 24 12Z" fill="#4A7A35" />
+    </symbol>
+    <symbol id="icon-guatila" viewBox="0 0 48 48">
+      <ellipse cx="24" cy="26" rx="14" ry="12" fill="#7BAF2A" />
+      <path d="M24 14 C18 10 14 14 16 20 C20 16 24 14 24 14Z" fill="#3D6B2C" />
+      <path d="M24 14 C30 10 34 14 32 20 C28 16 24 14 24 14Z" fill="#3D6B2C" />
+      <ellipse cx="24" cy="27" rx="8" ry="6" fill="#9DC840" opacity="0.5" />
+    </symbol>
+    <symbol id="icon-panela" viewBox="0 0 48 48">
+      <rect x="10" y="20" width="28" height="20" rx="4" fill="#C8963E" />
+      <rect x="10" y="20" width="28" height="8" rx="4" fill="#D4A96A" />
+      <path d="M18 20 C18 12 22 8 24 8 C26 8 30 12 30 20" fill="none" stroke="#B8832A" stroke-width="2.5"
+        stroke-linecap="round" />
+    </symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+      stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12" />
+      <polyline points="12 5 19 12 12 19" />
+    </symbol>
+  </svg>
 
-<!-- Skip to main content -->
-<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  <!-- Skip to main content -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 
-<!-- ============================
+  <!-- ============================
      NAVBAR
 ============================ -->
-<nav class="nav" id="navbar" role="navigation" aria-label="Navegacion principal">
-  <div class="container">
-    <div class="nav__inner">
-      <a href="#" class="nav__logo" aria-label="Guati inicio">
-        <img src="assets/images/logo guati.png" alt="Guati" class="nav__logo-img">
-      </a>
-      <ul class="nav__links" role="list">
-        <li><a href="#producto">Producto</a></li>
-        <li><a href="#historia">Historia</a></li>
-        <li><a href="#porque">Por que Guati</a></li>
-        <li><a href="#numeros">Numeros</a></li>
-      </ul>
-      <a href="#producto" class="nav__cta">Pedir ahora</a>
-      <button class="nav__burger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</nav>
-
-<!-- Mobile menu -->
-<div class="nav__mobile" id="mobileMenu" role="dialog" aria-label="Menu movil">
-  <a href="#producto">Producto</a>
-  <a href="#historia">Historia</a>
-  <a href="#porque">Por que Guati</a>
-  <a href="#numeros">Numeros</a>
-  <a href="#producto" class="nav__cta">Pedir ahora</a>
-</div>
-
-<!-- ============================
-     HERO
-============================ -->
-<main id="main-content">
-<section class="hero kraft-bg" id="hero" aria-label="Inicio">
-  <div class="container" style="width:100%;">
-    <div class="hero__inner">
-
-      <!-- Text column -->
-      <div>
-        <span class="hero__badge" data-animate>
-          Hecho en Colombia &middot; Sin conservantes &middot; Sin gluten
-        </span>
-
-        <h1 class="hero__h1" data-animate style="transition-delay:0.1s">
-          <span class="line1">Tu momento</span>
-          <span class="line2">Natural</span>
-        </h1>
-
-        <p class="hero__subtitle" data-animate style="transition-delay:0.2s">
-          El alfajor artesanal colombiano que reinventa lo ancestral. Galleta de yuca rellena de arequipe de guatila, cocido con panela de cana.
-        </p>
-
-        <div class="hero__descriptor" data-animate style="transition-delay:0.3s">
-          <span class="hero__descriptor-tag">Galleta de Yuca</span>
-          <span class="hero__descriptor-tag">Arequipe de Guatila</span>
-          <span class="hero__descriptor-tag">Panela de Cana</span>
-        </div>
-
-        <div class="hero__ctas" data-animate style="transition-delay:0.4s">
-          <a href="#producto" class="btn-primary">Quiero el mio <svg style="width:16px;height:16px;stroke:currentColor;fill:none" viewBox="0 0 24 24" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-          <a href="#historia" class="btn-outline">Conoce la historia</a>
-        </div>
-
-        <div class="hero__stats" data-animate style="transition-delay:0.5s">
-          <div class="hero__stat">
-            <span class="hero__stat-val">60g</span>
-            <span class="hero__stat-label">Por unidad</span>
-          </div>
-          <div class="hero__stat">
-            <span class="hero__stat-val">15d</span>
-            <span class="hero__stat-label">Vida util</span>
-          </div>
-          <div class="hero__stat">
-            <span class="hero__stat-val">40%</span>
-            <span class="hero__stat-label">Margen</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mascot column -->
-      <div class="hero__visual" data-animate style="transition-delay:0.2s">
-        <div class="hero__visual-ring">
-          <img src="assets/images/mascota.jpg" alt="Guatito — mascota de Guati" class="mascot-img">
-        </div>
-        <span class="hero__chip-nuevo">NUEVO</span>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="scroll-indicator" aria-hidden="true">
-    <span>Scroll</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <use href="#icon-chevron-down"/>
-    </svg>
-  </div>
-</section>
-
-<!-- ============================
-     PRODUCTO
-============================ -->
-<section class="section-pad" id="producto" aria-label="Nuestro Producto">
-  <div class="container">
-
-    <div class="producto__header">
-      <span class="eyebrow" data-animate>Nuestro Producto Estrella</span>
-      <h2 class="producto__title" data-animate style="transition-delay:0.1s">ALFAJOR <em>de Guatila</em></h2>
-    </div>
-
-    <div class="product-card" data-animate>
-      <div class="product-card__img">
-        <span class="product-card__badge">Nuevo</span>
-        <img src="assets/images/Guati frontal.png" alt="Empaque Guati — Alfajor de Guatila" loading="lazy">
-      </div>
-      <div class="product-card__info">
-        <p class="product-card__pre">Relleno con</p>
-        <h3 class="product-card__name">Arequipe de Guatila</h3>
-        <div class="leaf-sep">
-          <svg aria-hidden="true"><use href="#icon-leaf"/></svg>
-        </div>
-        <p class="product-card__desc">
-          Sabor floral y vegetal unico que ningun arequipe de leche puede imitar.
-          Cocido a fuego lento con panela de cana, sin aditivos ni colorantes.
-          La galleta de yuca es naturalmente libre de gluten, crujiente por fuera y tierna por dentro.
-        </p>
-        <div class="attr-grid">
-          <div class="attr-item">
-            <svg aria-hidden="true"><use href="#icon-check"/></svg>
-            Sin gluten natural
-          </div>
-          <div class="attr-item">
-            <svg aria-hidden="true"><use href="#icon-ban"/></svg>
-            Sin conservantes
-          </div>
-          <div class="attr-item">
-            <svg aria-hidden="true"><use href="#icon-ban"/></svg>
-            Sin colorantes
-          </div>
-          <div class="attr-item">
-            <svg aria-hidden="true"><use href="#icon-globe"/></svg>
-            100% Colombia
-          </div>
-        </div>
-        <p class="product-card__price">
-          Disponible desde <strong>$5.000 COP</strong>
-        </p>
-        <a href="#numeros" class="btn-primary">Pide el tuyo <svg style="width:14px;height:14px;stroke:currentColor;fill:none" viewBox="0 0 24 24" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-      </div>
-    </div>
-
-    <!-- Ingredient cards -->
-    <div class="ingredients">
-      <div class="ingr-card" data-animate>
-        <svg class="ingr-card__icon" aria-hidden="true"><use href="#icon-yuca"/></svg>
-        <h4 class="ingr-card__title">Galleta de Yuca</h4>
-        <p class="ingr-card__text">
-          Naturalmente libre de gluten. Crujiente por fuera, tierna por dentro.
-          94,4% de la produccion nacional va a consumo humano directo.
-        </p>
-      </div>
-      <div class="ingr-card" data-animate style="transition-delay:0.15s">
-        <svg class="ingr-card__icon" aria-hidden="true"><use href="#icon-guatila"/></svg>
-        <h4 class="ingr-card__title">Guatila</h4>
-        <p class="ingr-card__text">
-          Sabor floral unico. Potasio, calcio, antioxidantes y fibra.
-          Cultivo campesino de Cundinamarca, Boyaca y Narino.
-        </p>
-      </div>
-      <div class="ingr-card" data-animate style="transition-delay:0.3s">
-        <svg class="ingr-card__icon" aria-hidden="true"><use href="#icon-panela"/></svg>
-        <h4 class="ingr-card__title">Panela de Cana</h4>
-        <p class="ingr-card__text">
-          Coccion lenta y tradicional. Sin azucares refinados ni edulcorantes artificiales.
-          Endulzante ancestral colombiano.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ============================
-     HISTORIA
-============================ -->
-<section class="section-pad kraft-bg" id="historia" aria-label="Nuestra Historia">
-  <svg class="historia__leaf historia__leaf--1" aria-hidden="true" viewBox="0 0 24 24" fill="white">
-    <use href="#icon-leaf"/>
-  </svg>
-  <svg class="historia__leaf historia__leaf--2" aria-hidden="true" viewBox="0 0 24 24" fill="white">
-    <use href="#icon-leaf"/>
-  </svg>
-  <svg class="historia__leaf historia__leaf--3" aria-hidden="true" viewBox="0 0 24 24" fill="white">
-    <use href="#icon-leaf"/>
-  </svg>
-
-  <div class="container">
-    <div class="historia__inner">
-
-      <div>
-        <span class="eyebrow historia__eyebrow" data-animate>Nuestra Razon de Ser</span>
-        <h2 class="historia__h2" data-animate style="transition-delay:0.1s">
-          DEL CAMPO<br>COLOMBIANO<br><em>a tu mesa</em>
-        </h2>
-        <p class="historia__p" data-animate style="transition-delay:0.2s">
-          Detras de cada empaque hay una finca, una familia y una decision: transformar
-          lo que el campo siempre tuvo en algo que el mundo quiera probar. Guati nace
-          de la riqueza del campo colombiano y del deseo de convertir ingredientes
-          ancestrales en experiencias gastronomicas unicas y sostenibles.
-        </p>
-        <div class="glass-card" data-animate style="transition-delay:0.3s">
-          <p>
-            "Desarrollar productos innovadores a base de ingredientes naturales
-            colombianos, generando valor economico y social para las comunidades del campo."
-          </p>
-        </div>
-
-        <div class="pillars" data-animate style="transition-delay:0.4s">
-          <div class="pillar">
-            <svg aria-hidden="true"><use href="#icon-bulb"/></svg>
-            <div>
-              <div class="pillar__title">Innovacion</div>
-              <div class="pillar__text">Recetas que reinventan lo ancestral con estandares modernos.</div>
-            </div>
-          </div>
-          <div class="pillar">
-            <svg aria-hidden="true"><use href="#icon-flag"/></svg>
-            <div>
-              <div class="pillar__title">Identidad</div>
-              <div class="pillar__text">Alma local, orgullo regional y proyeccion nacional.</div>
-            </div>
-          </div>
-          <div class="pillar">
-            <svg aria-hidden="true"><use href="#icon-recycle"/></svg>
-            <div>
-              <div class="pillar__title">Sostenibilidad</div>
-              <div class="pillar__text">Empaque biodegradable y economia local fortalecida.</div>
-            </div>
-          </div>
-          <div class="pillar">
-            <svg aria-hidden="true"><use href="#icon-plant"/></svg>
-            <div>
-              <div class="pillar__title">Campo</div>
-              <div class="pillar__text">Trazabilidad de origen y apoyo directo al campesino.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="historia__deco" data-animate class="slide-right">
-        <img src="assets/images/empaque frontal de varios con fondo.jpg"
-             alt="Empaque Guati con galletas artesanales"
-             class="historia__product-img" loading="lazy">
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============================
-     POR QUE GUATI
-============================ -->
-<section class="section-pad" id="porque" aria-label="Por que elegir Guati">
-  <div class="container">
-
-    <div class="porque__header">
-      <span class="eyebrow" data-animate>Razones que convencen</span>
-      <h2 class="porque__title" data-animate style="transition-delay:0.1s">POR QUE <em>Guati</em></h2>
-    </div>
-
-    <div class="reason-list" role="list">
-
-      <div class="reason-card" role="listitem" data-animate>
-        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
-          <span class="reason-card__num">01</span>
-          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-bulb"/></svg>
-          <span class="reason-card__title">Innovador</span>
-          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
-        </div>
-        <div class="reason-card__body" aria-hidden="true">
-          <p class="reason-card__text">
-            Un producto que reinventa lo artesanal con estandares modernos de calidad.
-            La combinacion de galleta de yuca y arequipe de guatila no existe en ninguna otra
-            marca del mercado colombiano. Guati es genuinamente unico.
-          </p>
-        </div>
-      </div>
-
-      <div class="reason-card" role="listitem" data-animate style="transition-delay:0.05s">
-        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
-          <span class="reason-card__num">02</span>
-          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-leaf"/></svg>
-          <span class="reason-card__title">Nutritivo</span>
-          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
-        </div>
-        <div class="reason-card__body" aria-hidden="true">
-          <p class="reason-card__text">
-            Sin conservantes artificiales. Ingredientes 100% naturales. Para el consumidor consciente
-            que quiere disfrutar sin culpa. La guatila aporta potasio, calcio, antioxidantes y fibra
-            natural en cada bocado.
-          </p>
-        </div>
-      </div>
-
-      <div class="reason-card" role="listitem" data-animate style="transition-delay:0.1s">
-        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
-          <span class="reason-card__num">03</span>
-          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-chart"/></svg>
-          <span class="reason-card__title">Rentable</span>
-          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
-        </div>
-        <div class="reason-card__body" aria-hidden="true">
-          <p class="reason-card__text">
-            Margen estimado del 40% para distribuidores y puntos de venta. Rotacion eficiente
-            en gondola gracias al formato de 60g ideal para compra impulsiva. Una apuesta
-            comercial con retorno rapido.
-          </p>
-        </div>
-      </div>
-
-      <div class="reason-card" role="listitem" data-animate style="transition-delay:0.15s">
-        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
-          <span class="reason-card__num">04</span>
-          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-flag"/></svg>
-          <span class="reason-card__title">Colombiano</span>
-          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
-        </div>
-        <div class="reason-card__body" aria-hidden="true">
-          <p class="reason-card__text">
-            Alma local, orgullo regional y proyeccion nacional e internacional. En un mercado
-            donde lo artesanal colombiano esta en auge, Guati llega en el momento perfecto
-            para surfear esa ola con identidad real.
-          </p>
-        </div>
-      </div>
-
-      <div class="reason-card" role="listitem" data-animate style="transition-delay:0.2s">
-        <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
-          <span class="reason-card__num">05</span>
-          <svg class="reason-card__icon" aria-hidden="true"><use href="#icon-recycle"/></svg>
-          <span class="reason-card__title">Sostenible</span>
-          <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#icon-chevron-down"/></svg>
-        </div>
-        <div class="reason-card__body" aria-hidden="true">
-          <p class="reason-card__text">
-            Empaque biodegradable. Economia local fortalecida. Trazabilidad de origen garantizada.
-            Cada compra conecta directamente con familias campesinas de Cundinamarca, Boyaca y Narino.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============================
-     MASCOTA
-============================ -->
-<section class="section-pad" id="mascota" aria-label="Conoce a Guatito">
-  <div class="container">
-    <div class="mascota__inner">
-
-      <span class="eyebrow" data-animate>Nuestra Mascota</span>
-      <h2 class="mascota__title" data-animate style="transition-delay:0.1s">CONOCE A <em>Guatito</em></h2>
-      <p class="mascota__subtitle" data-animate style="transition-delay:0.15s">
-        Mas que un personaje — el alma emocional de la marca.
-      </p>
-
-      <div class="mascota__media" data-animate style="transition-delay:0.25s">
-        <img src="assets/images/mascota.jpg" alt="Guatito — mascota de Guati" class="mascot-img mascot-img--lg" id="mascotImg">
-        <video id="mascotVideo" class="mascot-video" src="assets/videos/video de la mascota.mp4"
-               loop muted playsinline preload="none" aria-label="Animacion de Guatito"></video>
-        <button class="mascota__vid-btn" id="mascotVidBtn" aria-label="Ver animacion de Guatito">
-          Ver animacion
-        </button>
-      </div>
-
-      <div class="mascota__chips" data-animate style="transition-delay:0.35s">
-        <span class="mascota__chip">Representa el producto</span>
-        <span class="mascota__chip">Conexion emocional</span>
-        <span class="mascota__chip">Protagonista en redes</span>
-        <span class="mascota__chip">Elemento diferenciador</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============================
-     NUMEROS
-============================ -->
-<section class="section-pad kraft-bg" id="numeros" aria-label="Oportunidad de negocio">
-  <div class="container">
-
-    <div class="numeros__header">
-      <span class="eyebrow" style="color:var(--dorado-claro);" data-animate>Una oportunidad real</span>
-      <h2 class="numeros__title" data-animate style="transition-delay:0.1s">OPORTUNIDAD DE NEGOCIO</h2>
-    </div>
-
-    <div class="counters" id="countersBlock">
-      <div class="counter" data-animate style="transition-delay:0.1s">
-        <span class="counter__val" data-target="40" data-suffix="%">0%</span>
-        <p class="counter__label">Margen estimado para distribuidores y puntos de venta</p>
-      </div>
-      <div class="counter" data-animate style="transition-delay:0.2s">
-        <span class="counter__val" data-target="60" data-suffix="g">0g</span>
-        <p class="counter__label">Formato ideal por unidad, optimizado para compra impulsiva</p>
-      </div>
-      <div class="counter" data-animate style="transition-delay:0.3s">
-        <span class="counter__val" data-target="15" data-suffix=" dias">0 dias</span>
-        <p class="counter__label">Vida util. Rotacion eficiente en gondola</p>
-      </div>
-    </div>
-
-    <div class="numeros__cta" data-animate>
-      <img src="assets/images/stand guati.jpg" alt="Stand Guati en punto de venta" class="numeros__stand-img" loading="lazy">
-      <p>
-        Listo para crecer juntos? Guati busca socios estrategicos en grandes superficies,
-        distribucion y retail en toda Colombia.
-      </p>
-      <a href="https://wa.me/573046640009?text=Hola%20Guati%2C%20quiero%20ser%20distribuidor%20%F0%9F%87%A8%F0%9F%87%B4" target="_blank" rel="noopener noreferrer" class="btn-gold">Hablemos <svg style="width:14px;height:14px;stroke:currentColor;fill:none;vertical-align:middle" viewBox="0 0 24 24" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-    </div>
-
-  </div>
-</section>
-
-</main><!-- /#main-content -->
-
-<!-- ============================
-     FOOTER
-============================ -->
-<footer aria-label="Pie de pagina">
-  <div class="container">
-    <div class="footer__grid">
-      <div>
-        <img src="assets/images/logo guati.png" alt="Guati" class="footer__logo-img">
-        <p class="footer__brand-made">Hecho en Colombia con tradicion y amor por el campo.</p>
-      </div>
-      <div>
-        <p class="footer__col-title">Navega</p>
-        <ul class="footer__links">
+  <nav class="nav" id="navbar" role="navigation" aria-label="Navegacion principal">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" class="nav__logo" aria-label="Guati inicio">
+          <img src="assets/images/logo guati.png" alt="Guati" class="nav__logo-img">
+        </a>
+        <ul class="nav__links" role="list">
           <li><a href="#producto">Producto</a></li>
           <li><a href="#historia">Historia</a></li>
           <li><a href="#porque">Por que Guati</a></li>
-          <li><a href="#numeros">Numeros</a></li>
+          <li><a href="#ficha-producto">Ficha</a></li>
         </ul>
-      </div>
-      <div>
-        <p class="footer__col-title">Encuentranos</p>
-        <div class="footer__socials">
-          <a href="https://www.instagram.com/guaticriollo2026?igsh=Z2pzeTF2bThzNWZ4" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Instagram de Guati">
-            <svg aria-hidden="true"><use href="#icon-instagram"/></svg>
-          </a>
-          <a href="https://tiktok.com/@guati.co" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="TikTok de Guati">
-            <svg aria-hidden="true"><use href="#icon-tiktok"/></svg>
-          </a>
-          <a href="https://facebook.com/guati.co" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="Facebook de Guati">
-            <svg aria-hidden="true"><use href="#icon-facebook"/></svg>
-          </a>
-          <a href="https://wa.me/573046640009?text=Hola%20Guati%2C%20quiero%20informaci%C3%B3n%20del%20producto%20%F0%9F%8D%AA" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="WhatsApp de Guati">
-            <svg aria-hidden="true"><use href="#icon-whatsapp"/></svg>
-          </a>
-        </div>
-        <p class="footer__contact-cta">Escribenos!</p>
+        <a href="#producto" class="nav__cta">Pedir ahora</a>
+        <button class="nav__burger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
-  </div>
-  <div class="footer__bar">
-    <div class="container">
-      2025 Guati &middot; Todos los derechos reservados &middot;
-      Galletas Artesanales Rellenas de Arequipe de Guatila &middot; Hecho en Colombia
-    </div>
-  </div>
-</footer>
+  </nav>
 
-<!-- ============================
-     CHATBOT GUATITO
+  <!-- Mobile menu -->
+  <div class="nav__mobile" id="mobileMenu" role="dialog" aria-label="Menu movil">
+    <a href="#producto">Producto</a>
+    <a href="#historia">Historia</a>
+    <a href="#porque">Por que Guati</a>
+    <a href="#ficha-producto">Ficha</a>
+    <a href="#producto" class="nav__cta">Pedir ahora</a>
+  </div>
+
+  <!-- ============================
+     HERO
 ============================ -->
-<div id="chatbot-container" aria-label="Chat con Guatito">
+  <main id="main-content">
+    <section class="hero kraft-bg" id="hero" aria-label="Inicio">
+      <div class="container" style="width:100%;">
+        <div class="hero__inner">
 
-  <!-- Tooltip bubble -->
-  <div class="cb-tooltip" id="cbTooltip" aria-hidden="true">&#x1F36A; ¡Hola! Soy Guatito</div>
+          <!-- Text column -->
+          <div>
+            <span class="hero__badge" data-animate>
+              Hecho en Colombia &middot; Sin conservantes &middot; Sin gluten
+            </span>
 
-  <!-- Trigger button -->
-  <button class="cb-trigger" id="cbTrigger" aria-label="Abrir chat con Guatito" aria-expanded="false" aria-controls="cbWindow">
-    <!-- Mini CSS mascot -->
-    <div class="cb-mascot-mini" aria-hidden="true">
-      <div class="cb-mascot-mini__top"></div>
-      <div class="cb-mascot-mini__body">
-        <div class="cb-mascot-mini__eye cb-mascot-mini__eye--l"></div>
-        <div class="cb-mascot-mini__eye cb-mascot-mini__eye--r"></div>
-        <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--l"></div>
-        <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--r"></div>
-        <div class="cb-mascot-mini__mouth"></div>
+            <h1 class="hero__h1" data-animate style="transition-delay:0.1s">
+              <span class="line1">Tu momento</span>
+              <span class="line2">Natural</span>
+            </h1>
+
+            <p class="hero__subtitle" data-animate style="transition-delay:0.2s">
+              El alfajor artesanal colombiano que reinventa lo ancestral. Galleta de yuca rellena de arequipe de
+              guatila, cocido con panela de cana.
+            </p>
+
+            <div class="hero__descriptor" data-animate style="transition-delay:0.3s">
+              <span class="hero__descriptor-tag">Galleta de Yuca</span>
+              <span class="hero__descriptor-tag">Arequipe de Guatila</span>
+              <span class="hero__descriptor-tag">Panela de Cana</span>
+            </div>
+
+            <div class="hero__ctas" data-animate style="transition-delay:0.4s">
+              <a href="pedido.html" class="btn-primary">Quiero el mio <svg
+                  style="width:16px;height:16px;stroke:currentColor;fill:none" viewBox="0 0 24 24" stroke-width="2.5">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg></a>
+              <a href="#historia" class="btn-outline">Conoce la historia</a>
+            </div>
+
+            <div class="hero__stats" data-animate style="transition-delay:0.5s">
+              <div class="hero__stat">
+                <span class="hero__stat-val">60g</span>
+                <span class="hero__stat-label">Por unidad</span>
+              </div>
+              <div class="hero__stat">
+                <span class="hero__stat-val">15d</span>
+                <span class="hero__stat-label">Vida util</span>
+              </div>
+              <div class="hero__stat">
+                <span class="hero__stat-val">40%</span>
+                <span class="hero__stat-label">Margen</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mascot column -->
+          <div class="hero__visual" data-animate style="transition-delay:0.2s">
+            <div class="hero__visual-ring">
+              <img src="assets/images/mascota.jpg" alt="Guatito - mascota de Guati" class="mascot-img">
+            </div>
+            <span class="hero__chip-nuevo">NUEVO</span>
+          </div>
+
+        </div>
       </div>
-    </div>
-    <!-- Notification badge -->
-    <span class="cb-badge" id="cbBadge" aria-hidden="true">1</span>
-  </button>
 
-  <!-- Chat window -->
-  <div class="cb-window" id="cbWindow" role="dialog" aria-label="Chat con Guatito" aria-modal="true">
+      <div class="scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#icon-chevron-down" />
+        </svg>
+      </div>
+    </section>
 
-    <!-- Header -->
-    <div class="cb-header">
-      <div class="cb-header__mascot" aria-hidden="true">
-        <div class="cb-mascot-mini" style="transform:scale(0.85)">
-          <div class="cb-mascot-mini__top"></div>
-          <div class="cb-mascot-mini__body">
-            <div class="cb-mascot-mini__eye cb-mascot-mini__eye--l"></div>
-            <div class="cb-mascot-mini__eye cb-mascot-mini__eye--r"></div>
-            <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--l"></div>
-            <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--r"></div>
-            <div class="cb-mascot-mini__mouth"></div>
+    <!-- ============================
+     PRODUCTO
+============================ -->
+    <section class="section-pad" id="producto" aria-label="Nuestro Producto">
+      <div class="container">
+
+        <div class="producto__header">
+          <span class="eyebrow" data-animate>Nuestro Producto Estrella</span>
+          <h2 class="producto__title" data-animate style="transition-delay:0.1s">ALFAJOR <em>de Guatila</em></h2>
+        </div>
+
+        <div class="product-card" data-animate>
+          <div class="product-card__img">
+            <span class="product-card__badge">Nuevo</span>
+            <img src="assets/images/Guati frontal.png" alt="Empaque Guati - Alfajor de Guatila" loading="lazy">
+          </div>
+          <div class="product-card__info">
+            <p class="product-card__pre">Relleno con</p>
+            <h3 class="product-card__name">Arequipe de Guatila</h3>
+            <div class="leaf-sep">
+              <svg aria-hidden="true">
+                <use href="#icon-leaf" />
+              </svg>
+            </div>
+            <p class="product-card__desc">
+              Sabor floral y vegetal unico que ningun arequipe de leche puede imitar.
+              Cocido a fuego lento con panela de cana, sin aditivos ni colorantes.
+              La galleta de yuca es naturalmente libre de gluten, crujiente por fuera y tierna por dentro.
+            </p>
+            <div class="attr-grid">
+              <div class="attr-item">
+                <svg aria-hidden="true">
+                  <use href="#icon-check" />
+                </svg>
+                Sin gluten natural
+              </div>
+              <div class="attr-item">
+                <svg aria-hidden="true">
+                  <use href="#icon-ban" />
+                </svg>
+                Sin conservantes
+              </div>
+              <div class="attr-item">
+                <svg aria-hidden="true">
+                  <use href="#icon-ban" />
+                </svg>
+                Sin colorantes
+              </div>
+              <div class="attr-item">
+                <svg aria-hidden="true">
+                  <use href="#icon-globe" />
+                </svg>
+                100% Colombia
+              </div>
+            </div>
+            <p class="product-card__price">
+              Disponible desde <strong>$4.500 COP</strong>
+            </p>
+            <a href="pedido.html" class="btn-primary">Pide el tuyo <svg
+                style="width:14px;height:14px;stroke:currentColor;fill:none" viewBox="0 0 24 24" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg></a>
           </div>
         </div>
+
+        <!-- Ingredient cards -->
+        <div class="ingredients">
+          <div class="ingr-card" data-animate>
+            <svg class="ingr-card__icon" aria-hidden="true">
+              <use href="#icon-yuca" />
+            </svg>
+            <h4 class="ingr-card__title">Galleta de Yuca</h4>
+            <p class="ingr-card__text">
+              Naturalmente libre de gluten. Crujiente por fuera, tierna por dentro.
+              94,4% de la produccion nacional va a consumo humano directo.
+            </p>
+          </div>
+          <div class="ingr-card" data-animate style="transition-delay:0.15s">
+            <svg class="ingr-card__icon" aria-hidden="true">
+              <use href="#icon-guatila" />
+            </svg>
+            <h4 class="ingr-card__title">Guatila</h4>
+            <p class="ingr-card__text">
+              Sabor floral unico. Potasio, calcio, antioxidantes y fibra.
+              Cultivo campesino de Cundinamarca, Boyaca y Narino.
+            </p>
+          </div>
+          <div class="ingr-card" data-animate style="transition-delay:0.3s">
+            <svg class="ingr-card__icon" aria-hidden="true">
+              <use href="#icon-panela" />
+            </svg>
+            <h4 class="ingr-card__title">Panela de Cana</h4>
+            <p class="ingr-card__text">
+              Coccion lenta y tradicional. Sin azucares refinados ni edulcorantes artificiales.
+              Endulzante ancestral colombiano.
+            </p>
+          </div>
+        </div>
+
       </div>
-      <div class="cb-header__info">
-        <div class="cb-header__name">Guatito</div>
-        <div class="cb-header__status">En línea</div>
+    </section>
+
+    <!-- ============================
+     HISTORIA
+============================ -->
+    <section class="section-pad kraft-bg" id="historia" aria-label="Nuestra Historia">
+      <svg class="historia__leaf historia__leaf--1" aria-hidden="true" viewBox="0 0 24 24" fill="white">
+        <use href="#icon-leaf" />
+      </svg>
+      <svg class="historia__leaf historia__leaf--2" aria-hidden="true" viewBox="0 0 24 24" fill="white">
+        <use href="#icon-leaf" />
+      </svg>
+      <svg class="historia__leaf historia__leaf--3" aria-hidden="true" viewBox="0 0 24 24" fill="white">
+        <use href="#icon-leaf" />
+      </svg>
+
+      <div class="container">
+        <div class="historia__inner">
+
+          <div>
+            <span class="eyebrow historia__eyebrow" data-animate>Nuestra Razon de Ser</span>
+            <h2 class="historia__h2" data-animate style="transition-delay:0.1s">
+              DEL CAMPO<br>COLOMBIANO<br><em>a tu mesa</em>
+            </h2>
+            <p class="historia__p" data-animate style="transition-delay:0.2s">
+              Detras de cada empaque hay una finca, una familia y una decision: transformar
+              lo que el campo siempre tuvo en algo que el mundo quiera probar. Guati nace
+              de la riqueza del campo colombiano y del deseo de convertir ingredientes
+              ancestrales en experiencias gastronomicas unicas y sostenibles.
+            </p>
+            <div class="glass-card" data-animate style="transition-delay:0.3s">
+              <p>
+                "Desarrollar productos innovadores a base de ingredientes naturales
+                colombianos, generando valor economico y social para las comunidades del campo."
+              </p>
+            </div>
+
+            <div class="pillars" data-animate style="transition-delay:0.4s">
+              <div class="pillar">
+                <svg aria-hidden="true">
+                  <use href="#icon-bulb" />
+                </svg>
+                <div>
+                  <div class="pillar__title">Innovacion</div>
+                  <div class="pillar__text">Recetas que reinventan lo ancestral con estandares modernos.</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <svg aria-hidden="true">
+                  <use href="#icon-flag" />
+                </svg>
+                <div>
+                  <div class="pillar__title">Identidad</div>
+                  <div class="pillar__text">Alma local, orgullo regional y proyeccion nacional.</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <svg aria-hidden="true">
+                  <use href="#icon-recycle" />
+                </svg>
+                <div>
+                  <div class="pillar__title">Sostenibilidad</div>
+                  <div class="pillar__text">Empaque biodegradable y economia local fortalecida.</div>
+                </div>
+              </div>
+              <div class="pillar">
+                <svg aria-hidden="true">
+                  <use href="#icon-plant" />
+                </svg>
+                <div>
+                  <div class="pillar__title">Campo</div>
+                  <div class="pillar__text">Trazabilidad de origen y apoyo directo al campesino.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="historia__deco" data-animate class="slide-right">
+            <img src="assets/images/empaque frontal de varios con fondo.jpg"
+              alt="Empaque Guati con galletas artesanales" class="historia__product-img" loading="lazy">
+          </div>
+
+        </div>
       </div>
-      <button class="cb-header__close" id="cbClose" aria-label="Cerrar chat">&#x2715;</button>
+    </section>
+
+    <!-- ============================
+     POR QUE GUATI
+============================ -->
+    <section class="section-pad" id="porque" aria-label="Por que elegir Guati">
+      <div class="container">
+
+        <div class="porque__header">
+          <span class="eyebrow" data-animate>Razones que convencen</span>
+          <h2 class="porque__title" data-animate style="transition-delay:0.1s">POR QUE <em>Guati</em></h2>
+        </div>
+
+        <div class="reason-list" role="list">
+
+          <div class="reason-card" role="listitem" data-animate>
+            <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+              <span class="reason-card__num">01</span>
+              <svg class="reason-card__icon" aria-hidden="true">
+                <use href="#icon-bulb" />
+              </svg>
+              <span class="reason-card__title">Innovador</span>
+              <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-chevron-down" />
+              </svg>
+            </div>
+            <div class="reason-card__body" aria-hidden="true">
+              <p class="reason-card__text">
+                Un producto que reinventa lo artesanal con estandares modernos de calidad.
+                La combinacion de galleta de yuca y arequipe de guatila no existe en ninguna otra
+                marca del mercado colombiano. Guati es genuinamente unico.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" role="listitem" data-animate style="transition-delay:0.05s">
+            <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+              <span class="reason-card__num">02</span>
+              <svg class="reason-card__icon" aria-hidden="true">
+                <use href="#icon-leaf" />
+              </svg>
+              <span class="reason-card__title">Nutritivo</span>
+              <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-chevron-down" />
+              </svg>
+            </div>
+            <div class="reason-card__body" aria-hidden="true">
+              <p class="reason-card__text">
+                Sin conservantes artificiales. Ingredientes 100% naturales. Para el consumidor consciente
+                que quiere disfrutar sin culpa. La guatila aporta potasio, calcio, antioxidantes y fibra
+                natural en cada bocado.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" role="listitem" data-animate style="transition-delay:0.1s">
+            <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+              <span class="reason-card__num">03</span>
+              <svg class="reason-card__icon" aria-hidden="true">
+                <use href="#icon-chart" />
+              </svg>
+              <span class="reason-card__title">Rentable</span>
+              <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-chevron-down" />
+              </svg>
+            </div>
+            <div class="reason-card__body" aria-hidden="true">
+              <p class="reason-card__text">
+                Margen estimado del 40% para distribuidores y puntos de venta. Rotacion eficiente
+                en gondola gracias al formato de 60g ideal para compra impulsiva. Una apuesta
+                comercial con retorno rapido.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" role="listitem" data-animate style="transition-delay:0.15s">
+            <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+              <span class="reason-card__num">04</span>
+              <svg class="reason-card__icon" aria-hidden="true">
+                <use href="#icon-flag" />
+              </svg>
+              <span class="reason-card__title">Colombiano</span>
+              <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-chevron-down" />
+              </svg>
+            </div>
+            <div class="reason-card__body" aria-hidden="true">
+              <p class="reason-card__text">
+                Alma local, orgullo regional y proyeccion nacional e internacional. En un mercado
+                donde lo artesanal colombiano esta en auge, Guati llega en el momento perfecto
+                para surfear esa ola con identidad real.
+              </p>
+            </div>
+          </div>
+
+          <div class="reason-card" role="listitem" data-animate style="transition-delay:0.2s">
+            <div class="reason-card__header" role="button" tabindex="0" aria-expanded="false">
+              <span class="reason-card__num">05</span>
+              <svg class="reason-card__icon" aria-hidden="true">
+                <use href="#icon-recycle" />
+              </svg>
+              <span class="reason-card__title">Sostenible</span>
+              <svg class="reason-card__arrow" viewBox="0 0 24 24" aria-hidden="true">
+                <use href="#icon-chevron-down" />
+              </svg>
+            </div>
+            <div class="reason-card__body" aria-hidden="true">
+              <p class="reason-card__text">
+                Empaque biodegradable. Economia local fortalecida. Trazabilidad de origen garantizada.
+                Cada compra conecta directamente con familias campesinas de Cundinamarca, Boyaca y Narino.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================
+     MASCOTA
+============================ -->
+    <section class="section-pad" id="mascota" aria-label="Conoce a Guatito">
+      <div class="container">
+        <div class="mascota__inner">
+
+          <span class="eyebrow" data-animate>Nuestra Mascota</span>
+          <h2 class="mascota__title" data-animate style="transition-delay:0.1s">CONOCE A <em>Guatito</em></h2>
+          <p class="mascota__subtitle" data-animate style="transition-delay:0.15s">
+            Mas que un personaje - el alma emocional de la marca.
+          </p>
+
+          <div class="mascota__media" data-animate style="transition-delay:0.25s">
+            <img src="assets/images/mascota.jpg" alt="Guatito - mascota de Guati" class="mascot-img mascot-img--lg"
+              id="mascotImg">
+            <video id="mascotVideo" class="mascot-video" src="assets/videos/video de la mascota.mp4" loop muted
+              playsinline preload="none" aria-label="Animacion de Guatito"></video>
+            <button class="mascota__vid-btn" id="mascotVidBtn" aria-label="Ver animacion de Guatito">
+              Ver animacion
+            </button>
+          </div>
+
+          <div class="mascota__chips" data-animate style="transition-delay:0.35s">
+            <span class="mascota__chip">Representa el producto</span>
+            <span class="mascota__chip">Conexion emocional</span>
+            <span class="mascota__chip">Protagonista en redes</span>
+            <span class="mascota__chip">Elemento diferenciador</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================
+     FICHA PRODUCTO
+============================ -->
+    <section class="section-pad" id="ficha-producto" aria-label="Ficha de producto Guati">
+      <div class="container">
+
+        <!-- Header -->
+        <div class="fp__header" data-animate>
+          <h2 class="fp__title">Lo que hay detrás de cada mordida</h2>
+          <p class="fp__subtitle">Ingredientes reales, números honestos, origen comprobado.</p>
+        </div>
+
+        <!-- Tab nav -->
+        <nav class="fp__tab-nav" aria-label="Secciones" data-animate style="transition-delay:0.1s">
+          <div class="fp__tab-nav-inner" id="fpTabNavInner">
+            <div class="fp__tab-indicator" id="fpTabIndicator" aria-hidden="true"></div>
+            <button class="fp__tab-btn is-active" data-tab="nut" aria-selected="true">📊&nbsp;Nutrición</button>
+            <button class="fp__tab-btn" data-tab="imp" aria-selected="false">🌍&nbsp;Impacto</button>
+          </div>
+        </nav>
+
+        <!-- Panels -->
+        <div class="fp__panels">
+
+          <!-- (Ingredientes removido — contenido ya está en sección #porque) -->
+          <div class="fp__panel" id="fp-panel-ing">
+            <div class="fp__ing-cards">
+
+              <article class="fp__ing-card" data-animate style="transition-delay:0s">
+                <svg class="fp__ing-card-icon" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+                  <path
+                    d="M26 44 C20 37 11 31 9 23 C6.5 14 12 7 20 8.5 C22.5 9 24 12 26 15 C28 12 29.5 9 32 8.5 C40 7 45.5 14 43 23 C41 31 32 37 26 44Z"
+                    stroke="#EDD9B0" stroke-width="1.8" fill="rgba(237,217,176,0.05)" stroke-linejoin="round" />
+                  <line x1="26" y1="15" x2="26" y2="44" stroke="#EDD9B0" stroke-width="1" stroke-dasharray="3,4"
+                    opacity="0.45" />
+                  <path d="M17 21 C20 22.5 23 23 26 22.5" stroke="#EDD9B0" stroke-width="1.2" opacity="0.45"
+                    stroke-linecap="round" />
+                  <path d="M35 21 C32 22.5 29 23 26 22.5" stroke="#EDD9B0" stroke-width="1.2" opacity="0.45"
+                    stroke-linecap="round" />
+                  <line x1="26" y1="44" x2="26" y2="49" stroke="#EDD9B0" stroke-width="2.2" stroke-linecap="round" />
+                  <path d="M22 49 L26 46 L30 49" stroke="#EDD9B0" stroke-width="1.8" fill="none" stroke-linejoin="round"
+                    stroke-linecap="round" />
+                </svg>
+                <span class="fp__ing-card-name">Yuca</span>
+                <span class="fp__ing-card-tag">Base de la galleta</span>
+                <ul class="fp__ing-card-list">
+                  <li>Naturalmente libre de gluten</li>
+                  <li>Textura crujiente por fuera y tierna por dentro - algo que la harina de trigo no logra</li>
+                  <li>El 94.4% de la producción nacional va a consumo humano directo</li>
+                  <li>Sabor neutro que exalta el arequipe sin competirle</li>
+                </ul>
+              </article>
+
+              <article class="fp__ing-card" data-animate style="transition-delay:0.12s">
+                <svg class="fp__ing-card-icon" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+                  <ellipse cx="26" cy="30" rx="13" ry="17" stroke="#EDD9B0" stroke-width="1.8"
+                    fill="rgba(237,217,176,0.05)" />
+                  <path d="M26 13 C26 10 29 8.5 30.5 7.5" stroke="#EDD9B0" stroke-width="1.8" stroke-linecap="round" />
+                  <path d="M14 22 C17 20.5 20 21.5 21 24" stroke="#EDD9B0" stroke-width="1.2" opacity="0.45"
+                    stroke-linecap="round" />
+                  <path d="M38 22 C35 20.5 32 21.5 31 24" stroke="#EDD9B0" stroke-width="1.2" opacity="0.45"
+                    stroke-linecap="round" />
+                  <path d="M14 30 C17 28.5 20 29.5 21 32" stroke="#EDD9B0" stroke-width="1.2" opacity="0.45"
+                    stroke-linecap="round" />
+                  <path d="M38 30 C35 28.5 32 29.5 31 32" stroke="#EDD9B0" stroke-width="1.2" opacity="0.45"
+                    stroke-linecap="round" />
+                  <path d="M17 38 C20 36.5 23 37.5 24 40" stroke="#EDD9B0" stroke-width="1.2" opacity="0.45"
+                    stroke-linecap="round" />
+                  <path d="M35 38 C32 36.5 29 37.5 28 40" stroke="#EDD9B0" stroke-width="1.2" opacity="0.45"
+                    stroke-linecap="round" />
+                </svg>
+                <span class="fp__ing-card-name">Guatila</span>
+                <span class="fp__ing-card-tag">Relleno de arequipe</span>
+                <ul class="fp__ing-card-list">
+                  <li>Sabor floral y vegetal único - ningún arequipe de leche lo imita</li>
+                  <li>Cocido a fuego lento con panela de caña, sin aditivos ni colorantes</li>
+                  <li>Fuente natural de potasio, calcio, antioxidantes y fibra dietaria</li>
+                  <li>Cultivo campesino en Cundinamarca, Boyacá y Nariño</li>
+                </ul>
+              </article>
+
+            </div>
+          </div><!-- /panel ing -->
+
+          <!-- ── PANEL 2: Nutrición ── -->
+          <div class="fp__panel is-active" id="fp-panel-nut">
+            <div class="fp__nut-layout">
+
+              <div class="fp__kcal-callout" data-animate>
+                <div>
+                  <div class="fp__kcal-num">117</div>
+                  <div class="fp__kcal-unit">kcal</div>
+                  <div class="fp__kcal-por">por alfajor (44g)</div>
+                </div>
+                <div>
+                  <div class="fp__kcal-divider"></div>
+                  <div class="fp__invima-mini">
+                    <p class="fp__invima-mini-label">⚠️ Exceso en azúcares</p>
+                    <p class="fp__invima-mini-text">Los azúcares aportan el 69.4% de las calorías. La panela y el azúcar
+                      son azúcares añadidos según norma INVIMA.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="fp__macros" id="macrosBlock">
+                  <div class="fp__macro">
+                    <div class="fp__macro-header">
+                      <span class="fp__macro-name">Carbohidratos</span>
+                      <span class="fp__macro-val">24.5 g</span>
+                    </div>
+                    <div class="fp__macro-track">
+                      <div class="fp__macro-fill" style="width:88%;background:linear-gradient(90deg,#C9943A,#E8C87A);">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fp__macro">
+                    <div class="fp__macro-header">
+                      <span class="fp__macro-name fp__macro-name--sub">- Del cual azúcares</span>
+                      <span class="fp__macro-val">20.4 g</span>
+                    </div>
+                    <div class="fp__macro-track">
+                      <div class="fp__macro-fill" style="width:74%;background:rgba(201,148,58,0.42);"></div>
+                    </div>
+                  </div>
+                  <div class="fp__macro">
+                    <div class="fp__macro-header">
+                      <span class="fp__macro-name">Grasas totales</span>
+                      <span class="fp__macro-val">1.5 g</span>
+                    </div>
+                    <div class="fp__macro-track">
+                      <div class="fp__macro-fill" style="width:18%;background:linear-gradient(90deg,#4A7C35,#6AAC4E);">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fp__macro">
+                    <div class="fp__macro-header">
+                      <span class="fp__macro-name fp__macro-name--sub">- Saturadas / Trans</span>
+                      <span class="fp__macro-val">0.4 g / 0 g</span>
+                    </div>
+                    <div class="fp__macro-track">
+                      <div class="fp__macro-fill" style="width:5%;background:rgba(74,124,53,0.42);"></div>
+                    </div>
+                  </div>
+                  <div class="fp__macro">
+                    <div class="fp__macro-header">
+                      <span class="fp__macro-name">Proteínas</span>
+                      <span class="fp__macro-val">2.2 g</span>
+                    </div>
+                    <div class="fp__macro-track">
+                      <div class="fp__macro-fill" style="width:28%;background:linear-gradient(90deg,#2D5420,#4A7C35);">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="fp__macro">
+                    <div class="fp__macro-header">
+                      <span class="fp__macro-name">Sodio</span>
+                      <span class="fp__macro-val">18 mg</span>
+                    </div>
+                    <div class="fp__macro-track">
+                      <div class="fp__macro-fill" style="width:8%;background:linear-gradient(90deg,#1E3A14,#2D5420);">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="fp__sin-sello">
+                  <span class="fp__chip">✅ Sodio muy bajo</span>
+                  <span class="fp__chip">✅ Grasas trans: 0</span>
+                  <span class="fp__chip">✅ Sin edulcorantes artificiales</span>
+                  <span class="fp__chip">✅ Grasas saturadas dentro del límite</span>
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /panel nut -->
+
+          <!-- ── PANEL 3: Impacto ── -->
+          <div class="fp__panel" id="fp-panel-imp">
+            <div class="fp__impact-grid">
+
+              <div>
+                <p class="fp__ods-section-title">Objetivos de Desarrollo Sostenible</p>
+                <div class="fp__ods-cards">
+                  <div class="fp__ods-card" data-ods>
+                    <div class="fp__ods-square" style="background:#4C9F38;">
+                      <span class="fp__ods-num">3</span>
+                      <span class="fp__ods-label-tag">Salud</span>
+                    </div>
+                    <p class="fp__ods-text">Promueve dieta equilibrada y control de enfermedades gracias a ingredientes
+                      naturalmente libres de gluten.</p>
+                  </div>
+                  <div class="fp__ods-card" data-ods>
+                    <div class="fp__ods-square" style="background:#BF8B2E;">
+                      <span class="fp__ods-num">12</span>
+                      <span class="fp__ods-label-tag">Consumo</span>
+                    </div>
+                    <p class="fp__ods-text">Empaque biodegradable y trazabilidad de origen que fomenta la economía local
+                      campesina.</p>
+                  </div>
+                  <div class="fp__ods-card" data-ods>
+                    <div class="fp__ods-square" style="background:#3F7E44;">
+                      <span class="fp__ods-num">13</span>
+                      <span class="fp__ods-label-tag">Clima</span>
+                    </div>
+                    <p class="fp__ods-text">Transparencia de origen verificable y uso de materiales biodegradables en
+                      todo el empaque.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fp__prod-panel" data-animate>
+                <p class="fp__prod-title">Rentabilidad</p>
+                <p class="fp__prod-price">Precio de venta al público: <strong>$3.500 – $5.000</strong> por unidad</p>
+                <div class="fp__prod-metrics" id="countersBlock">
+                  <div class="fp__prod-metric">
+                    <span class="fp__prod-metric-val counter__val" data-target="50" data-suffix="%">0%</span>
+                    <p class="fp__prod-metric-label">Rentabilidad máxima</p>
+                    <p class="fp__prod-metric-sub">a $5.000 / unidad</p>
+                  </div>
+                  <div class="fp__prod-metric">
+                    <span class="fp__prod-metric-val counter__val" data-target="30" data-suffix="%">0%</span>
+                    <p class="fp__prod-metric-label">Rentabilidad mínima</p>
+                    <p class="fp__prod-metric-sub">a $3.500 / unidad</p>
+                  </div>
+                </div>
+                <p class="fp__prod-equil">Punto de equilibrio: venta del 50% al 70% de la producción.</p>
+              </div>
+
+            </div>
+          </div><!-- /panel imp -->
+
+          <!-- ── PANEL 4: Historia ── -->
+          <div class="fp__panel" id="fp-panel-his">
+            <div class="fp__historia-panel">
+              <span class="fp__historia-deco" aria-hidden="true">"</span>
+              <blockquote class="fp__historia-quote">
+                Detrás de cada empaque hay una finca, una familia y una decisión:<br>
+                transformar lo que el campo siempre tuvo en algo que el mundo quiera probar.
+              </blockquote>
+              <div class="fp__historia-divider">
+                <span class="fp__historia-divider-line"></span>
+                <svg class="fp__historia-divider-icon" viewBox="0 0 18 18" aria-hidden="true">
+                  <path
+                    d="M9 1C5.5 1 2 4 2 8c0 2.5 1.2 4.5 3 5.8L9 17l4-3.2C14.8 12.5 16 10.5 16 8c0-4-3.5-7-7-7zm0 2c2.8 0 5 2.5 5 5 0 2-1 3.8-2.5 4.8L9 14.5l-2.5-1.7C5 11.8 4 10 4 8c0-2.5 2.2-5 5-5z" />
+                </svg>
+                <span class="fp__historia-divider-line"></span>
+              </div>
+              <p class="fp__historia-desc">
+                Alfajor de harina de yuca colombiana<br>relleno de arequipe de Guatila
+              </p>
+              <div class="fp__historia-origin">
+                Un fruto que no se usa habitualmente en repostería, encontrado en las fincas de Cundinamarca y
+                transformado en el relleno más único de Colombia. Sin conservantes. Sin gluten. Con todo el amor del
+                campo.
+              </div>
+            </div>
+          </div><!-- /panel his -->
+
+        </div><!-- /.fp__panels -->
+
+      </div><!-- /.container -->
+
+      <svg class="fp__wave" viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+        aria-hidden="true">
+        <path d="M0,28 C360,56 720,0 1080,28 C1260,42 1380,14 1440,28 L1440,56 L0,56 Z" fill="#0A0A0A" />
+      </svg>
+
+    </section>
+
+  </main><!-- /#main-content -->
+
+  <!-- ============================
+     FOOTER
+============================ -->
+  <footer aria-label="Pie de pagina">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <img src="assets/images/logo guati.png" alt="Guati" class="footer__logo-img">
+          <p class="footer__brand-made">Hecho en Colombia con tradicion y amor por el campo.</p>
+        </div>
+        <div>
+          <p class="footer__col-title">Navega</p>
+          <ul class="footer__links">
+            <li><a href="#producto">Producto</a></li>
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#porque">Por que Guati</a></li>
+            <li><a href="#ficha-producto">Ficha</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__col-title">Encuentranos</p>
+          <div class="footer__socials">
+            <a href="https://www.instagram.com/guaticriollo2026?igsh=Z2pzeTF2bThzNWZ4" target="_blank"
+              rel="noopener noreferrer" class="footer__social" aria-label="Instagram de Guati">
+              <svg aria-hidden="true">
+                <use href="#icon-instagram" />
+              </svg>
+            </a>
+            <a href="https://tiktok.com/@guati.co" target="_blank" rel="noopener noreferrer" class="footer__social"
+              aria-label="TikTok de Guati">
+              <svg aria-hidden="true">
+                <use href="#icon-tiktok" />
+              </svg>
+            </a>
+            <a href="https://facebook.com/guati.co" target="_blank" rel="noopener noreferrer" class="footer__social"
+              aria-label="Facebook de Guati">
+              <svg aria-hidden="true">
+                <use href="#icon-facebook" />
+              </svg>
+            </a>
+            <a href="https://wa.me/573046640009?text=Hola%20Guati%2C%20quiero%20informaci%C3%B3n%20del%20producto%20%F0%9F%8D%AA"
+              target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="WhatsApp de Guati">
+              <svg aria-hidden="true">
+                <use href="#icon-whatsapp" />
+              </svg>
+            </a>
+          </div>
+          <p class="footer__contact-cta">Escribenos!</p>
+        </div>
+      </div>
     </div>
-
-    <!-- Messages -->
-    <div class="cb-messages" id="cbMessages" aria-live="polite" aria-atomic="false"></div>
-
-    <!-- Quick reply chips -->
-    <div class="cb-chips" id="cbChips" role="list" aria-label="Respuestas rápidas">
-      <button class="cb-chip" role="listitem" data-msg="¿Qué es Guati?">¿Qué es Guati?</button>
-      <button class="cb-chip" role="listitem" data-msg="¿Dónde comprar?">¿Dónde comprar?</button>
-      <button class="cb-chip" role="listitem" data-msg="Soy distribuidor">Soy distribuidor</button>
-      <button class="cb-chip" role="listitem" data-msg="¿Cuánto cuesta?">¿Precio?</button>
+    <div class="footer__bar">
+      <div class="container">
+        2025 Guati &middot; Todos los derechos reservados &middot;
+        Galletas Artesanales Rellenas de Arequipe de Guatila &middot; Hecho en Colombia
+      </div>
     </div>
+  </footer>
 
-    <!-- Input -->
-    <div class="cb-input-area">
-      <input class="cb-input" id="cbInput" type="text"
-             placeholder="Escríbeme algo..." autocomplete="off"
-             aria-label="Mensaje para Guatito" maxlength="200">
-      <button class="cb-send" id="cbSend" aria-label="Enviar mensaje" disabled>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-        </svg>
-      </button>
-    </div>
+  <!-- ============================
+     CHATBOT GUATITO
+============================ -->
+  <div id="chatbot-container" aria-label="Chat con Guatito">
 
-  </div><!-- /.cb-window -->
-</div><!-- /#chatbot-container -->
+    <!-- Tooltip bubble -->
+    <div class="cb-tooltip" id="cbTooltip" aria-hidden="true">&#x1F36A; ¡Hola! Soy Guatito</div>
 
-<!-- ============================
+    <!-- Trigger button -->
+    <button class="cb-trigger" id="cbTrigger" aria-label="Abrir chat con Guatito" aria-expanded="false"
+      aria-controls="cbWindow">
+      <!-- Mini CSS mascot -->
+      <div class="cb-mascot-mini" aria-hidden="true">
+        <div class="cb-mascot-mini__top"></div>
+        <div class="cb-mascot-mini__body">
+          <div class="cb-mascot-mini__eye cb-mascot-mini__eye--l"></div>
+          <div class="cb-mascot-mini__eye cb-mascot-mini__eye--r"></div>
+          <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--l"></div>
+          <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--r"></div>
+          <div class="cb-mascot-mini__mouth"></div>
+        </div>
+      </div>
+      <!-- Notification badge -->
+      <span class="cb-badge" id="cbBadge" aria-hidden="true">1</span>
+    </button>
+
+    <!-- Chat window -->
+    <div class="cb-window" id="cbWindow" role="dialog" aria-label="Chat con Guatito" aria-modal="true">
+
+      <!-- Header -->
+      <div class="cb-header">
+        <div class="cb-header__mascot" aria-hidden="true">
+          <div class="cb-mascot-mini" style="transform:scale(0.85)">
+            <div class="cb-mascot-mini__top"></div>
+            <div class="cb-mascot-mini__body">
+              <div class="cb-mascot-mini__eye cb-mascot-mini__eye--l"></div>
+              <div class="cb-mascot-mini__eye cb-mascot-mini__eye--r"></div>
+              <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--l"></div>
+              <div class="cb-mascot-mini__cheek cb-mascot-mini__cheek--r"></div>
+              <div class="cb-mascot-mini__mouth"></div>
+            </div>
+          </div>
+        </div>
+        <div class="cb-header__info">
+          <div class="cb-header__name">Guatito</div>
+          <div class="cb-header__status">En línea</div>
+        </div>
+        <button class="cb-header__close" id="cbClose" aria-label="Cerrar chat">&#x2715;</button>
+      </div>
+
+      <!-- Messages -->
+      <div class="cb-messages" id="cbMessages" aria-live="polite" aria-atomic="false"></div>
+
+      <!-- Quick reply chips -->
+      <div class="cb-chips" id="cbChips" role="list" aria-label="Respuestas rápidas">
+        <button class="cb-chip" role="listitem" data-msg="¿Qué es Guati?">¿Qué es Guati?</button>
+        <button class="cb-chip" role="listitem" data-msg="¿Dónde comprar?">¿Dónde comprar?</button>
+        <button class="cb-chip" role="listitem" data-msg="Soy distribuidor">Soy distribuidor</button>
+        <button class="cb-chip" role="listitem" data-msg="¿Cuánto cuesta?">¿Precio?</button>
+      </div>
+
+      <!-- Input -->
+      <div class="cb-input-area">
+        <input class="cb-input" id="cbInput" type="text" placeholder="Escríbeme algo..." autocomplete="off"
+          aria-label="Mensaje para Guatito" maxlength="200">
+        <button class="cb-send" id="cbSend" aria-label="Enviar mensaje" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+          </svg>
+        </button>
+      </div>
+
+    </div><!-- /.cb-window -->
+  </div><!-- /#chatbot-container -->
+
+  <!-- ============================
      STICKY MOBILE CTA BAR
 ============================ -->
-<div class="mobile-cta-bar" id="mobileCta">
-  <div class="mobile-cta-bar__inner">
-    <div class="mobile-cta-bar__text">
-      <strong>Alfajor de Guatila</strong>
-      Desde $5.000 COP
+  <div class="mobile-cta-bar" id="mobileCta">
+    <div class="mobile-cta-bar__inner">
+      <div class="mobile-cta-bar__text">
+        <strong>Alfajor de Guatila</strong>
+        Desde $4.500 COP
+      </div>
+      <a href="pedido.html" class="mobile-cta-bar__btn">Pedir</a>
     </div>
-    <a href="#producto" class="mobile-cta-bar__btn">Pedir</a>
   </div>
-</div>
 
-<!-- ============================
+  <!-- ============================
      JAVASCRIPT
 ============================ -->
-<script>
-  /* 0. LOADING SCREEN */
-  (function () {
-    const loader = document.getElementById('loader');
-    if (!loader) return;
-    // Quitar loader al 1.5s o cuando DOMContentLoaded, lo que ocurra último
-    function hideLoader() {
-      loader.classList.add('fade-out');
-      setTimeout(() => { loader.remove(); }, 700);
-    }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 1200));
-    } else {
-      setTimeout(hideLoader, 1200);
-    }
-  })();
-
-  /* 1. INTERSECTION OBSERVER — fadeInUp + slide */
-  const animObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        animObserver.unobserve(entry.target);
+  <script>
+    /* 0. LOADING SCREEN */
+    (function () {
+      const loader = document.getElementById('loader');
+      if (!loader) return;
+      // Quitar loader al 1.5s o cuando DOMContentLoaded, lo que ocurra último
+      function hideLoader() {
+        loader.classList.add('fade-out');
+        setTimeout(() => { loader.remove(); }, 700);
       }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-  document.querySelectorAll('[data-animate]').forEach(el => animObserver.observe(el));
-
-  /* 2. NAVBAR SCROLL */
-  const navbar = document.getElementById('navbar');
-  let rafNavPending = false;
-  window.addEventListener('scroll', () => {
-    if (!rafNavPending) {
-      rafNavPending = true;
-      requestAnimationFrame(() => {
-        navbar.classList.toggle('nav--scrolled', window.scrollY > 60);
-        rafNavPending = false;
-      });
-    }
-  }, { passive: true });
-
-  /* 3. SMOOTH SCROLL + CLOSE MENU */
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', e => {
-      const href = link.getAttribute('href');
-      if (href === '#') return;
-      const target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      closeMobileMenu();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
-  /* 4. HAMBURGER MENU */
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  function closeMobileMenu() {
-    hamburger.classList.remove('is-open');
-    mobileMenu.classList.remove('is-open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  hamburger.addEventListener('click', () => {
-    const isOpen = hamburger.classList.toggle('is-open');
-    mobileMenu.classList.toggle('is-open', isOpen);
-    hamburger.setAttribute('aria-expanded', String(isOpen));
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-
-  /* 5. COUNTER ANIMATION */
-  let countersAnimated = false;
-  const counterObserver = new IntersectionObserver((entries) => {
-    if (countersAnimated) return;
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        countersAnimated = true;
-        counterObserver.disconnect();
-        animateAllCounters();
-      }
-    });
-  }, { threshold: 0.3 });
-
-  const countersBlock = document.getElementById('countersBlock');
-  if (countersBlock) counterObserver.observe(countersBlock);
-
-  function animateAllCounters() {
-    document.querySelectorAll('.counter__val[data-target]').forEach(el => {
-      const target = parseInt(el.dataset.target, 10);
-      const suffix = el.dataset.suffix || '';
-      const duration = 2200;
-      const start = performance.now();
-      function tick(now) {
-        const elapsed = now - start;
-        const t = Math.min(elapsed / duration, 1);
-        const progress = 1 - (1 - t) * (1 - t);
-        el.textContent = Math.round(target * progress) + suffix;
-        if (t < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    });
-  }
-
-  /* 6. MASCOT VIDEO TOGGLE */
-  const mascotVidBtn = document.getElementById('mascotVidBtn');
-  const mascotVideo  = document.getElementById('mascotVideo');
-  const mascotImg    = document.getElementById('mascotImg');
-
-  if (mascotVidBtn && mascotVideo && mascotImg) {
-    mascotVidBtn.addEventListener('click', () => {
-      const isPlaying = mascotVideo.classList.contains('is-playing');
-      if (isPlaying) {
-        mascotVideo.pause();
-        mascotVideo.classList.remove('is-playing');
-        mascotImg.classList.remove('is-hidden');
-        mascotVidBtn.textContent = 'Ver animacion';
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => setTimeout(hideLoader, 1200));
       } else {
-        mascotVideo.classList.add('is-playing');
-        mascotImg.classList.add('is-hidden');
-        mascotVideo.play();
-        mascotVidBtn.textContent = 'Volver a imagen';
+        setTimeout(hideLoader, 1200);
       }
-    });
-  }
+    })();
 
-  /* 7. EXPANDABLE REASON CARDS */
-  const isTouch = !window.matchMedia('(hover: hover)').matches;
-
-  document.querySelectorAll('.reason-card__header').forEach(header => {
-    if (isTouch) {
-      header.addEventListener('click', () => {
-        const card = header.closest('.reason-card');
-        const body = card.querySelector('.reason-card__body');
-        const isExpanded = card.classList.contains('is-expanded');
-
-        document.querySelectorAll('.reason-card.is-expanded').forEach(c => {
-          c.classList.remove('is-expanded');
-          c.querySelector('.reason-card__body').style.maxHeight = '0';
-          c.querySelector('.reason-card__header').setAttribute('aria-expanded', 'false');
-          c.querySelector('.reason-card__body').setAttribute('aria-hidden', 'true');
-        });
-
-        if (!isExpanded) {
-          card.classList.add('is-expanded');
-          body.style.maxHeight = body.scrollHeight + 'px';
-          header.setAttribute('aria-expanded', 'true');
-          body.setAttribute('aria-hidden', 'false');
+    /* 1. INTERSECTION OBSERVER - fadeInUp + slide */
+    const animObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          animObserver.unobserve(entry.target);
         }
       });
-    } else {
-      header.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const card = header.closest('.reason-card');
-          card.classList.toggle('is-expanded');
-          const expanded = card.classList.contains('is-expanded');
-          header.setAttribute('aria-expanded', String(expanded));
-          const body = card.querySelector('.reason-card__body');
-          body.setAttribute('aria-hidden', String(!expanded));
-          body.style.maxHeight = expanded ? body.scrollHeight + 'px' : '0';
-        }
-      });
-    }
-  });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  /* ================================
-     8. CHATBOT GUATITO — lógica completa
-  ================================ */
-  (function () {
-    const WA_NUMBER   = '573046640009';
-    const WA_BASE     = 'https://wa.me/' + WA_NUMBER;
+    document.querySelectorAll('[data-animate]').forEach(el => animObserver.observe(el));
 
-    const trigger     = document.getElementById('cbTrigger');
-    const window_el   = document.getElementById('cbWindow');
-    const closeBtn    = document.getElementById('cbClose');
-    const messages    = document.getElementById('cbMessages');
-    const input       = document.getElementById('cbInput');
-    const sendBtn     = document.getElementById('cbSend');
-    const chips       = document.getElementById('cbChips');
-    const badge       = document.getElementById('cbBadge');
-    const tooltip     = document.getElementById('cbTooltip');
-
-    let isOpen          = false;
-    let welcomeSent     = false;
-    let tooltipShown    = false;
-
-    /* --- Restore session state --- */
-    if (sessionStorage.getItem('cb_open') === '1') openChat(false);
-
-    /* --- Tooltip: show once on first hover --- */
-    trigger.addEventListener('mouseenter', () => {
-      if (!tooltipShown && !isOpen) {
-        tooltip.classList.add('show');
-      }
-    });
-    trigger.addEventListener('mouseleave', () => {
-      tooltip.classList.remove('show');
-    });
-
-    /* --- Open / Close --- */
-    trigger.addEventListener('click', () => {
-      isOpen ? closeChat() : openChat(true);
-    });
-    closeBtn.addEventListener('click', closeChat);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isOpen) closeChat();
-    });
-
-    function openChat(animate) {
-      isOpen = true;
-      window_el.classList.add('is-open');
-      trigger.setAttribute('aria-expanded', 'true');
-      badge.classList.add('hidden');
-      tooltip.classList.remove('show');
-      tooltipShown = true;
-      sessionStorage.setItem('cb_open', '1');
-
-      if (!welcomeSent) {
-        welcomeSent = true;
-        setTimeout(() => {
-          showTyping(900).then(() => {
-            addBotMsg('¡Hola! 🍪 Soy Guatito, el alfajor más sabroso de Colombia. ¿En qué te puedo ayudar hoy?');
-          });
-        }, animate ? 600 : 0);
-      } else {
-        scrollToBottom();
-      }
-    }
-
-    function closeChat() {
-      isOpen = false;
-      window_el.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded', 'false');
-      sessionStorage.setItem('cb_open', '0');
-    }
-
-    /* --- Response map --- */
-    const RESPONSES = [
-      {
-        keys: ['guati', 'qué es', 'que es', 'producto', 'alfajor'],
-        text: '¡Guati es el primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila 🌿 — un sabor floral único que ningún arequipe de leche puede imitar. ¡100% artesanal, sin conservantes y hecho en Colombia! 🇨🇴',
-        btn: null
-      },
-      {
-        keys: ['precio', 'cuánto', 'cuanto', 'valor', 'costo', 'cuesta'],
-        text: 'El alfajor Guati está disponible desde $5.000 por unidad 🍪 Para pedidos al por mayor o distribución, ¡escríbenos y te damos el mejor precio!',
-        btn: { label: '💬 Pedir por WhatsApp', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero información sobre precios de Guati 🍪') }
-      },
-      {
-        keys: ['comprar', 'dónde', 'donde', 'conseguir', 'venta', 'pedir', 'pedido'],
-        text: 'Puedes conseguir Guati en tiendas saludables, cafeterías y puntos de venta especializados 🏪 También puedes hacer tu pedido directo por WhatsApp y te lo llevamos. ¿Cuántos quieres? 😊',
-        btn: { label: '💬 Pedir ahora', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero hacer un pedido de Guati 🍪') }
-      },
-      {
-        keys: ['distribuidor', 'distribución', 'distribucion', 'mayorista', 'negocio', 'socio', 'revender'],
-        text: '¡Qué buena noticia! 🎉 Guati tiene un margen del 40% para distribuidores y puntos de venta. Nuestro alfajor tiene 15 días de vida útil y rota súper bien en góndola. ¿Hablamos de los detalles?',
-        btn: { label: '📞 Contactar equipo comercial', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Estoy interesado en ser distribuidor de Guati 🇨🇴') }
-      },
-      {
-        keys: ['ingredientes', 'yuca', 'guatila', 'sin gluten', 'gluten', 'panela'],
-        text: 'Guati está hecho con:\n🌿 Galleta de YUCA — naturalmente sin gluten\n🍬 Arequipe de GUATILA — fruto colombiano único, sabor floral\n🫙 Panela de caña — sin azúcares refinados\n¡Puro campo colombiano! ❤️',
-        btn: null
-      },
-      {
-        keys: ['conservante', 'natural', 'saludable', 'artificial', 'colorante', 'aditivo'],
-        text: '¡Cero artificiales! 🚫 Guati no tiene conservantes, colorantes ni edulcorantes artificiales. Solo ingredientes naturales colombianos. ¡Lo que el campo da! 🌿',
-        btn: null
-      },
-      {
-        keys: ['hola', 'buenos', 'buenas', 'hey', 'hi'],
-        text: '¡Hola, hola! 🍪 ¿En qué te puedo ayudar hoy? Puedo contarte sobre el producto, precios, dónde comprar o cómo ser distribuidor.',
-        btn: null
-      }
-    ];
-
-    const FALLBACK = {
-      text: 'Mmm, no entendí bien tu pregunta 🍪 Pero te puedo conectar directo con nuestro equipo — ellos te cuentan todo sobre Guati.',
-      btn: { label: '💬 Hablar por WhatsApp', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Tengo una pregunta sobre Guati 🍪') }
-    };
-
-    function matchResponse(text) {
-      const normalized = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      for (const entry of RESPONSES) {
-        if (entry.keys.some(k => {
-          const kn = k.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-          return normalized.includes(kn);
-        })) return entry;
-      }
-      return FALLBACK;
-    }
-
-    /* --- Message rendering --- */
-    function addBotMsg(text, btn) {
-      const bubble = document.createElement('div');
-      bubble.className = 'cb-bubble cb-bubble--bot';
-      // Handle newlines
-      bubble.innerHTML = text.replace(/\n/g, '<br>');
-      if (btn) {
-        const a = document.createElement('a');
-        a.href = btn.href;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.className = 'cb-bubble__btn';
-        a.textContent = btn.label;
-        const wrapper = document.createElement('div');
-        wrapper.style.marginTop = '0.5rem';
-        wrapper.appendChild(a);
-        bubble.appendChild(wrapper);
-      }
-      messages.appendChild(bubble);
-      scrollToBottom();
-    }
-
-    function addUserMsg(text) {
-      const bubble = document.createElement('div');
-      bubble.className = 'cb-bubble cb-bubble--user';
-      bubble.textContent = text;
-      messages.appendChild(bubble);
-      scrollToBottom();
-    }
-
-    function showTyping(duration) {
-      return new Promise(resolve => {
-        const typing = document.createElement('div');
-        typing.className = 'cb-typing';
-        typing.innerHTML = '<span></span><span></span><span></span>';
-        typing.id = 'cbTyping';
-        messages.appendChild(typing);
-        scrollToBottom();
-        setTimeout(() => {
-          const existing = document.getElementById('cbTyping');
-          if (existing) existing.remove();
-          resolve();
-        }, duration);
-      });
-    }
-
-    function scrollToBottom() {
-      requestAnimationFrame(() => { messages.scrollTop = messages.scrollHeight; });
-    }
-
-    /* --- Send logic --- */
-    function handleSend() {
-      const text = input.value.trim();
-      if (!text) return;
-      addUserMsg(text);
-      input.value = '';
-      sendBtn.disabled = true;
-
-      const response = matchResponse(text);
-      const delay = 700 + Math.random() * 400;
-
-      showTyping(delay).then(() => {
-        addBotMsg(response.text, response.btn || null);
-      });
-    }
-
-    sendBtn.addEventListener('click', handleSend);
-    input.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSend(); });
-    input.addEventListener('input', () => {
-      sendBtn.disabled = input.value.trim().length === 0;
-    });
-
-    /* --- Quick reply chips --- */
-    chips.querySelectorAll('.cb-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const msg = chip.dataset.msg;
-        if (!isOpen) openChat(true);
-        setTimeout(() => {
-          addUserMsg(msg);
-          const response = matchResponse(msg);
-          showTyping(800 + Math.random() * 300).then(() => {
-            addBotMsg(response.text, response.btn || null);
-          });
-        }, isOpen ? 0 : 900);
-      });
-    });
-
-  })(); // end chatbot IIFE
-
-  /* 9. STICKY MOBILE CTA BAR */
-  const mobileCta = document.getElementById('mobileCta');
-  if (mobileCta) {
-    let rafCtaPending = false;
+    /* 2. NAVBAR SCROLL */
+    const navbar = document.getElementById('navbar');
+    let rafNavPending = false;
     window.addEventListener('scroll', () => {
-      if (!rafCtaPending) {
-        rafCtaPending = true;
+      if (!rafNavPending) {
+        rafNavPending = true;
         requestAnimationFrame(() => {
-          mobileCta.classList.toggle('is-visible', window.scrollY > 500);
-          rafCtaPending = false;
+          navbar.classList.toggle('nav--scrolled', window.scrollY > 60);
+          rafNavPending = false;
         });
       }
     }, { passive: true });
-  }
-</script>
+
+    /* 3. SMOOTH SCROLL + CLOSE MENU */
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+        e.preventDefault();
+        closeMobileMenu();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    /* 4. HAMBURGER MENU */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function closeMobileMenu() {
+      hamburger.classList.remove('is-open');
+      mobileMenu.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('is-open');
+      mobileMenu.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+
+    /* 5. COUNTER ANIMATION */
+    let countersAnimated = false;
+    const counterObserver = new IntersectionObserver((entries) => {
+      if (countersAnimated) return;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          countersAnimated = true;
+          counterObserver.disconnect();
+          animateAllCounters();
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const countersBlock = document.getElementById('countersBlock');
+    if (countersBlock) counterObserver.observe(countersBlock);
+
+    function animateAllCounters() {
+      document.querySelectorAll('.counter__val[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target, 10);
+        const suffix = el.dataset.suffix || '';
+        const duration = 2200;
+        const start = performance.now();
+        function tick(now) {
+          const elapsed = now - start;
+          const t = Math.min(elapsed / duration, 1);
+          const progress = 1 - (1 - t) * (1 - t);
+          el.textContent = Math.round(target * progress) + suffix;
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    /* 6. FICHA-PRODUCTO TABS */
+    (function () {
+      const tabBtns = document.querySelectorAll('.fp__tab-btn');
+      const panels = document.querySelectorAll('.fp__panel');
+      const indicator = document.getElementById('fpTabIndicator');
+      const navInner = document.getElementById('fpTabNavInner');
+
+      function moveIndicator(btn) {
+        if (!indicator || !navInner) return;
+        const nRect = navInner.getBoundingClientRect();
+        const bRect = btn.getBoundingClientRect();
+        indicator.style.left = (bRect.left - nRect.left) + 'px';
+        indicator.style.width = bRect.width + 'px';
+      }
+
+      function triggerODS() {
+        document.querySelectorAll('.fp__ods-card[data-ods]').forEach((card, i) => {
+          card.classList.remove('is-visible');
+          setTimeout(() => card.classList.add('is-visible'), 80 + i * 120);
+        });
+      }
+
+      function activateTab(btn) {
+        const target = btn.dataset.tab;
+        tabBtns.forEach(b => { b.classList.remove('is-active'); b.setAttribute('aria-selected', 'false'); });
+        panels.forEach(p => p.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+        const panel = document.getElementById('fp-panel-' + target);
+        if (panel) panel.classList.add('is-active');
+        moveIndicator(btn);
+
+        if (target === 'nut') {
+          setTimeout(() => {
+            const m = document.getElementById('macrosBlock');
+            if (m) m.classList.add('is-animated');
+          }, 120);
+        }
+        if (target === 'imp') {
+          if (!countersAnimated) { countersAnimated = true; animateAllCounters(); }
+          triggerODS();
+        }
+      }
+
+      tabBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn)));
+
+      // Position indicator after layout settles
+      requestAnimationFrame(() => {
+        const active = document.querySelector('.fp__tab-btn.is-active');
+        if (active) moveIndicator(active);
+      });
+      window.addEventListener('resize', () => {
+        const active = document.querySelector('.fp__tab-btn.is-active');
+        if (active) moveIndicator(active);
+      });
+    })();
+
+    /* 7. MASCOT VIDEO TOGGLE */
+    const mascotVidBtn = document.getElementById('mascotVidBtn');
+    const mascotVideo = document.getElementById('mascotVideo');
+    const mascotImg = document.getElementById('mascotImg');
+
+    if (mascotVidBtn && mascotVideo && mascotImg) {
+      mascotVidBtn.addEventListener('click', () => {
+        const isPlaying = mascotVideo.classList.contains('is-playing');
+        if (isPlaying) {
+          mascotVideo.pause();
+          mascotVideo.classList.remove('is-playing');
+          mascotImg.classList.remove('is-hidden');
+          mascotVidBtn.textContent = 'Ver animacion';
+        } else {
+          mascotVideo.classList.add('is-playing');
+          mascotImg.classList.add('is-hidden');
+          mascotVideo.play();
+          mascotVidBtn.textContent = 'Volver a imagen';
+        }
+      });
+    }
+
+    /* 7. EXPANDABLE REASON CARDS */
+    const isTouch = !window.matchMedia('(hover: hover)').matches;
+
+    document.querySelectorAll('.reason-card__header').forEach(header => {
+      if (isTouch) {
+        header.addEventListener('click', () => {
+          const card = header.closest('.reason-card');
+          const body = card.querySelector('.reason-card__body');
+          const isExpanded = card.classList.contains('is-expanded');
+
+          document.querySelectorAll('.reason-card.is-expanded').forEach(c => {
+            c.classList.remove('is-expanded');
+            c.querySelector('.reason-card__body').style.maxHeight = '0';
+            c.querySelector('.reason-card__header').setAttribute('aria-expanded', 'false');
+            c.querySelector('.reason-card__body').setAttribute('aria-hidden', 'true');
+          });
+
+          if (!isExpanded) {
+            card.classList.add('is-expanded');
+            body.style.maxHeight = body.scrollHeight + 'px';
+            header.setAttribute('aria-expanded', 'true');
+            body.setAttribute('aria-hidden', 'false');
+          }
+        });
+      } else {
+        header.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const card = header.closest('.reason-card');
+            card.classList.toggle('is-expanded');
+            const expanded = card.classList.contains('is-expanded');
+            header.setAttribute('aria-expanded', String(expanded));
+            const body = card.querySelector('.reason-card__body');
+            body.setAttribute('aria-hidden', String(!expanded));
+            body.style.maxHeight = expanded ? body.scrollHeight + 'px' : '0';
+          }
+        });
+      }
+    });
+
+    /* ================================
+       8. CHATBOT GUATITO - lógica completa
+    ================================ */
+    (function () {
+      const WA_NUMBER = '573046640009';
+      const WA_BASE = 'https://wa.me/' + WA_NUMBER;
+
+      const trigger = document.getElementById('cbTrigger');
+      const window_el = document.getElementById('cbWindow');
+      const closeBtn = document.getElementById('cbClose');
+      const messages = document.getElementById('cbMessages');
+      const input = document.getElementById('cbInput');
+      const sendBtn = document.getElementById('cbSend');
+      const chips = document.getElementById('cbChips');
+      const badge = document.getElementById('cbBadge');
+      const tooltip = document.getElementById('cbTooltip');
+
+      let isOpen = false;
+      let welcomeSent = false;
+      let tooltipShown = false;
+
+      /* --- Restore session state --- */
+      if (sessionStorage.getItem('cb_open') === '1') openChat(false);
+
+      /* --- Tooltip: show once on first hover --- */
+      trigger.addEventListener('mouseenter', () => {
+        if (!tooltipShown && !isOpen) {
+          tooltip.classList.add('show');
+        }
+      });
+      trigger.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('show');
+      });
+
+      /* --- Open / Close --- */
+      trigger.addEventListener('click', () => {
+        isOpen ? closeChat() : openChat(true);
+      });
+      closeBtn.addEventListener('click', closeChat);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen) closeChat();
+      });
+
+      function openChat(animate) {
+        isOpen = true;
+        window_el.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        badge.classList.add('hidden');
+        tooltip.classList.remove('show');
+        tooltipShown = true;
+        sessionStorage.setItem('cb_open', '1');
+
+        if (!welcomeSent) {
+          welcomeSent = true;
+          setTimeout(() => {
+            showTyping(900).then(() => {
+              addBotMsg('¡Hola! 🍪 Soy Guatito, el alfajor más sabroso de Colombia. ¿En qué te puedo ayudar hoy?');
+            });
+          }, animate ? 600 : 0);
+        } else {
+          scrollToBottom();
+        }
+      }
+
+      function closeChat() {
+        isOpen = false;
+        window_el.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        sessionStorage.setItem('cb_open', '0');
+      }
+
+      /* --- Response map --- */
+      const RESPONSES = [
+        {
+          keys: ['guati', 'qué es', 'que es', 'producto', 'alfajor'],
+          text: '¡Guati es el primer alfajor colombiano de galleta de yuca relleno con Arequipe de Guatila 🌿 - un sabor floral único que ningún arequipe de leche puede imitar. ¡100% artesanal, sin conservantes y hecho en Colombia! 🇨🇴',
+          btn: null
+        },
+        {
+          keys: ['precio', 'cuánto', 'cuanto', 'valor', 'costo', 'cuesta'],
+          text: 'El alfajor Guati está disponible desde $4.500 por unidad 🍪 Los packs son de 6 unidades ($27.000) o 12 unidades ($54.000). Para pedidos al por mayor, ¡escríbenos y te damos el mejor precio!',
+          btn: { label: '💬 Pedir por WhatsApp', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero información sobre precios de Guati 🍪') }
+        },
+        {
+          keys: ['comprar', 'dónde', 'donde', 'conseguir', 'venta', 'pedir', 'pedido'],
+          text: 'Puedes conseguir Guati en tiendas saludables, cafeterías y puntos de venta especializados 🏪 También puedes hacer tu pedido directo por WhatsApp y te lo llevamos. ¿Cuántos quieres? 😊',
+          btn: { label: '💬 Pedir ahora', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Quiero hacer un pedido de Guati 🍪') }
+        },
+        {
+          keys: ['distribuidor', 'distribución', 'distribucion', 'mayorista', 'negocio', 'socio', 'revender'],
+          text: '¡Qué buena noticia! 🎉 Guati tiene un margen del 40% para distribuidores y puntos de venta. Nuestro alfajor tiene 15 días de vida útil y rota súper bien en góndola. ¿Hablamos de los detalles?',
+          btn: { label: '📞 Contactar equipo comercial', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Estoy interesado en ser distribuidor de Guati 🇨🇴') }
+        },
+        {
+          keys: ['ingredientes', 'yuca', 'guatila', 'sin gluten', 'gluten', 'panela'],
+          text: 'Guati está hecho con:\n🌿 Galleta de YUCA - naturalmente sin gluten\n🍬 Arequipe de GUATILA - fruto colombiano único, sabor floral\n🫙 Panela de caña - sin azúcares refinados\n¡Puro campo colombiano! ❤️',
+          btn: null
+        },
+        {
+          keys: ['conservante', 'natural', 'saludable', 'artificial', 'colorante', 'aditivo'],
+          text: '¡Cero artificiales! 🚫 Guati no tiene conservantes, colorantes ni edulcorantes artificiales. Solo ingredientes naturales colombianos. ¡Lo que el campo da! 🌿',
+          btn: null
+        },
+        {
+          keys: ['hola', 'buenos', 'buenas', 'hey', 'hi'],
+          text: '¡Hola, hola! 🍪 ¿En qué te puedo ayudar hoy? Puedo contarte sobre el producto, precios, dónde comprar o cómo ser distribuidor.',
+          btn: null
+        }
+      ];
+
+      const FALLBACK = {
+        text: 'Mmm, no entendí bien tu pregunta 🍪 Pero te puedo conectar directo con nuestro equipo - ellos te cuentan todo sobre Guati.',
+        btn: { label: '💬 Hablar por WhatsApp', href: WA_BASE + '?text=' + encodeURIComponent('Hola! Tengo una pregunta sobre Guati 🍪') }
+      };
+
+      function matchResponse(text) {
+        const normalized = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        for (const entry of RESPONSES) {
+          if (entry.keys.some(k => {
+            const kn = k.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            return normalized.includes(kn);
+          })) return entry;
+        }
+        return FALLBACK;
+      }
+
+      /* --- Message rendering --- */
+      function addBotMsg(text, btn) {
+        const bubble = document.createElement('div');
+        bubble.className = 'cb-bubble cb-bubble--bot';
+        // Handle newlines
+        bubble.innerHTML = text.replace(/\n/g, '<br>');
+        if (btn) {
+          const a = document.createElement('a');
+          a.href = btn.href;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.className = 'cb-bubble__btn';
+          a.textContent = btn.label;
+          const wrapper = document.createElement('div');
+          wrapper.style.marginTop = '0.5rem';
+          wrapper.appendChild(a);
+          bubble.appendChild(wrapper);
+        }
+        messages.appendChild(bubble);
+        scrollToBottom();
+      }
+
+      function addUserMsg(text) {
+        const bubble = document.createElement('div');
+        bubble.className = 'cb-bubble cb-bubble--user';
+        bubble.textContent = text;
+        messages.appendChild(bubble);
+        scrollToBottom();
+      }
+
+      function showTyping(duration) {
+        return new Promise(resolve => {
+          const typing = document.createElement('div');
+          typing.className = 'cb-typing';
+          typing.innerHTML = '<span></span><span></span><span></span>';
+          typing.id = 'cbTyping';
+          messages.appendChild(typing);
+          scrollToBottom();
+          setTimeout(() => {
+            const existing = document.getElementById('cbTyping');
+            if (existing) existing.remove();
+            resolve();
+          }, duration);
+        });
+      }
+
+      function scrollToBottom() {
+        requestAnimationFrame(() => { messages.scrollTop = messages.scrollHeight; });
+      }
+
+      /* --- Send logic --- */
+      function handleSend() {
+        const text = input.value.trim();
+        if (!text) return;
+        addUserMsg(text);
+        input.value = '';
+        sendBtn.disabled = true;
+
+        const response = matchResponse(text);
+        const delay = 700 + Math.random() * 400;
+
+        showTyping(delay).then(() => {
+          addBotMsg(response.text, response.btn || null);
+        });
+      }
+
+      sendBtn.addEventListener('click', handleSend);
+      input.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSend(); });
+      input.addEventListener('input', () => {
+        sendBtn.disabled = input.value.trim().length === 0;
+      });
+
+      /* --- Quick reply chips --- */
+      chips.querySelectorAll('.cb-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const msg = chip.dataset.msg;
+          if (!isOpen) openChat(true);
+          setTimeout(() => {
+            addUserMsg(msg);
+            const response = matchResponse(msg);
+            showTyping(800 + Math.random() * 300).then(() => {
+              addBotMsg(response.text, response.btn || null);
+            });
+          }, isOpen ? 0 : 900);
+        });
+      });
+
+    })(); // end chatbot IIFE
+
+    /* 9. STICKY MOBILE CTA BAR */
+    const mobileCta = document.getElementById('mobileCta');
+    if (mobileCta) {
+      let rafCtaPending = false;
+      window.addEventListener('scroll', () => {
+        if (!rafCtaPending) {
+          rafCtaPending = true;
+          requestAnimationFrame(() => {
+            mobileCta.classList.toggle('is-visible', window.scrollY > 500);
+            rafCtaPending = false;
+          });
+        }
+      }, { passive: true });
+    }
+  </script>
 
 </body>
+
 </html>
